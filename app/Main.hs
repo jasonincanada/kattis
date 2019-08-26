@@ -2,7 +2,7 @@
 
 module Main where
 
-import LawnMower
+import Semafori
 
 main :: IO ()
-main = interact lawnmower
+main = interact semafori
