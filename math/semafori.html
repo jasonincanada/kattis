@@ -1,0 +1,96 @@
+<html>
+
+<head>
+	<title>Semafori - Mathematical Analysis</title>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+	<style type="text/css">
+		body {
+			font-family: Arial; 
+			color: #333; 
+			background-color: white; 
+			font-family: 'Open Sans';
+			font-size: 15pt;
+      padding-bottom: 100px;
+		}
+
+    a {
+      color: #369;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #69A;
+    }
+	</style>
+
+  <!-- Good MathJax quick reference here:
+       https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+      tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+	  });
+	</script>
+</head>
+
+<body>
+
+<div style="margin: auto auto; margin-top: 100px; width: 900px;">
+
+  <div style="float: right;">
+      <a href="https://open.kattis.com/problems/semafori">Problem Description</a>
+    | <a href="https://github.com/jasonincanada/kattis/blob/master/src/Semafori.hs">My Haskell Solution</a>
+  </div>
+
+  <h2>Semafori</h2>
+
+  <p>
+    Given $n$ lights, denote their distances from the start of the road by
+
+      $$d_1, d_2, \ldots, d_n,$$
+
+    with $d_0 := 0$ and $d_0 \lt d_1 \lt \ldots \lt d_n$.  Denote the distance between lights $i-1$ and $i$ by
+
+      $$\delta_i := d_i - d_{i-1}.$$
+
+    Denote the durations of the lights' red and green modes by $r_1, r_2, \ldots, r_n$ and $g_1, g_2, \dots, g_n$
+    respectively.
+  </p>
+
+  <p>
+    Then the earliest time $t_i$ the driver can be at a green light at light $i$ is given by the recurrence
+
+      $$\begin{align}
+          t_0 &= 0,\\
+          t_i &= t_{i-1} + \delta_i + max \left.
+                                       \begin{cases}
+                                         0\\
+                                         r_i - \left[\space\left(t_{i-1} + \delta_i \right)\mod (r_i + g_i)\space\right]
+                                       \end{cases} \right\}.
+        \end{align}$$
+  </p>
+
+  <p>
+    Given the length $L$ of the road, the total time $T$ to drive the whole length of the road, while respecting
+    red lights, is the time to the last light plus the time on the last stretch of the road:
+
+      $$T = t_n + (L - d_n).$$
+  </p>
+
+
+  <h3 style="margin-top: 50px;">Notes</h3>
+
+  <p>
+    The speed of travel is 1 unit of distance per 1 unit of time, so we can add $t_{i-1}$ and $\delta_i$ without
+    explicitly scaling between units.
+  </p>
+
+  <p>
+    I use a fold in Haskell to traverse the list of lights in order to avoid using array indices, so the source
+    is not a direct translation of the above.
+  </p>
+</div>
+
+</body>
+</html>
