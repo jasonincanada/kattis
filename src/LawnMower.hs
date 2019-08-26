@@ -98,10 +98,10 @@ overlay (a, b) (c, d)
 doCase :: TestCase -> Output
 doCase (width, horizontals, verticals) = fullyMowed
   where
-    fullyMowed  = bool No Yes (null mowedUp && null mowedAcross)
+    fullyMowed  = bool No Yes (null mowedAcross && null mowedUp)
 
-    mowedUp     = mow lawnWidth  $ map (strip width) horizontals
-    mowedAcross = mow lawnLength $ map (strip width) verticals
+    mowedAcross = mow lawnWidth  $ map (strip width) horizontals
+    mowedUp     = mow lawnLength $ map (strip width) verticals
 
     -- The strip a mower with width w makes along center line at offset x
     strip :: Mower -> CenterLine -> Strip
