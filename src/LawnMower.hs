@@ -10,6 +10,7 @@ import Scanner
 {- Types -}
 
 type Strip      = (Float, Float)  -- closed interval between two offsets
+type Lawn       = Strip           -- represent the starting lawn as one unmowed strip
 type Mower      = Float           -- width of the mower
 type CenterLine = Float           -- x or y offset, the mower is centered on this
 
@@ -56,13 +57,13 @@ isValid (width, _, _) = width > 0.0
 
 
 -- Constants given by the problem description
-lawnLength, lawnWidth :: Strip
+lawnLength, lawnWidth :: Lawn
 lawnLength = (0, 100)
 lawnWidth  = (0, 75 )
 
 
 -- Return the unmowed strips left on a lawn after a mower mows the given list of strips
-mow :: Strip -> [Strip] -> [Strip]
+mow :: Lawn -> [Strip] -> [Strip]
 mow lawn = cut >>> prune 
   where
     cut   = foldr go [lawn]
