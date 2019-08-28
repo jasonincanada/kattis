@@ -2,7 +2,7 @@
 
 module Main where
 
-import Compromise
+import Towering
 
 main :: IO ()
-main = interact compromise
+main = interact towering
