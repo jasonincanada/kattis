@@ -2,7 +2,7 @@
 
 module Main where
 
-import Semafori
+import Compromise
 
 main :: IO ()
-main = interact semafori
+main = interact compromise
