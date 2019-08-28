@@ -26,6 +26,11 @@ instance Show Output where
 parseInput :: Scanner [TestCase]
 parseInput = str >> many parseCase
 
+{-  3 5
+    00000
+    00100
+    01001
+-}
 parseCase :: Scanner TestCase
 parseCase = do
   count   <- runWordScanner int <$> str
