@@ -2,7 +2,7 @@
 
 module Main where
 
-import Towering
+import FastFood
 
 main :: IO ()
-main = interact towering
+main = interact fastfood
