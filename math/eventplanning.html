@@ -1,0 +1,73 @@
+<html>
+
+<head>
+  <title>Event Planning - Mathematical Analysis</title>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+  <style type="text/css">
+    body {
+      font-family: Arial;
+      color: #333;
+      background-color: white;
+      font-family: 'Open Sans';
+      font-size: 15pt;
+      padding-bottom: 100px;
+    }
+
+    a {
+      color: #369;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #69A;
+    }
+  </style>
+
+  <!-- Good MathJax quick reference here:
+       https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+    });
+  </script>
+</head>
+
+<body>
+
+<div style="margin: auto auto; margin-top: 100px; width: 900px;">
+
+  <div style="float: right;">
+      <a href="https://open.kattis.com/problems/eventplanning">Problem Description</a>
+    | My Haskell Solution
+  </div>
+
+  <h2>Event Planning</h2>
+
+  <p>
+    Given a set $H$ of hotels, denote the nightly rate for hotel $h$ as $R_h$.
+    Denote the set of weekend vacancies for hotel $h$ by $V_h$.
+  </p>
+
+  <p>
+    The set $C$ of hotels with enough capacity for all $N$ participants on at least one weekend is defined as
+
+      $$C := \{ h \in H \space | \space \exists n \in V_h [ n \ge N ] \}.$$
+
+    Let $\beta \subseteq C$ be the set of hotels whose nightly rate keeps us within our budget $B$:
+
+    $$\beta := \{ h \in C \space | \space N \cdot R_h \le B \}$$
+
+    Then the cheapest cost $A$ for the trip ($-1$ if nothing is available) is
+
+      $$A := \begin{cases}
+                N \cdot \min_{h \in \beta} R_h, & \text{if $\beta \ne \emptyset$ } \\
+                -1,                             & \text{otherwise}
+             \end{cases}$$
+  </p>
+
+</div>
+
+</body>
+</html>
