@@ -1,0 +1,65 @@
+<html>
+
+<head>
+  <title>FastFood - Mathematical Analysis</title>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+  <style type="text/css">
+    body {
+      font-family: Arial;
+      color: #333;
+      background-color: white;
+      font-family: 'Open Sans';
+      font-size: 15pt;
+      padding-bottom: 100px;
+    }
+
+    a {
+      color: #369;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #69A;
+    }
+  </style>
+
+  <!-- Good MathJax quick reference here:
+       https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+    });
+  </script>
+</head>
+
+<body>
+
+<div style="margin: auto auto; margin-top: 100px; width: 900px;">
+
+  <div style="float: right;">
+      <a href="https://open.kattis.com/problems/semafori">Problem Description</a>
+    | <a href="https://github.com/jasonincanada/kattis/blob/master/src/FastFood.hs">My Haskell Solution</a>
+  </div>
+
+  <h2>FastFood</h2>
+
+  <p>
+    Given $n$ prizes, denote their values by
+
+      $$v_1, v_2, \ldots, v_n.$$
+
+    Denote the number of required stickers for prize $i$, sticker type $j$ as $R_{i,j}$.
+  </p>
+
+  <p>
+    Then the total amount $A$ of prize money is given by
+
+      $$A = \sum_{i=1}^n v_i ( \min_{j} R_{i,j} ).$$
+  </p>
+
+</div>
+
+</body>
+</html>
