@@ -1,0 +1,68 @@
+<html>
+
+<head>
+  <title>Curse The Darkness - Mathematical Analysis</title>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+  <style type="text/css">
+    body {
+      font-family: Arial;
+      color: #333;
+      background-color: white;
+      font-family: 'Open Sans';
+      font-size: 15pt;
+      padding-bottom: 100px;
+    }
+
+    a {
+      color: #369;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #69A;
+    }
+  </style>
+
+  <!-- Good MathJax quick reference here:
+       https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+    });
+  </script>
+</head>
+
+<body>
+
+<div style="margin: auto auto; margin-top: 100px; width: 900px;">
+
+  <div style="float: right;">
+      <a href="https://open.kattis.com/problems/cursethedarkness">Problem Description</a>
+    | My Haskell Solution
+  </div>
+
+  <h2>Curse The Darkness</h2>
+
+  <p>
+    Given candles $C := \{ c_1, c_2, \ldots, c_n \}$, denote their x and y coordinates by $x_1, x_2, \ldots, x_n$ and $y_1, y_2, \ldots, y_n$ respectively.  Let our book's coordinates be $b_x$ and $b_y$.  Let $x_i, y_i, b_x, b_y \in \mathbb{R}$.
+  </p>
+
+  <p>
+    The set $\gamma$ of candles within 8 meters of our book is given by
+
+      $$\gamma := \{ c_i \in C \space|\space \sqrt{(x_i - b_x)^2 + (y_i - b_y)^2} \le 8 \}.$$
+
+    The answer $A$ to the problem is given by
+
+      $$A := \begin{cases}
+              \text{light a candle},     & \gamma \ne \emptyset \\
+              \text{curse the darkness}, & otherwise
+             \end{cases}$$
+  </p>
+
+</div>
+
+</body>
+</html>
