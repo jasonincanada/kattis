@@ -118,8 +118,9 @@ countTotal dict word = foldMap f dict & getSum
 doCase :: TestCase -> Output
 doCase (sentence, dict) = output
   where
-    correct = foldMap f sentence & getProduct
-    total   = foldMap g sentence & getProduct
+    correct   = foldMap f sentence & getProduct
+    total     = foldMap g sentence & getProduct
+    incorrect = total - correct
 
     f, g :: Word -> Product Int
     f word = Product (countCorrect dict word)
@@ -127,7 +128,7 @@ doCase (sentence, dict) = output
 
     output  = if total == 1
               then Translation inDutch allCorrect
-              else Tally correct (total - correct)
+              else Tally correct incorrect
 
     (inDutch, allCorrect) = foldMap (first dict) sentence & fmap getAll
 
