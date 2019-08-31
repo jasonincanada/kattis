@@ -100,9 +100,9 @@ countCorrect :: Dictionary -> Word -> Int
 countCorrect dict word = foldMap f dict & getSum
   where
     f :: Record -> Sum Int
-    f (english, _, correct)
-      | english == word && correct = Sum 1
-      | otherwise                  = Sum 0
+    f (dutch, _, correct)
+      | dutch == word && correct = Sum 1
+      | otherwise                = Sum 0
 
 
 -- Map a word to the total number of translations
@@ -110,9 +110,9 @@ countTotal :: Dictionary -> Word -> Int
 countTotal dict word = foldMap f dict & getSum
   where
     f :: Record -> Sum Int
-    f (english, _, _)
-      | english == word = Sum 1
-      | otherwise       = Sum 0
+    f (dutch, _, _)
+      | dutch == word = Sum 1
+      | otherwise     = Sum 0
 
 
 doCase :: TestCase -> Output
@@ -137,9 +137,9 @@ doCase (sentence, dict) = output
     -- Get the first translation of a word in the dictionary. The found word is
     -- put in a singleton list so it--and the resulting tuple!--forms a monoid
     first :: Dictionary -> Word -> ([Word], All)
-    first ( (english,dutch,correct) : ws ) word
-      | english == word = ([dutch], All correct)
-      | otherwise       = first ws word
+    first ( (dutch,english,correct) : ws ) word
+      | dutch == word = ([english], All correct)
+      | otherwise     = first ws word
 
 
 {- Operations -}
