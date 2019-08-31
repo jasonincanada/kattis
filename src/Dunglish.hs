@@ -8,7 +8,7 @@ module Dunglish (dunglish, try) where
 
     The three monoids used in this solution: All, Product, Sum
 
-      All True  <> All True = All True      -- mempty = True
+      All True  <> All True = All True      -- mempty = All True
       All False <> All True = All False
 
       Product 3 <> Product 5 = Product 15   -- mempty = Product 1
