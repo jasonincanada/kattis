@@ -2,7 +2,7 @@
 
 module Main where
 
-import FastFood
+import Dunglish
 
 main :: IO ()
-main = interact fastfood
+main = interact dunglish
