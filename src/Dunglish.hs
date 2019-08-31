@@ -127,10 +127,10 @@ doCase (sentence, dict) = output
     g word = Product (countTotal   dict word)
 
     output  = if total == 1
-              then Translation inDutch allCorrect
+              then Translation inEnglish allCorrect
               else Tally correct incorrect
 
-    (inDutch, allCorrect) = foldMap (first dict) sentence & fmap getAll
+    (inEnglish, allCorrect) = foldMap (first dict) sentence & fmap getAll
 
     -- foldMap :: (Foldable t, Monoid m) => (a -> m) -> t a -> m
 
