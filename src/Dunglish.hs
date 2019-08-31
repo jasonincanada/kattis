@@ -17,7 +17,7 @@ module Dunglish (dunglish, try) where
     But actually, there's a fourth one: the built-in list!
 
       ["loose", "lips"] <> ["sink", "ships"] = ["loose", "lips", "sink", "ships"]
-      ["foo"] <> [] = ["foo"]
+      ["foo"]           <> []                = ["foo"]
 
     Any two monoids can be paired up and the whole pair forms a monoid. We use this
     to our advantage in doCase to translate a sentence while tracking whether every
@@ -126,9 +126,9 @@ doCase (sentence, dict) = output
     f word = Product (countCorrect dict word)
     g word = Product (countTotal   dict word)
 
-    output  = if total == 1
-              then Translation inEnglish allCorrect
-              else Tally correct incorrect
+    output = if total == 1
+             then Translation inEnglish allCorrect
+             else Tally correct incorrect
 
     (inEnglish, allCorrect) = foldMap (first dict) sentence & fmap getAll
 
