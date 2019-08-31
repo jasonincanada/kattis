@@ -1,0 +1,86 @@
+<html>
+
+<head>
+  <title>Dunglish - Mathematical Analysis</title>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+  <style type="text/css">
+    body {
+      font-family: Arial;
+      color: #333;
+      background-color: white;
+      font-family: 'Open Sans';
+      font-size: 15pt;
+      padding-bottom: 100px;
+    }
+
+    a {
+      color: #369;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #69A;
+    }
+  </style>
+
+  <!-- Good MathJax quick reference here:
+       https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+    });
+  </script>
+</head>
+
+<body>
+
+<div style="margin: auto auto; margin-top: 100px; width: 900px;">
+
+  <div style="float: right;">
+      <a href="https://open.kattis.com/problems/dunglish">Problem Description</a>
+    | <a href="https://github.com/jasonincanada/kattis/blob/master/src/Dunglish.hs">My Haskell Solution</a>
+  </div>
+
+  <h2>Dunglish</h2>
+
+  <p>
+    We have a set $W$ of words from which a sentence $S$ has been constructed. For example:
+
+      $$\begin{align}
+          W &:= \{ \text{als}, \text{mollen} \} \\
+          S &:= \text{'als mollen mollen mollen'}
+        \end{align}$$
+
+    The words can occur more than once in the sentence, so define a function $s : W \to \mathbb{N}$ that maps a word to the number of occurrences of it in $S$.  For the above example:
+
+      $$\begin{align}
+          s(\text{als})    &= 1 \\
+          s(\text{mollen}) &= 3
+        \end{align}$$
+  </p>
+
+
+  <p>
+    Define two maps: $c : W \to \mathbb{N}$, which maps words to the number of <i>correct</i> translations in our dictionary; and $t : W \to \mathbb{N}$, which maps words to the <i>total</i> translations (both correct/incorrect).  In this section we will be computing totals only, not determining the translations themselves, so the English words are not represented here.
+  </p>
+
+  <p>
+    The total possible <i>correct</i> translations $C$ of the sentence $S$ is given by:
+
+      $$C := \prod_{w \in W} c(w)^{s(w)} $$
+
+    The total possible translations $T$ is:
+
+      $$T := \prod_{w \in W} t(w)^{s(w)} $$
+
+    The number of incorrect translations $I$ is then:
+
+      $$I = T - C.$$
+  </p>
+
+</div>
+
+</body>
+</html>
