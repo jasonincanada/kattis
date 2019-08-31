@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 Date | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+31 Aug 2019 | [2.3](https://open.kattis.com/problems/dunglish) | [Dunglish.hs](src/Dunglish.hs) | Count the possible translations of a sentence given a dictionary
 29 Aug 2019 | [2.2](https://open.kattis.com/problems/fastfood) | [FastFood.hs](src/FastFood.hs) | Calculate total value of prizes obtained with a set of stickers
 28 Aug 2019 | [2.1](https://open.kattis.com/problems/towering) | [Towering.hs](src/Towering.hs) | Stack boxes into two towers with specified heights
 28 Aug 2019 | [2.1](https://open.kattis.com/problems/compromise) | [Compromise.hs](src/Compromise.hs) | Find the best compromise for a set of yes/no beliefs for n people
