@@ -34,9 +34,9 @@ module Dunglish (dunglish, try) where
     We have thrown performance concerns to the wind with this one! There is a lot of
     repetitive traversal of the dictionary, but we are focusing on the monoidal
     sub-structures for this challenge instead of finding a fast solution. A faster
-    solution would use a Data.IntMap for quicker lookups, and exponentiation instead
-    of "repeated multiplication" as we are effectively doing with the Product type
-    when we have repeated words in a sentence.
+    solution would use Data.Map and Data.Set for quicker lookups, and exponentiation
+    instead of "repeated multiplication" as we are effectively doing with the
+    Product type when we have repeated words in a sentence.
 
 -}
 
