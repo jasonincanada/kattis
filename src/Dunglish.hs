@@ -6,13 +6,14 @@ module Dunglish (dunglish, try) where
     monoidal structure of the sub-problems and forego any data structure more
     complicated than the built-in list.
 
-    The three monoids used in this solution: All, Product, Sum
+    The three monoids used in this solution: Sum, Product, All
+
+      Sum 3     <> Sum 5     = Sum 8        -- mempty = Sum 0
+      Product 3 <> Product 5 = Product 15   -- mempty = Product 1
 
       All True  <> All True = All True      -- mempty = All True
       All False <> All True = All False
 
-      Product 3 <> Product 5 = Product 15   -- mempty = Product 1
-      Sum 3     <> Sum 5     = Sum 8        -- mempty = Sum 0
 
     But actually, there's a fourth one: the built-in list!
 
