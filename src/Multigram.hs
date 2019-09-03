@@ -41,6 +41,7 @@ doCase word = output
 
     roots :: [String]
     roots = divisors (length word) & foldMap (flip chunksOf word >>> root)
+    --    = concat [ root $ chunksOf i word | i <- divisors (length word) ]
 
     -- return the first of a list of words if they are all anagrams
     -- or the empty list if not
