@@ -4,6 +4,7 @@ module Multigram (multigram, try) where
 
 import Control.Arrow   ((>>>))
 import Data.Bool       (bool)
+import Data.Function   ((&))
 import Data.List       (sort)
 import Data.List.Split (chunksOf)
 import Scanner
@@ -39,15 +40,15 @@ doCase word = output
                []       -> NotAMultigram
 
     roots :: [String]
-    roots = concat [ anagrams $ chunksOf i word | i <- divisors (length word) ]
+    roots = divisors (length word) & foldMap (flip chunksOf word >>> root)
 
-    -- return the root of the list of words if they are all anagrams
+    -- return the first of a list of words if they are all anagrams
     -- or the empty list if not
-    anagrams :: [String] -> [String]
-    anagrams (root:rest) = bool [] [root] allGood
+    root :: [String] -> [String]
+    root (r:rs) = bool [] [r] allGood
       where
-        allGood = all (sort >>> (==sorted)) rest
-        sorted  = sort root
+        allGood = all (sort >>> (==sorted)) rs
+        sorted  = sort r
 
     -- from: https://stackoverflow.com/a/1480620/229717
     divisors :: Int -> [Int]
