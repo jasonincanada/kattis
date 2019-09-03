@@ -2,7 +2,7 @@
 
 module Main where
 
-import Dunglish
+import Multigram
 
 main :: IO ()
-main = interact dunglish
+main = interact multigram
