@@ -2,7 +2,7 @@
 
 module Main where
 
-import Multigram
+import GrowlingGears
 
 main :: IO ()
-main = interact multigram
+main = interact growlinggears

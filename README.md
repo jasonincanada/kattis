@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 Date | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+5 Sep 2019 | [2.4](https://open.kattis.com/problems/growlinggears) | [GrowlingGears.hs](src/GrowlingGears.hs) | Find the maximum value of a set of inverted parabolas
 2 Sep 2019 | [2.4](https://open.kattis.com/problems/multigram) | [Multigram.hs](src/Multigram.hs) | Find the shortest n-string that's an anagram of the other n-strings
 31 Aug 2019 | [2.3](https://open.kattis.com/problems/dunglish) | [Dunglish.hs](src/Dunglish.hs) | Count the possible translations of a sentence given a dictionary
 29 Aug 2019 | [2.2](https://open.kattis.com/problems/fastfood) | [FastFood.hs](src/FastFood.hs) | Calculate total value of prizes obtained with a set of stickers
