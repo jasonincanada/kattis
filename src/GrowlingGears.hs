@@ -10,7 +10,6 @@ module GrowlingGears (growlinggears, try) where
     https://www.wikihow.com/Find-the-Maximum-or-Minimum-Value-of-a-Quadratic-Function-Easily
 -}
 
-import Data.Bifunctor (first)
 import Control.Arrow  ((>>>))
 import Control.Monad  (replicateM)
 import Data.List      (sort)
@@ -58,12 +57,10 @@ parseGear = do
 {- Logic -}
 
 doCase :: TestCase -> Output
-doCase gears = Output $ findMaxY withIndex
+doCase = findMaxY >>> Output
   where
-    withIndex = zip gears [1..]
-
-    findMaxY :: [(Gear, Int)] -> Int
-    findMaxY = map (first yMax) >>> sort >>> last >>> snd
+    findMaxY :: [Gear] -> Int
+    findMaxY = map yMax >>> flip zip [1..] >>> sort >>> last >>> snd
       where
         yMax :: Gear -> Float
         yMax gear = eval gear (xOfMax gear)
