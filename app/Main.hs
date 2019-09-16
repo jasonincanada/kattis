@@ -2,7 +2,7 @@
 
 module Main where
 
-import GrowlingGears
+import ThreePowers
 
 main :: IO ()
-main = interact growlinggears
+main = interact threepowers

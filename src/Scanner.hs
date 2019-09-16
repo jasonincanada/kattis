@@ -34,11 +34,21 @@ many :: Scanner a -> Scanner [a]
 many s = get >>= \case { [] -> return [];
                          _  -> (:) <$> s <*> many s }
 
-two, four, six, eight :: Scanner a -> Scanner [a]
-[two, four, six, eight] = map replicateM [2,4,6,8]
+two, three, four, six, eight :: Scanner a -> Scanner [a]
+[two, three, four, six, eight] = map replicateM [2,3,4,6,8]
 
 
--- I added these for convenience
+-- I added the following
 runWordScanner = runScanner words
 runLineScanner = runScanner lines
+
+triple :: Scanner a -> Scanner (a, a, a)
+triple s = do
+  [a, b, c] <- three s
+
+  return (a, b, c)
+
+
+bigint :: Scanner Integer
+bigint = read <$> str
 
