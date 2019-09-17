@@ -39,12 +39,12 @@ doCase n = Output $ set 3 n
 
 -- Get the nth subset of b^[0..] ordered by sum of elements
 set :: Integer -> Integer -> [Integer]
-set b n = foldMap try [0,1..last n]
+set b n = map (b^) $ foldMap try [0,1..last n]
   where
     last = fromIntegral >>> logBase 2 >>> floor
 
     try :: Integer -> [Integer]
-    try i = bool [] [b^i] (ind == 1)
+    try i = bool [] [i] (ind == 1)
       where
         ind = (n-1) `div` (2^i) `mod` 2
 
