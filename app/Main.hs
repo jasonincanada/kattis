@@ -2,7 +2,7 @@
 
 module Main where
 
-import ThreePowers
+import JointAttack
 
 main :: IO ()
-main = interact threepowers
+main = interact jointattack

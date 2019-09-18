@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 Date | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+18 Sep 2019 | [2.5](https://open.kattis.com/problems/jointattack) | [JointAttack.hs](src/JointAttack.hs) | Calculate a continued fraction with a finite number of terms
 16 Sep 2019 | [2.5](https://open.kattis.com/problems/threepowers) | [ThreePowers.hs](src/ThreePowers.hs) | Find the <i>n</i>th subset ordered by sum of values
 5 Sep 2019 | [2.4](https://open.kattis.com/problems/growlinggears) | [GrowlingGears.hs](src/GrowlingGears.hs) | Find the maximum value of a set of inverted parabolas
 2 Sep 2019 | [2.4](https://open.kattis.com/problems/multigram) | [Multigram.hs](src/Multigram.hs) | Find the shortest n-string that's an anagram of the other n-strings
