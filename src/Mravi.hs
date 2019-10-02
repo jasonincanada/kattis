@@ -15,7 +15,11 @@ type Flow     = Double         -- measure of water flow
 type Portion  = Double         -- percentage of the prior node's flow (1 ≤ x ≤ 100)
 type Req      = Double         -- required amount of liquid at a leaf node
 
-type Pipe     = (Label, Label, Portion, Bool)
+data Pipe     = Pipe { from    :: Label
+                     , to      :: Label
+                     , portion :: Portion
+                     , super   :: Bool
+                     }
 
 type PipeMap  = IM.IntMap Pipe -- keyed on the target node (nodes may have many
                                -- outflows but only one inflow so this is safe)
@@ -47,7 +51,7 @@ parseInput = do
 
   where
     mapped :: [Pipe] -> PipeMap
-    mapped = map (\pipe@(_,to,_,_) -> (to, pipe)) >>> IM.fromList
+    mapped = map (\pipe -> (to pipe, pipe)) >>> IM.fromList
 
     indexed :: [Int] -> [(Label, Req)]
     indexed = map fromIntegral >>> zip [1..] >>> filter (snd >>> (>=0))
@@ -57,7 +61,7 @@ parseInput = do
 parsePipe :: Scanner Pipe
 parsePipe = do
   [from, to, portion, super] <- runWordScanner (four int) <$> str
-  return (from, to, fromIntegral portion, super == 1)
+  return $ Pipe from to (fromIntegral portion) (super == 1)
 
 
 {- Logic -}
@@ -74,17 +78,15 @@ doCase (pipes, reqs) = Output x
         -- construct the path of pipes from the given leaf to the root
         path :: Label -> [Pipe]
         path 1     = []
-        path label = pipe : rest
+        path label = pipe : path (from pipe)
           where
-            pipe         = pipes IM.! label
-            rest         = path from
-            (from,_,_,_) = pipe
+            pipe = pipes IM.! label
 
         -- convert this pipe into its mini-function
         k :: Pipe -> (Flow -> Flow)
-        k (_, _, portion, super)
-          | super     = sqrt >>> (/(portion/100))
-          | otherwise =          (/(portion/100))
+        k pipe
+          | super pipe = sqrt >>> (/(portion pipe / 100))
+          | otherwise  =          (/(portion pipe / 100))
 
         -- string the mini-functions together into one big function
         compose :: [(Flow -> Flow)] -> (Flow -> Flow)
