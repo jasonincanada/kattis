@@ -11,7 +11,7 @@ import           Scanner
 {- Types -}
 
 type Label    = Int            -- nodes are labeled with integers, 1 being the root
-type Flow     = Double         -- percentage of the prior node's flow (1 ⇐ x ⇐ 100)
+type Flow     = Double         -- percentage of the prior node's flow (1 ≤ x ≤ 100)
 type Req      = Double         -- required amount of liquid at a leaf node
 
 type Pipe     = (Label, Label, Flow, Bool)
