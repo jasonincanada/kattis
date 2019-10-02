@@ -89,8 +89,11 @@ doCase (pipes, reqs) = Output x
           | otherwise  =          (/(portion pipe / 100))
 
         -- string the mini-functions together into one big function
-        compose :: [(Flow -> Flow)] -> (Flow -> Flow)
-        compose = foldl (>>>) id
+        compose :: [(Flow -> Flow)] -> (Req -> Flow)
+        compose = foldl (>>>) init
+          where
+            init :: Req -> Flow
+            init = id
 
 
 {- Operations -}
