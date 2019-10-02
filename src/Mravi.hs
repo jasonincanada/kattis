@@ -11,10 +11,11 @@ import           Scanner
 {- Types -}
 
 type Label    = Int            -- nodes are labeled with integers, 1 being the root
-type Flow     = Double         -- percentage of the prior node's flow (1 ≤ x ≤ 100)
+type Flow     = Double         -- measure of water flow
+type Portion  = Double         -- percentage of the prior node's flow (1 ≤ x ≤ 100)
 type Req      = Double         -- required amount of liquid at a leaf node
 
-type Pipe     = (Label, Label, Flow, Bool)
+type Pipe     = (Label, Label, Portion, Bool)
 
 type PipeMap  = IM.IntMap Pipe -- keyed on the target node (nodes may have many
                                -- outflows but only one inflow so this is safe)
@@ -49,8 +50,8 @@ parseInput = do
 
 parsePipe :: Scanner Pipe
 parsePipe = do
-  [from, to, flow, super] <- runWordScanner (four int) <$> str
-  return (from, to, fromIntegral flow, super == 1)
+  [from, to, portion, super] <- runWordScanner (four int) <$> str
+  return (from, to, fromIntegral portion, super == 1)
 
 
 {- Logic -}
@@ -75,9 +76,9 @@ doCase (pipes, reqs) = Output x
 
         -- convert this pipe into its mini-function
         k :: Pipe -> (Flow -> Flow)
-        k (_, _, flow, super)
-          | super     = sqrt >>> (/(flow/100))
-          | otherwise =          (/(flow/100))
+        k (_, _, portion, super)
+          | super     = sqrt >>> (/(portion/100))
+          | otherwise =          (/(portion/100))
 
         -- string the mini-functions together into one big function
         compose :: [(Flow -> Flow)] -> (Flow -> Flow)
