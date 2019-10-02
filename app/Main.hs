@@ -2,7 +2,7 @@
 
 module Main where
 
-import JointAttack
+import Mravi
 
 main :: IO ()
-main = interact jointattack
+main = interact mravi
