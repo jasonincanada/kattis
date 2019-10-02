@@ -1,3 +1,5 @@
+{-# Language RecordWildCards #-}
+
 module Mravi (mravi, try) where
 
 {-  Mravi (difficulty 2.7) - https://open.kattis.com/problems/mravi -}
@@ -84,9 +86,9 @@ doCase (pipes, reqs) = Output x
 
         -- convert this pipe into its mini-function
         k :: Pipe -> (Flow -> Flow)
-        k pipe
-          | super pipe = sqrt >>> (/(portion pipe))
-          | otherwise  =          (/(portion pipe))
+        k Pipe{..}
+          | super     = sqrt >>> (/portion)
+          | otherwise =          (/portion)
 
         -- string the mini-functions together into one big function
         compose :: [Flow -> Flow] -> (Req -> Flow)
