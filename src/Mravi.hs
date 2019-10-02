@@ -32,6 +32,11 @@ instance Show Output where
 
 {- Parsing -}
 
+{-  3
+    1 2 20 1
+    1 3 80 1
+    -1 4 8
+-}
 parseInput :: Scanner TestCase
 parseInput = do
   count <- int
@@ -48,6 +53,7 @@ parseInput = do
     indexed = map fromIntegral >>> zip [1..] >>> filter (snd >>> (>=0))
 
 
+-- 1 2 20 1
 parsePipe :: Scanner Pipe
 parsePipe = do
   [from, to, portion, super] <- runWordScanner (four int) <$> str
