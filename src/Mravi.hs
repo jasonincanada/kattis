@@ -2,7 +2,7 @@ module Mravi (mravi, try) where
 
 {-  Mravi (difficulty 2.7) - https://open.kattis.com/problems/mravi -}
 
-import           Control.Arrow ((>>>))
+import           Control.Arrow ((>>>), (&&&))
 import           Control.Monad (replicateM)
 import qualified Data.IntMap as IM
 import           Scanner
@@ -51,7 +51,7 @@ parseInput = do
 
   where
     mapped :: [Pipe] -> PipeMap
-    mapped = map (\pipe -> (to pipe, pipe)) >>> IM.fromList
+    mapped = map (to &&& id) >>> IM.fromList
 
     indexed :: [Int] -> [(Label, Req)]
     indexed = map fromIntegral >>> zip [1..] >>> filter (snd >>> (>=0))
