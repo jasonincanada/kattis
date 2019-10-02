@@ -61,7 +61,7 @@ parseInput = do
 parsePipe :: Scanner Pipe
 parsePipe = do
   [from, to, portion, super] <- runWordScanner (four int) <$> str
-  return $ Pipe from to (fromIntegral portion) (super == 1)
+  return $ Pipe from to (fromIntegral portion / 100) (super == 1)
 
 
 {- Logic -}
@@ -85,8 +85,8 @@ doCase (pipes, reqs) = Output x
         -- convert this pipe into its mini-function
         k :: Pipe -> (Flow -> Flow)
         k pipe
-          | super pipe = sqrt >>> (/(portion pipe / 100))
-          | otherwise  =          (/(portion pipe / 100))
+          | super pipe = sqrt >>> (/(portion pipe))
+          | otherwise  =          (/(portion pipe))
 
         -- string the mini-functions together into one big function
         compose :: [Flow -> Flow] -> (Req -> Flow)
