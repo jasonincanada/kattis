@@ -2,7 +2,7 @@
 
 module Main where
 
-import Mravi
+import SmartPhone
 
 main :: IO ()
-main = interact mravi
+main = interact smartphone
