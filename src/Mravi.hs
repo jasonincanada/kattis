@@ -14,7 +14,7 @@ import           Scanner
 
 type Label    = Int            -- nodes are labeled with integers, 1 being the root
 type Flow     = Double         -- measure of water flow
-type Portion  = Double         -- percentage of the prior node's flow (1 ≤ x ≤ 100)
+type Portion  = Double         -- percentage of the prior node's flow (0.01 ≤ x ≤ 1)
 type Req      = Double         -- required amount of liquid at a leaf node
 
 data Pipe     = Pipe { from    :: Label
