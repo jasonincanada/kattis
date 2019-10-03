@@ -77,7 +77,7 @@ doCase (goal, typedSoFar, suggestions) = Output quickest
                        & getSum
 
 
-    -- backspace until we share a prefix with the goal word
+    -- backspace until our word is a prefix of the goal word
     backspace :: Operation
     backspace = do
       word <- lift get
