@@ -24,6 +24,7 @@ dependencies:
 - containers
 - mtl
 - split
+- dlist
 
 library:
   source-dirs: src
