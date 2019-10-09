@@ -2,7 +2,7 @@
 
 module Main where
 
-import SmartPhone
+import Circular
 
 main :: IO ()
-main = interact smartphone
+main = interact circular
