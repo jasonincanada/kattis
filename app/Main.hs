@@ -2,7 +2,7 @@
 
 module Main where
 
-import Circular
+import Orchard
 
 main :: IO ()
-main = interact circular
+main = interact orchard

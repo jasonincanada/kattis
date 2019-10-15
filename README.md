@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 Date | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+15 Oct 2019 | [2.7](https://open.kattis.com/problems/orchard) | [Orchard.hs](src/Orchard.hs) | Calculate the probability of winning the First Orchard game
 9 Oct 2019 | [2.7](https://open.kattis.com/problems/circular) | [Circular.hs](src/Circular.hs) | Find the cut of a circular DNA strand that maximizes valid structures
 9 Oct 2019 | [2.7](https://open.kattis.com/problems/competitivearcadebasketball) | [Basketball.hs](src/Basketball.hs) | Determine which players win a basketball competition
 3 Oct 2019 | [2.7](https://open.kattis.com/problems/smartphone) | [SmartPhone.hs](src/SmartPhone.hs) | Find the quickest way to finish typing a word
