@@ -2,7 +2,8 @@
 
 module Main where
 
-import Orchard
+import Putovanje
 
 main :: IO ()
-main = interact orchard
+main = interact putovanje
+
