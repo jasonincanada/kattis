@@ -2,8 +2,8 @@
 
 module Main where
 
-import Putovanje
+import RotateCut
 
 main :: IO ()
-main = interact putovanje
+main = interact rotatecut
 
