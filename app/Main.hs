@@ -2,8 +2,8 @@
 
 module Main where
 
-import RotateCut
+import MarblesTree
 
 main :: IO ()
-main = interact rotatecut
+main = interact marblestree
 
