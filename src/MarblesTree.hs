@@ -13,7 +13,7 @@ module MarblesTree (marblestree, try) where
       1) the accumulating cost (the number of moves of the marbles), and
       2) one of:
          a) the surplus number of marbles we're carrying upwards, or
-         b) the number of zeros we still have to fill in the subtrees we've left behind
+         b) the distances to zeros we still have to fill in the subtrees we've left behind
 
     It took many days of thinking to figure out this algebra, so I was excited when it
     finally ran accurately on the test inputs.  However, I must have made a wrong
