@@ -69,7 +69,7 @@ parseCase = toMap <$> numberOf node
     node :: Scanner (Label, (Int, [Label]))
     node = runWordScanner n <$> str
 
-    -- 3 0 2 5 6  -> (3, 0, [5,6])
+    -- 3 0 2 5 6  -> (3, (0, [5,6]))
     n = do label     <- int
            marbles   <- int
            subLabels <- numberOf int
