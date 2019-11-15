@@ -86,7 +86,7 @@ doCase :: TestCase -> Output
 doCase dict = Output result
   where
     result = hylo (coalgebra dict) algebra seed  & fst
-    seed   = (1, snd $ dict M.! 1)
+    seed   = (1, dict M.! 1  & snd)
 
 
 -- Coalgebra
@@ -97,7 +97,7 @@ coalgebra :: TestCase -> Coalgebra TreeF (Label, [Label])
 coalgebra dict (label, labels) = NodeF marbles subs
   where
     marbles = dict M.! label  & fst
-    subs    = [ (l, snd $ dict M.! l) | l <- labels ]
+    subs    = [ (l, dict M.! l  & snd) | l <- labels ]
 
 
 -- Algebra
