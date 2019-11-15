@@ -26,6 +26,7 @@ dependencies:
 - split
 - dlist
 - array
+- hspec
 
 library:
   source-dirs: src
