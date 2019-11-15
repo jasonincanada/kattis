@@ -111,7 +111,7 @@ type Algebra f a = f a -> a
 
 algebra :: Algebra TreeF FoldData
 algebra (NodeF marbles []    )               -- leaf node base cases
-  | marbles == 0  = (0, Deficit $ [0]      )
+  | marbles == 0  = (0, Deficit $ 0 : []   )
   | otherwise     = (0, Surplus $ marbles-1)
 
 algebra (NodeF marbles subtrees) = foldData  -- the main folding action
