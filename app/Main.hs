@@ -2,8 +2,8 @@
 
 module Main where
 
-import MarblesTree
+import FlippingPatties
 
 main :: IO ()
-main = interact marblestree
+main = interact flippingpatties
 
