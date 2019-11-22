@@ -2,8 +2,8 @@
 
 module Main where
 
-import FlippingPatties
+import SmallSchedule
 
 main :: IO ()
-main = interact flippingpatties
+main = interact smallschedule
 
