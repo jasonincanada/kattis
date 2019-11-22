@@ -54,10 +54,12 @@ doCase (qdur, machines, ones, qs) = Output minutes
     -- by the concurrently-running Qs
     hidden   = gamma*qdur
 
-    minutes | leftover == 0  = (rows+0)*qdur
+    minutes | leftover == 0  = (rows+0)*qdur + extra'
             | ones <= hidden = (rows+1)*qdur + 0
             | ones >  hidden = (rows+1)*qdur + extra
             where
+              extra'= ceiling $ fromIntegral ones
+                              / fromIntegral machines
               extra = ceiling $ fromIntegral (ones - hidden)
                               / fromIntegral machines
 
