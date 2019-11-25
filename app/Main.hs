@@ -2,8 +2,8 @@
 
 module Main where
 
-import SmallSchedule
+import KnightSearch3
 
 main :: IO ()
-main = interact smallschedule
+main = interact knightsearch
 

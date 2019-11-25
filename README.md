@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 Date | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+25 Nov 2019 | [3.1](https://open.kattis.com/problems/knightsearch) | [KnightSearch.hs](src/KnightSearch.hs) ([2](src/KnightSearch2.hs), [3](src/KnightSearch3.hs)) | Check if a chess knight can walk a sequence
 17 Nov 2019 | [3.2](https://open.kattis.com/problems/flippingpatties) | [FlippingPatties.hs](src/FlippingPatties.hs) | Find minimum number of cooks needed to fulfill an order
 10 Nov 2019 | [3.0](https://open.kattis.com/problems/rotatecut) | [RotateCut.hs](src/RotateCut.hs) | Trim sides of a string by a quarter of its length recursively
 15 Oct 2019 | [2.7](https://open.kattis.com/problems/orchard) | [Orchard.hs](src/Orchard.hs) | Calculate the probability of winning the First Orchard game
