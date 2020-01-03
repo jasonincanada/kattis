@@ -80,8 +80,7 @@ instance Show Output where
 parseInput :: Scanner TestCase
 parseInput = do
   sentence <- runWordScanner (many str) <$> (str >> str)
-  count    <- runWordScanner int        <$> str
-  records  <- replicateM count parseRecord
+  records  <- numberOf parseRecord
 
   return (sentence, records)
 
