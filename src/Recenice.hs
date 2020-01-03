@@ -69,8 +69,8 @@ convert number
                         convert r
 
   | number >= 10   = tell [teens number]
-  | number == 0    = return ()
-  | otherwise      = tell [ones number]
+  | number >= 1    = tell [ones  number]
+  | otherwise      = return ()
   where
     ones 1 = "one"
     ones 2 = "two"
