@@ -68,8 +68,7 @@ convert number
                         tell [tens q]
                         convert r
 
-  | number >= 11   = tell [teens number]
-  | number == 10   = tell ["ten"]
+  | number >= 10   = tell [teens number]
   | number == 0    = return ()
   | otherwise      = tell [ones number]
   where
@@ -83,6 +82,7 @@ convert number
     ones 8 = "eight"
     ones 9 = "nine"
 
+    teens 10 = "ten"
     teens 11 = "eleven"
     teens 12 = "twelve"
     teens 13 = "thirteen"
