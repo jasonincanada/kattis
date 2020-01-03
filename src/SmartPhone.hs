@@ -36,7 +36,7 @@ instance Show Output where
     CAKEEATUR
 -}
 parseInput :: Scanner [TestCase]
-parseInput = int >>= flip replicateM parseCase
+parseInput = numberOf parseCase
 
 parseCase :: Scanner TestCase
 parseCase = (,,) <$> str        -- goal
