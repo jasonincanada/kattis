@@ -41,11 +41,7 @@ parseInput = str >> many parseGears
     2 152 208
 -}
 parseGears :: Scanner TestCase
-parseGears = do
-  count <- int
-  gears <- replicateM count parseGear
-
-  return gears
+parseGears = numberOf parseGear
 
 --  3 126 1400
 parseGear :: Scanner Gear
