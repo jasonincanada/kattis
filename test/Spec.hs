@@ -2,6 +2,7 @@ import Test.Hspec
 import Control.Monad (forM_)
 
 import MarblesTree   (marblestree)
+import Recenice      (recenice)
 import SmallSchedule (smallschedule)
 
 path = "test/inputs/"
@@ -38,6 +39,23 @@ main = hspec $ do
       \(testfile, result) ->
         it testfile $ (marblestree <$> readFile (path ++ testfile))
                         >>= (`shouldBe` (unlines [show result]))
+
+
+
+  describe "Rečenice" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "recenice-1.input", "this sentence has thirtyone letters"  )
+                , ( "recenice-2.input", "thirty is the number of letters here" )
+                , ( "recenice-3.input", "the letters are twentynine potato"    )
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (recenice <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
 
 
   describe "SmallSchedule" $ do

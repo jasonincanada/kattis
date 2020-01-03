@@ -2,8 +2,8 @@
 
 module Main where
 
-import KnightSearch3
+import Recenice
 
 main :: IO ()
-main = interact knightsearch
+main = interact recenice
 
