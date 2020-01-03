@@ -32,7 +32,7 @@ instance Show Output where
     e1 e1 s1 e2 s1 s2 e42 e1 s1
 -}
 parseInput :: Scanner TestCase
-parseInput = runWordScanner (many marker) <$> (str >> str)
+parseInput = str >> parseLine (many marker)
 
 marker :: Scanner Marker
 marker = do

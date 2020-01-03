@@ -46,7 +46,7 @@ parseGears = numberOf parseGear
 --  3 126 1400
 parseGear :: Scanner Gear
 parseGear = do
-  [a, b, c] <- runWordScanner (three int) <$> str
+  [a, b, c] <- parseLine (three int)
   return (negate a, b, c)
 
 

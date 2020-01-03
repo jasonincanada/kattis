@@ -54,11 +54,9 @@ instance Show Output where
 
 {-  1 1 0 0 3  -}
 parseInput :: Scanner TestCase
-parseInput = runWordScanner s <$> str
-  where
-    s = do fruits <- four int
-           steps  <- int
-           return (fruits, steps)
+parseInput = parseLine $ do fruits <- four int
+                            steps  <- int
+                            return (fruits, steps)
 
 
 {- Logic -}

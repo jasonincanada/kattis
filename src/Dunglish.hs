@@ -79,7 +79,8 @@ instance Show Output where
 -}
 parseInput :: Scanner TestCase
 parseInput = do
-  sentence <- runWordScanner (many str) <$> (str >> str)
+  str
+  sentence <- parseLine (many str)
   records  <- numberOf parseRecord
 
   return (sentence, records)

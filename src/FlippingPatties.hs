@@ -44,10 +44,8 @@ parseInput :: Scanner TestCase
 parseInput = numberOf order
 
 order :: Scanner Order
-order = runWordScanner s <$> str
-  where
-    s = (,) <$> int  -- duration per side
-            <*> int  -- target time to have the order ready
+order = parseLine $ (,) <$> int  -- duration per side
+                        <*> int  -- target time to have the order ready
 
 
 

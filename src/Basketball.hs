@@ -47,7 +47,7 @@ instance Show Output where
 -}
 parseInput :: Scanner TestCase
 parseInput = do
-  [players, goal, count] <- runWordScanner (many int) <$> str
+  [players, goal, count] <- parseLine (many int)
   names  <- replicateM players str
   scores <- replicateM count   parseScore
 

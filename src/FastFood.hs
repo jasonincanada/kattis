@@ -38,7 +38,7 @@ parseCase :: Scanner TestCase
 parseCase = do
   count    <- runWordScanner int          <$> str
   prizes   <- replicateM count parsePrize
-  amounts  <- runWordScanner (many int)   <$> str
+  amounts  <- parseLine (many int)
 
   return (prizes, pile amounts)
 

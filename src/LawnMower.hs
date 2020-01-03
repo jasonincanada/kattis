@@ -37,7 +37,7 @@ parseInput = many parseTestCase
 -}
 parseTestCase :: Scanner TestCase
 parseTestCase = do
-  width <- runWordScanner (str >> str >> float) <$> str
+  width <- parseLine (str >> str >> float)
 
   if width /= 0.0
     then do

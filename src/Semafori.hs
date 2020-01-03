@@ -38,11 +38,11 @@ parseInput = do
 {-  4 30  -}
 -- Skip over the first word and collect the second one as an integer
 parseRoadLength :: Scanner Distance
-parseRoadLength = runWordScanner (str >> int) <$> str
+parseRoadLength = parseLine (str >> int)
 
 -- 7 13 5
 parseLight :: Scanner Light
-parseLight = runWordScanner scanner <$> str
+parseLight = parseLine scanner
   where
     scanner = (,,) <$> int -- collect the first three words as integers and product them up into a triple
                    <*> int

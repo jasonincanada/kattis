@@ -47,7 +47,7 @@ parseInput :: Scanner TestCase
 parseInput = do
   count <- int
   pipes <- replicateM (count-1) parsePipe
-  reqs  <- runWordScanner (many int) <$> str
+  reqs  <- parseLine (many int)
 
   return (mapped pipes, indexed reqs)
 

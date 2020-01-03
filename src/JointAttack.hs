@@ -27,7 +27,7 @@ instance Show Output where
 
 -- Skip the first line and read all integers available on the second
 parseInput :: Scanner TestCase
-parseInput = runWordScanner (many bigint) <$> (str >> str)
+parseInput = str >> parseLine (many bigint)
 
 
 {- Logic -}

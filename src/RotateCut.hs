@@ -27,7 +27,7 @@ instance Show Output where
     2 ZZZ
 -}
 parseInput :: Scanner [TestCase]
-parseInput = numberOf (runWordScanner p <$> str)
+parseInput = numberOf $ parseLine p
   where
     p = (,) <$> int -- number of operations
             <*> str -- original sentence

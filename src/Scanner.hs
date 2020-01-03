@@ -42,6 +42,9 @@ two, three, four, six, eight :: Scanner a -> Scanner [a]
 runWordScanner = runScanner words
 runLineScanner = runScanner lines
 
+parseLine :: Scanner a -> Scanner a
+parseLine p = runWordScanner p <$> str
+
 triple :: Scanner a -> Scanner (a, a, a)
 triple s = do
   [a, b, c] <- three s
