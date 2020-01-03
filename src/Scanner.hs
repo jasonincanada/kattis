@@ -46,10 +46,10 @@ parseLine :: Scanner a -> Scanner a
 parseLine p = runWordScanner p <$> str
 
 triple :: Scanner a -> Scanner (a, a, a)
-triple s = do
-  [a, b, c] <- three s
-
-  return (a, b, c)
+triple s =
+  three s >>= \case
+                 [a,b,c] -> return (a,b,c)
+                 _       -> error "expecting exactly three elements"
 
 
 bigint :: Scanner Integer
