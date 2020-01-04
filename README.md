@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 Date | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+4 Jan 2020 | [3.1](https://open.kattis.com/problems/golombrulers) | [Golomb.hs](src/Golomb.hs) | Check if input markings describe a valid Golomb ruler
 3 Jan 2020 | [3.1](https://open.kattis.com/problems/recenice) | [Recenice.hs](src/Recenice.hs) | Find the missing number expressed as a string
 25 Nov 2019 | [3.1](https://open.kattis.com/problems/knightsearch) | [KnightSearch.hs](src/KnightSearch.hs) | Check if a chess knight can walk a sequence ([2](src/KnightSearch2.hs), [3](src/KnightSearch3.hs))
 17 Nov 2019 | [3.2](https://open.kattis.com/problems/flippingpatties) | [FlippingPatties.hs](src/FlippingPatties.hs) | Find minimum number of cooks needed to fulfill an order

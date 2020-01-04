@@ -1,6 +1,7 @@
 import Test.Hspec
 import Control.Monad (forM_)
 
+import Golomb        (golomb)
 import MarblesTree   (marblestree)
 import Recenice      (recenice)
 import SmallSchedule (smallschedule)
@@ -9,6 +10,22 @@ path = "test/inputs/"
 
 main :: IO ()
 main = hspec $ do
+
+  describe "Golomb" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "golomb.input", unlines [ "not a ruler"
+                                            , "perfect"
+                                            , "missing 1 2 3 4"
+                                            , "not a ruler"
+                                            , "missing 6"] ) ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (golomb <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
 
   describe "MarblesTree" $ do
 

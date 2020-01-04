@@ -2,8 +2,8 @@
 
 module Main where
 
-import Recenice
+import Golomb
 
 main :: IO ()
-main = interact recenice
+main = interact golomb
 
