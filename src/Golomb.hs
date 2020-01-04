@@ -1,6 +1,6 @@
 module Golomb (golomb, try) where
 
-{-  Golomb (difficulty 3.1) - https://open.kattis.com/problems/golomb -}
+{-  Golomb (difficulty 3.1) - https://open.kattis.com/problems/golombrulers -}
 
 import Control.Arrow  ((>>>))
 import Data.List      (group, sort, (\\))
