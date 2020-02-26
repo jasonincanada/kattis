@@ -49,10 +49,9 @@ pile amounts = M.fromList $ zip [1..] amounts
 
 --  3 1 2 3 100
 parsePrize :: Scanner Prize
-parsePrize = runWordScanner p <$> str
+parsePrize = parseLine p
   where
-    p = do count    <- int
-           stickers <- replicateM count int
+    p = do stickers <- numberOf int
            value    <- int
            return (value, stickers)
 
