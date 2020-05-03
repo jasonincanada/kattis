@@ -31,10 +31,10 @@ fn do_case(case: &str) -> String {
   for   i in 1   .. length-1 {
     for j in i+1 .. length   {
 
-      let (left,mid,right) = cut(&case, i, j);
-      let recombined =  reverse(&left)
-                     + &reverse(&mid)
-                     + &reverse(&right);
+      let (left,mid,right) = cut(case, i, j);
+      let recombined =  reverse(left)
+                     + &reverse(mid)
+                     + &reverse(right);
 
       if recombined < first {
         first = recombined;
@@ -46,11 +46,11 @@ fn do_case(case: &str) -> String {
 }
 
 // cut a string into three substrings along the given indices
-fn cut(s: &str, i: usize, j: usize) -> (String,String,String) {
+fn cut(s: &str, i: usize, j: usize) -> (&str,&str,&str) {
   
-  (s[0..i].to_string(),
-   s[i..j].to_string(),
-   s[j.. ].to_string())
+  ( &s[0..i],
+    &s[i..j],
+    &s[j.. ] )
 }
 
 fn reverse(s: &str) -> String {
@@ -68,9 +68,7 @@ mod tests {
   fn cut_works() {
     let test = "dcbagfekjih";
 
-    assert_eq!(cut(&test, 1, 3), ("d".to_string(),
-                                  "cb".to_string(),
-                                  "agfekjih".to_string()));
+    assert_eq!(cut(test, 1, 3), ("d", "cb", "agfekjih"));
   }
 
 
