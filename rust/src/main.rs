@@ -48,7 +48,7 @@ fn do_case(case: &str) -> String {
 // cut a string into three substrings along the given indices
 fn cut(s: &str, i: usize, j: usize) -> (&str,&str,&str) {
   
-  ( &s[0..i],
+  ( &s[ ..i],
     &s[i..j],
     &s[j.. ] )
 }
