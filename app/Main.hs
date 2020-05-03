@@ -2,8 +2,8 @@
 
 module Main where
 
-import Golomb
+import Lektira
 
 main :: IO ()
-main = interact golomb
+main = interact lektira
 

@@ -2,6 +2,7 @@ import Test.Hspec
 import Control.Monad (forM_)
 
 import Golomb        (golomb)
+import Lektira       (lektira)
 import MarblesTree   (marblestree)
 import Recenice      (recenice)
 import SmallSchedule (smallschedule)
@@ -103,4 +104,20 @@ main = hspec $ do
       \(input, result) ->
         it (input ++ " -> " ++ show result) $
           smallschedule input `shouldBe` show result
+
+
+  describe "Lektira" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "lektira-1.input", "abcdefghijk" )
+                , ( "lektira-2.input", "bometil" )
+                , ( "lektira-3.input", "aanadnok" )
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (lektira <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
 
