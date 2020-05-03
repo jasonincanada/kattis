@@ -60,7 +60,7 @@ main = hspec $ do
 
 
 
-  describe "Rečenice" $ do
+  describe "Recenice" $ do
 
     let cases = [
                 -- Sample inputs from the problem page
