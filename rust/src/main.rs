@@ -1,17 +1,16 @@
+use std::io::{self, Read};
+use std::str::FromStr;
 
-mod lektira;
-
-use std::io::{self, BufRead};
+mod tiredterry;
 
 fn main() {
+  let mut input = String::new();
 
-  // no parsing required, just read in a string from stdin
-  for line in io::stdin().lock().lines() {
+  io::stdin().read_to_string(&mut input).unwrap();
 
-    let result = lektira::do_case(&line.unwrap());
+  let case   = tiredterry::TestCase::from_str(&input).unwrap();
+  let result = tiredterry::do_case(case);
 
-    println!("{}", result);
-  }
-
+  println!("{}", result);
 }
 
