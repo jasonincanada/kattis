@@ -7,6 +7,11 @@
 
    This solution takes 0.00s (!) to complete on the kattis server
 
+   Revision: This revision should be a bit more performant (though it also takes 0.00s
+   runtime on the server so it's hard to tell for sure). We now call reverse only once per
+   change of the variable i to determine the left segment of the candidate string, instead
+   of every time we compose a new one
+
 */
 
 pub fn do_case(case: &str) -> String {
@@ -14,11 +19,20 @@ pub fn do_case(case: &str) -> String {
   let mut first  = case.to_string();
   let     length = case.len();
 
-  for   i in 1   .. length-1 {
-    for j in i+1 .. length   {
+  for i in 1 .. length-1 {
 
-      let (left,mid,right) = cut(case, i, j);
-      let recombined =  reverse(left)
+    // reverse the left-most segment only once per change of i
+    let left = reverse(&case[ ..i]);
+
+    for j in i+1 .. length {
+
+      let mid   = &case[i..j];
+      let right = &case[j.. ];
+
+      // this still copies left again to a new string before concatenating the mid and
+      // right segments. it feels like this should be avoidable because we already
+      // converted left to a string when we initialized it in the outer loop
+      let recombined =  left.to_string()
                      + &reverse(mid)
                      + &reverse(right);
 
@@ -31,14 +45,6 @@ pub fn do_case(case: &str) -> String {
   first
 }
 
-// cut a string into three substrings along the given indices
-fn cut(s: &str, i: usize, j: usize) -> (&str,&str,&str) {
-  
-  ( &s[ ..i],
-    &s[i..j],
-    &s[j.. ] )
-}
-
 fn reverse(s: &str) -> String {
   s.chars().rev().collect::<String>()
 }
@@ -48,14 +54,7 @@ fn reverse(s: &str) -> String {
 
 #[cfg(test)]
 mod tests {
-  use super::{cut, do_case, reverse};
-
-  #[test]
-  fn cut_works() {
-    let test = "dcbagfekjih";
-
-    assert_eq!(cut(test, 1, 3), ("d", "cb", "agfekjih"));
-  }
+  use super::{do_case, reverse};
 
 
   #[test]

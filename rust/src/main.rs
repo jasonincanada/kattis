@@ -1,4 +1,21 @@
-use std::io::{self, Read};
+
+use std::io::{self, BufRead};
+
+mod lektira;
+
+fn main() {
+
+  // no parsing required, just read in a string from stdin
+  for line in io::stdin().lock().lines() {
+
+    let result = lektira::do_case(&line.unwrap());
+
+    println!("{}", result);
+  }
+
+}
+
+/*
 use std::str::FromStr;
 
 mod tiredterry;
@@ -13,4 +30,5 @@ fn main() {
 
   println!("{}", result);
 }
+*/
 
