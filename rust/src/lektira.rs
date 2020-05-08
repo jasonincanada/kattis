@@ -32,7 +32,7 @@ pub fn do_case(case: &str) -> String {
       // this still copies left again to a new string before concatenating the mid and
       // right segments. it feels like this should be avoidable because we already
       // converted left to a string when we initialized it in the outer loop
-      let recombined =  left.to_string()
+      let recombined =  left.clone()
                      + &reverse(mid)
                      + &reverse(right);
 
