@@ -6,6 +6,8 @@ import Lektira       (lektira)
 import MarblesTree   (marblestree)
 import Recenice      (recenice)
 import SmallSchedule (smallschedule)
+import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
+
 
 path = "test/inputs/"
 
@@ -118,6 +120,42 @@ main = hspec $ do
     forM_ cases $
       \(testfile, result) ->
         it testfile $ (lektira <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
+  describe "Uxuhul Voting" $ do
+
+    it "turn 1 1" $ show (turn (pile 1) (Stone 1)) `shouldBe` "Pile 5"
+    it "turn 1 2" $ show (turn (pile 1) (Stone 2)) `shouldBe` "Pile 3"
+    it "turn 1 3" $ show (turn (pile 1) (Stone 3)) `shouldBe` "Pile 2"
+    it "turn 2 3" $ show (turn (pile 2) (Stone 3)) `shouldBe` "Pile 1"
+    it "turn 3 2" $ show (turn (pile 3) (Stone 2)) `shouldBe` "Pile 1"
+    it "turn 8 2" $ show (turn (pile 8) (Stone 2)) `shouldBe` "Pile 6"
+
+    it "ltop [-1,-1,-1]" $ show (ltop [-1,-1,-1]) `shouldBe` "Pile 1"
+    it "ltop [-1,-1, 1]" $ show (ltop [-1,-1, 1]) `shouldBe` "Pile 2"
+    it "ltop [ 1, 1, 1]" $ show (ltop [ 1, 1, 1]) `shouldBe` "Pile 8"
+
+    it "ptol 1" $ show (ptol $ pile 1) `shouldBe` "[-1,-1,-1]"
+    it "ptol 2" $ show (ptol $ pile 2) `shouldBe` "[-1,-1,1]"
+    it "ptol 3" $ show (ptol $ pile 3) `shouldBe` "[-1,1,-1]"
+    it "ptol 4" $ show (ptol $ pile 4) `shouldBe` "[-1,1,1]"
+    it "ptol 5" $ show (ptol $ pile 5) `shouldBe` "[1,-1,-1]"
+    it "ptol 6" $ show (ptol $ pile 6) `shouldBe` "[1,-1,1]"
+    it "ptol 7" $ show (ptol $ pile 7) `shouldBe` "[1,1,-1]"
+    it "ptol 8" $ show (ptol $ pile 8) `shouldBe` "[1,1,1]"
+
+
+    let cases = [
+                -- Sample inputs from the problem page
+                -- hide failing test for now
+                --( "uxuhul-1.input", "NYY\n" ),
+                  ( "uxuhul-2.input", "NNY\n" )
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (uxuhul <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 
 

@@ -2,8 +2,8 @@
 
 module Main where
 
-import Lektira
+import Uxuhul
 
 main :: IO ()
-main = interact lektira
+main = interact uxuhul
 

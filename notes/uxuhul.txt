@@ -1,0 +1,98 @@
+1
+4
+8 7 6 5 4 3 2 1  NNN - > x
+8 6 3 1 2 4 5 7  x   - > y
+8 3 6 5 1 2 7 4  y   - > YYY
+1 2 3 4 5 6 7 8  YYY -1> NYY
+
+    1 2 3 4 +   sign
+NNN 8 4 5 1 18  even
+NNY 7 5 6 2 20  odd
+NYN 6 3 2 3 14  odd
+NYY 5 6 8 4 23  even
+YNN 4 7 4 5 20  odd
+YNY 3 2 3 6 14  even
+YYN 2 8 7 7 24  even
+YYY 1 1 1 8 11  odd  -- this is the lowest but it can't be this one because
+                     -- it's an odd permutation of NNN and we have an even number
+                     -- of voters in this vote, so we go to the first available
+                     -- lowest even permutation (18, 23, >14<, 24) <- flawed
+
+
+if each voter were the last voter
+8 7 6 5 4 3 2 1  NNN -1> YNN
+8 6 3 1 2 4 5 7  YNN -3> YNY
+8 3 6 5 1 2 7 4  YNY -2> YYY
+1 2 3 4 5 6 7 8  YYY -1> NYY
+
+-- if 1 plays 1
+8 7 6 5 4 3 2 1  NNN -1> YNN
+8 6 3 1 2 4 5 7  YNN -1> NNN(4th) vs (8th)
+                 YNN -2> YYN(8th) vs (2nd)
+                 YNN -3> YNY(2nd) vs (3rd)
+
+-- if 1 plays 2
+8 7 6 5 4 3 2 1  NNN -2> NYN
+8 6 3 1 2 4 5 7  NYN -1> YYN(8th) vs (2nd)
+                 NYN -2> NNN(4th) vs (8th)
+                 NYN -3> NYY(6th) vs (5th)
+
+-- if 1 plays 3
+8 7 6 5 4 3 2 1  NNN -3> NNY
+8 6 3 1 2 4 5 7  NNY -1> YNY(2nd) vs (3rd)
+                 NNY -2> NYY(6th) vs (5th)
+                 NNY -3> NNN(4th) vs (8th)
+
+                         THIS determines THIS
+
+
+-- best interest for both to end up at YNY
+--
+-- so:    1 played 1 and 2 played 3
+--     or 1 played 3 and 2 played 1
+
+
+-- then:
+-- if 3 plays 1
+8 3 6 5 1 2 7 4  YNY -1> NNY
+1 2 3 4 5 6 7 8  NNY -1> YNY(6th) vs (3rd)
+                 NNY -2> NYY(4th) vs (8th)
+                 NNY -3> NNN(1st) vs (5th)
+
+-- if 3 plays 2
+8 3 6 5 1 2 7 4  YNY -2> YYY
+1 2 3 4 5 6 7 8  YYY -1> NYY(4th) vs (8th)
+                 YYY -2> YNY(6th) vs (3rd)
+                 YYY -3> YYN(7th) vs (7th)
+
+-- if 3 plays 3
+8 3 6 5 1 2 7 4  YNY -3> YNN
+1 2 3 4 5 6 7 8  YNN -1> NNN(1st) vs (5th)
+                 YNN -2> YYN(7th) vs (7th)
+                 YNN -3> YNY(6th) vs (3rd)
+
+-- but we know from the sample inputs that NYY is the final outcome
+-- so we made an assumption wrong somewhere
+
+--------------------------------------------------------------------------------
+
+last voter plays in his best interest according to his preferences only
+so this is what voter (n-1) knows about voter n:
+
+NNN -3> NNY (2nd)
+NNY -3> NNN (1st)
+NYN -2> NNN (1st)
+NYY -2> NNY (2nd)
+YNN -1> NNN (1st)
+YNY -1> NNY (1st)
+YYN -1> NYN (3rd)
+YYY -1> NYY (4th)
+
+voter[1..i..n][1..s..8] = 1..8
+
+
+
+voter (n-1)
+
+
+
