@@ -7,7 +7,7 @@ import MarblesTree   (marblestree)
 import Recenice      (recenice)
 import SmallSchedule (smallschedule)
 import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
-import Ceiling       (ceiling)
+--import Ceiling       (ceiling)
 import Substitution  (substitution)
 
 
