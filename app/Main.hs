@@ -2,8 +2,8 @@
 
 module Main where
 
-import Uxuhul
+import Substitution
 
 main :: IO ()
-main = interact uxuhul
+main = interact substitution
 

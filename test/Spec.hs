@@ -7,6 +7,8 @@ import MarblesTree   (marblestree)
 import Recenice      (recenice)
 import SmallSchedule (smallschedule)
 import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
+import Ceiling       (ceiling)
+import Substitution  (substitution)
 
 
 path = "test/inputs/"
@@ -158,4 +160,33 @@ main = hspec $ do
         it testfile $ (uxuhul <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 
+
+
+  {-
+  describe "Ceiling" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "ceiling-1.input", "4" ),
+                  ( "ceiling-2.input", "2" )
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (Ceiling.ceiling <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+  -}
+
+
+  describe "Substitution" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "substitution-1.input", unlines ["3", "1"] )
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (substitution <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
 
