@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 Date | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+20 Jun 2020 | [3.4](https://open.kattis.com/problems/limbo1) | [Limbo1.hs](src/Limbo1.hs) | Simple calculation with triangular numbers
 3 May 2020 | [3.2](https://open.kattis.com/problems/lektira) | [Lektira.hs](src/Lektira.hs) | Find the first word alphabetically after reversing substrings ([Rust](rust/src/lektira.rs))
 4 Jan 2020 | [3.1](https://open.kattis.com/problems/golombrulers) | [Golomb.hs](src/Golomb.hs) | Check if input markings describe a valid Golomb ruler
 3 Jan 2020 | [3.1](https://open.kattis.com/problems/recenice) | [Recenice.hs](src/Recenice.hs) | Find the missing number expressed as a string

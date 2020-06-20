@@ -2,8 +2,8 @@
 
 module Main where
 
-import Substitution
+import Limbo1
 
 main :: IO ()
-main = interact substitution
+main = interact limbo1
 
