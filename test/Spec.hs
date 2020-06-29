@@ -9,7 +9,7 @@ import SmallSchedule (smallschedule)
 import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
 --import Ceiling       (ceiling)
 import Limbo1        (limbo1)
-import Limbo2        (limbo2, which, trySquare, tryRect, doCase, rectCorner, rectTop, Output(..))
+import Limbo2        (limbo2, which, trySquare, tryRect, doCase, Output(..))
 
 
 path = "test/inputs/"
@@ -230,13 +230,6 @@ main = hspec $ do
     it "doCase 14" (doCase [3,2] `shouldBe` (Output 14))
     it "doCase 15" (doCase [3,3] `shouldBe` (Output 15))
 
-    it "rectCorner 1" (rectCorner 1 `shouldBe` 2)
-    it "rectCorner 2" (rectCorner 2 `shouldBe` 8)
-    it "rectCorner 3" (rectCorner 3 `shouldBe` 32)
-
-    it "rectTop 1" (rectTop 1 `shouldBe` 1)
-    it "rectTop 2" (rectTop 2 `shouldBe` 2)
-    it "rectTop 3" (rectTop 3 `shouldBe` 4)
 
     let cases = [
                 -- Sample inputs from the problem page

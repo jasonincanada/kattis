@@ -15,7 +15,7 @@ module Limbo2 (
   try,
   limbo2,
 
-  which,trySquare,tryRect,doCase,Output(..),rectCorner,rectTop
+  which,trySquare,tryRect,doCase,Output(..)
 ) where
 
 
@@ -63,59 +63,47 @@ doCase (row:column:_) = Output $ fromJust block
              <|> tryRect   (which row   ) row column
 
 
-trySquare :: Index -> Row -> Col -> Maybe Block
-trySquare square row col
-  | row >= height  = Nothing
-  | otherwise      = Just block
-  where
-    block  = corner + (height * (col - left)) + row
-
-    corner = squareCorner square
-    height = squareHeight square
-    left   = squareLeft   square
-
-
-tryRect :: Index -> Row -> Col -> Maybe Block
-tryRect rect row col
-  | col >= width  = Nothing
-  | otherwise     = Just block
-  where
-    block  = corner + (width * (row - top)) + col
-
-    corner = rectCorner rect
-    width  = rectWidth  rect
-    top    = rectTop    rect
-
-
-squareCorner :: Index -> Block
-squareCorner 0 = 0
-squareCorner n = 4^(n-1)
-
-squareHeight :: Index -> Row
-squareHeight 0 = 1
-squareHeight n = 2^(n-1)
-
-squareLeft :: Index -> Col
-squareLeft 0 = 0
-squareLeft n = 2^(n-1)
-
-rectCorner :: Index -> Block
-rectCorner 0 = error "should never get here"
-rectCorner n = 4^n `div` 2
-
-rectWidth :: Index -> Col
-rectWidth 0 = error "should never get here"
-rectWidth n = 2^n
-
-rectTop :: Index -> Row
-rectTop 0 = error "should never get here"
-rectTop n = 2^(n-1)
-
-
-which :: Int -> Int
+-- map a column to the square it falls in, or a row to its rectangle; they turn out to be
+-- the same function
+which :: Int -> Index
 which coord
   | coord == 0 = 0
   | otherwise  = 1 + (floor $ logBase 2 (fromIntegral coord))
+
+
+-- if the nth square contains this row and column, return the block number at that coord
+trySquare :: Index -> Row -> Col -> Maybe Block
+trySquare index row col
+  | row >= height  = Nothing
+  | otherwise      = Just block
+  where
+    block                   = corner + (height * (col - left)) + row
+    (corner, height, left)  = shapeProps index Square
+
+
+tryRect :: Index -> Row -> Col -> Maybe Block
+tryRect index row col
+  | col >= width  = Nothing
+  | otherwise     = Just block
+  where
+    block                 = corner + (width * (row - top)) + col
+    (corner, width, top)  = shapeProps index Rectangle
+
+
+data Shape   = Square | Rectangle
+type Size    = Int
+type Offset  = Int
+type Corner  = Block
+
+
+-- for the nth shape, calculate the number in its corner, its width|height, and location
+shapeProps :: Index -> Shape -> (Corner, Size, Offset)
+
+shapeProps n Square    | n == 0    = (0, 1, 0)
+                       | otherwise = (4^(n-1)    , 2^(n-1), 2^(n-1))
+
+shapeProps n Rectangle | n == 0    = error "shouldn't get here"
+                       | otherwise = (4^n `div` 2, 2^n    , 2^(n-1))
 
 
 
