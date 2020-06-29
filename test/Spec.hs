@@ -9,8 +9,7 @@ import SmallSchedule (smallschedule)
 import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
 --import Ceiling       (ceiling)
 import Limbo1        (limbo1)
-import Limbo2        (limbo2, toRectangle, toSquare, Rect(..), Square(..),
-                      trySquare, tryRect, doCase, rectCorner, rectTop, Output(..))
+import Limbo2        (limbo2, which, trySquare, tryRect, doCase, rectCorner, rectTop, Output(..))
 
 
 path = "test/inputs/"
@@ -178,51 +177,40 @@ main = hspec $ do
   describe "Limbo2" $ do
 
     -- map a column to the square it will belong to if the row is within it
-    it "toSquare 0" ( toSquare 0 `shouldBe` Square 0 )
-    it "toSquare 1" ( toSquare 1 `shouldBe` Square 1 )
-    it "toSquare 2" ( toSquare 2 `shouldBe` Square 2 )
-    it "toSquare 3" ( toSquare 3 `shouldBe` Square 2 )
-    it "toSquare 4" ( toSquare 4 `shouldBe` Square 3 )
-    it "toSquare 5" ( toSquare 5 `shouldBe` Square 3 )
+    it "which 0" ( which 0 `shouldBe` 0 )
+    it "which 1" ( which 1 `shouldBe` 1 )
+    it "which 2" ( which 2 `shouldBe` 2 )
+    it "which 3" ( which 3 `shouldBe` 2 )
+    it "which 4" ( which 4 `shouldBe` 3 )
+    it "which 5" ( which 5 `shouldBe` 3 )
     -- ...
-    it "toSquare 7" ( toSquare 7 `shouldBe` Square 3 )
-    it "toSquare 8" ( toSquare 8 `shouldBe` Square 4 )
-    it "toSquare 9" ( toSquare 9 `shouldBe` Square 4 )
+    it "which 7" ( which 7 `shouldBe` 3 )
+    it "which 8" ( which 8 `shouldBe` 4 )
+    it "which 9" ( which 9 `shouldBe` 4 )
     -- ...
-    it "toSquare 15" ( toSquare 15 `shouldBe` Square 4 )
-    it "toSquare 16" ( toSquare 16 `shouldBe` Square 5 )
+    it "which 15" ( which 15 `shouldBe` 4 )
+    it "which 16" ( which 16 `shouldBe` 5 )
 
 
-    it "toRectangle 0" ( toRectangle 0 `shouldBe` Nothing )
-    it "toRectangle 1" ( toRectangle 1 `shouldBe` (Just $ Rect 1 ))
-    it "toRectangle 2" ( toRectangle 2 `shouldBe` (Just $ Rect 2 ))
-    it "toRectangle 3" ( toRectangle 3 `shouldBe` (Just $ Rect 2 ))
-    it "toRectangle 4" ( toRectangle 4 `shouldBe` (Just $ Rect 3 ))
+    it "trySquare" ( trySquare 2 0 2 `shouldBe` (Just 4))
+    it "trySquare" ( trySquare 2 1 2 `shouldBe` (Just 5))
+    it "trySquare" ( trySquare 2 0 3 `shouldBe` (Just 6))
+    it "trySquare" ( trySquare 2 1 3 `shouldBe` (Just 7))
 
-    -- toSquare and toRectangle turn out to be the same function except the argument 0
-    -- returns a Square for toSquare but Nothing for toRectangle
+    it "trySquare" ( trySquare 3 2 6 `shouldBe` (Just 26))
 
+    it "tryRect" ( tryRect 1 1 0 `shouldBe` (Just 2))
+    it "tryRect" ( tryRect 1 1 1 `shouldBe` (Just 3))
 
+    it "tryRect" ( tryRect 2 2 0 `shouldBe` (Just 8))
+    it "tryRect" ( tryRect 2 2 1 `shouldBe` (Just 9))
+    it "tryRect" ( tryRect 2 2 2 `shouldBe` (Just 10))
+    it "tryRect" ( tryRect 2 2 3 `shouldBe` (Just 11))
 
-    it "trySquare" ( trySquare (Square 2) 0 2 `shouldBe` (Just 4))
-    it "trySquare" ( trySquare (Square 2) 1 2 `shouldBe` (Just 5))
-    it "trySquare" ( trySquare (Square 2) 0 3 `shouldBe` (Just 6))
-    it "trySquare" ( trySquare (Square 2) 1 3 `shouldBe` (Just 7))
+    it "tryRect" ( tryRect 2 3 0 `shouldBe` (Just 12))
+    it "tryRect" ( tryRect 2 3 3 `shouldBe` (Just 15))
 
-    it "trySquare" ( trySquare (Square 3) 2 6 `shouldBe` (Just 26))
-
-    it "tryRect" ( tryRect (Rect 1) 1 0 `shouldBe` (Just 2))
-    it "tryRect" ( tryRect (Rect 1) 1 1 `shouldBe` (Just 3))
-
-    it "tryRect" ( tryRect (Rect 2) 2 0 `shouldBe` (Just 8))
-    it "tryRect" ( tryRect (Rect 2) 2 1 `shouldBe` (Just 9))
-    it "tryRect" ( tryRect (Rect 2) 2 2 `shouldBe` (Just 10))
-    it "tryRect" ( tryRect (Rect 2) 2 3 `shouldBe` (Just 11))
-
-    it "tryRect" ( tryRect (Rect 2) 3 0 `shouldBe` (Just 12))
-    it "tryRect" ( tryRect (Rect 2) 3 3 `shouldBe` (Just 15))
-
-    it "tryRect" ( tryRect (Rect 3) 4 0 `shouldBe` (Just 32))
+    it "tryRect" ( tryRect 3 4 0 `shouldBe` (Just 32))
 
 
     it "doCase 0" (doCase [0,0] `shouldBe` (Output 0))
@@ -242,13 +230,13 @@ main = hspec $ do
     it "doCase 14" (doCase [3,2] `shouldBe` (Output 14))
     it "doCase 15" (doCase [3,3] `shouldBe` (Output 15))
 
-    it "rectCorner 1" (rectCorner (Rect 1) `shouldBe` 2)
-    it "rectCorner 2" (rectCorner (Rect 2) `shouldBe` 8)
-    it "rectCorner 3" (rectCorner (Rect 3) `shouldBe` 32)
+    it "rectCorner 1" (rectCorner 1 `shouldBe` 2)
+    it "rectCorner 2" (rectCorner 2 `shouldBe` 8)
+    it "rectCorner 3" (rectCorner 3 `shouldBe` 32)
 
-    it "rectTop 1" (rectTop (Rect 1) `shouldBe` 1)
-    it "rectTop 2" (rectTop (Rect 2) `shouldBe` 2)
-    it "rectTop 3" (rectTop (Rect 3) `shouldBe` 4)
+    it "rectTop 1" (rectTop 1 `shouldBe` 1)
+    it "rectTop 2" (rectTop 2 `shouldBe` 2)
+    it "rectTop 3" (rectTop 3 `shouldBe` 4)
 
     let cases = [
                 -- Sample inputs from the problem page
