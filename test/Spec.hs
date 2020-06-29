@@ -9,6 +9,8 @@ import SmallSchedule (smallschedule)
 import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
 --import Ceiling       (ceiling)
 import Limbo1        (limbo1)
+import Limbo2        (limbo2, toRectangle, toSquare, Rect(..), Square(..), f, g, doCase,
+                      rectCorner, rectTop, Output(..))
 
 
 path = "test/inputs/"
@@ -170,5 +172,90 @@ main = hspec $ do
     forM_ cases $
       \(testfile, result) ->
         it testfile $ (limbo1 <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
+  describe "Limbo2" $ do
+
+    -- map a column to the square it will belong to if the row is within it
+    it "toSquare 0" ( toSquare 0 `shouldBe` Square 0 )
+    it "toSquare 1" ( toSquare 1 `shouldBe` Square 1 )
+    it "toSquare 2" ( toSquare 2 `shouldBe` Square 2 )
+    it "toSquare 3" ( toSquare 3 `shouldBe` Square 2 )
+    it "toSquare 4" ( toSquare 4 `shouldBe` Square 3 )
+    it "toSquare 5" ( toSquare 5 `shouldBe` Square 3 )
+    -- ...
+    it "toSquare 7" ( toSquare 7 `shouldBe` Square 3 )
+    it "toSquare 8" ( toSquare 8 `shouldBe` Square 4 )
+    it "toSquare 9" ( toSquare 9 `shouldBe` Square 4 )
+    -- ...
+    it "toSquare 15" ( toSquare 15 `shouldBe` Square 4 )
+    it "toSquare 16" ( toSquare 16 `shouldBe` Square 5 )
+
+
+    it "toRectangle 0" ( toRectangle 0 `shouldBe` Nothing )
+    it "toRectangle 1" ( toRectangle 1 `shouldBe` (Just $ Rect 1 ))
+    it "toRectangle 2" ( toRectangle 2 `shouldBe` (Just $ Rect 2 ))
+    it "toRectangle 3" ( toRectangle 3 `shouldBe` (Just $ Rect 2 ))
+    it "toRectangle 4" ( toRectangle 4 `shouldBe` (Just $ Rect 3 ))
+
+    -- toSquare and toRectangle turn out to be the same function except the argument 0
+    -- returns a Square for toSquare but Nothing for toRectangle
+
+
+
+    it "f" ( f (Square 2) 0 2 `shouldBe` (Just 4))
+    it "f" ( f (Square 2) 1 2 `shouldBe` (Just 5))
+    it "f" ( f (Square 2) 0 3 `shouldBe` (Just 6))
+    it "f" ( f (Square 2) 1 3 `shouldBe` (Just 7))
+
+    it "f" ( f (Square 3) 2 6 `shouldBe` (Just 26))
+
+    it "g" ( g (Rect 1) 1 0 `shouldBe` (Just 2))
+    it "g" ( g (Rect 1) 1 1 `shouldBe` (Just 3))
+
+    it "g" ( g (Rect 2) 2 0 `shouldBe` (Just 8))
+    it "g" ( g (Rect 2) 2 1 `shouldBe` (Just 9))
+    it "g" ( g (Rect 2) 2 2 `shouldBe` (Just 10))
+    it "g" ( g (Rect 2) 2 3 `shouldBe` (Just 11))
+
+    it "g" ( g (Rect 2) 3 0 `shouldBe` (Just 12))
+    it "g" ( g (Rect 2) 3 3 `shouldBe` (Just 15))
+
+    it "g" ( g (Rect 3) 4 0 `shouldBe` (Just 32))
+
+
+    it "doCase 0" (doCase [0,0] `shouldBe` (Output 0))
+    it "doCase 1" (doCase [0,1] `shouldBe` (Output 1))
+    it "doCase 2" (doCase [1,0] `shouldBe` (Output 2))
+    it "doCase 3" (doCase [1,1] `shouldBe` (Output 3))
+    it "doCase 4" (doCase [0,2] `shouldBe` (Output 4))
+    it "doCase 5" (doCase [1,2] `shouldBe` (Output 5))
+    it "doCase 6" (doCase [0,3] `shouldBe` (Output 6))
+    it "doCase 7" (doCase [1,3] `shouldBe` (Output 7))
+    it "doCase 8" (doCase [2,0] `shouldBe` (Output 8))
+    it "doCase 9" (doCase [2,1] `shouldBe` (Output 9))
+    it "doCase 10" (doCase [2,2] `shouldBe` (Output 10))
+    it "doCase 11" (doCase [2,3] `shouldBe` (Output 11))
+    it "doCase 12" (doCase [3,0] `shouldBe` (Output 12))
+    it "doCase 13" (doCase [3,1] `shouldBe` (Output 13))
+    it "doCase 14" (doCase [3,2] `shouldBe` (Output 14))
+    it "doCase 15" (doCase [3,3] `shouldBe` (Output 15))
+
+    it "rectCorner 1" (rectCorner (Rect 1) `shouldBe` 2)
+    it "rectCorner 2" (rectCorner (Rect 2) `shouldBe` 8)
+    it "rectCorner 3" (rectCorner (Rect 3) `shouldBe` 32)
+
+    it "rectTop 1" (rectTop (Rect 1) `shouldBe` 1)
+    it "rectTop 2" (rectTop (Rect 2) `shouldBe` 2)
+    it "rectTop 3" (rectTop (Rect 3) `shouldBe` 4)
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "limbo2.input", unlines [ "0", "2", "18" ]) ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (limbo2 <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 

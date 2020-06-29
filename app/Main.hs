@@ -2,8 +2,8 @@
 
 module Main where
 
-import Limbo1
+import Limbo2
 
 main :: IO ()
-main = interact limbo1
+main = interact limbo2
 
