@@ -9,8 +9,8 @@ import SmallSchedule (smallschedule)
 import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
 --import Ceiling       (ceiling)
 import Limbo1        (limbo1)
-import Limbo2        (limbo2, toRectangle, toSquare, Rect(..), Square(..), f, g, doCase,
-                      rectCorner, rectTop, Output(..))
+import Limbo2        (limbo2, toRectangle, toSquare, Rect(..), Square(..),
+                      trySquare, tryRect, doCase, rectCorner, rectTop, Output(..))
 
 
 path = "test/inputs/"
@@ -204,25 +204,25 @@ main = hspec $ do
 
 
 
-    it "f" ( f (Square 2) 0 2 `shouldBe` (Just 4))
-    it "f" ( f (Square 2) 1 2 `shouldBe` (Just 5))
-    it "f" ( f (Square 2) 0 3 `shouldBe` (Just 6))
-    it "f" ( f (Square 2) 1 3 `shouldBe` (Just 7))
+    it "trySquare" ( trySquare (Square 2) 0 2 `shouldBe` (Just 4))
+    it "trySquare" ( trySquare (Square 2) 1 2 `shouldBe` (Just 5))
+    it "trySquare" ( trySquare (Square 2) 0 3 `shouldBe` (Just 6))
+    it "trySquare" ( trySquare (Square 2) 1 3 `shouldBe` (Just 7))
 
-    it "f" ( f (Square 3) 2 6 `shouldBe` (Just 26))
+    it "trySquare" ( trySquare (Square 3) 2 6 `shouldBe` (Just 26))
 
-    it "g" ( g (Rect 1) 1 0 `shouldBe` (Just 2))
-    it "g" ( g (Rect 1) 1 1 `shouldBe` (Just 3))
+    it "tryRect" ( tryRect (Rect 1) 1 0 `shouldBe` (Just 2))
+    it "tryRect" ( tryRect (Rect 1) 1 1 `shouldBe` (Just 3))
 
-    it "g" ( g (Rect 2) 2 0 `shouldBe` (Just 8))
-    it "g" ( g (Rect 2) 2 1 `shouldBe` (Just 9))
-    it "g" ( g (Rect 2) 2 2 `shouldBe` (Just 10))
-    it "g" ( g (Rect 2) 2 3 `shouldBe` (Just 11))
+    it "tryRect" ( tryRect (Rect 2) 2 0 `shouldBe` (Just 8))
+    it "tryRect" ( tryRect (Rect 2) 2 1 `shouldBe` (Just 9))
+    it "tryRect" ( tryRect (Rect 2) 2 2 `shouldBe` (Just 10))
+    it "tryRect" ( tryRect (Rect 2) 2 3 `shouldBe` (Just 11))
 
-    it "g" ( g (Rect 2) 3 0 `shouldBe` (Just 12))
-    it "g" ( g (Rect 2) 3 3 `shouldBe` (Just 15))
+    it "tryRect" ( tryRect (Rect 2) 3 0 `shouldBe` (Just 12))
+    it "tryRect" ( tryRect (Rect 2) 3 3 `shouldBe` (Just 15))
 
-    it "g" ( g (Rect 3) 4 0 `shouldBe` (Just 32))
+    it "tryRect" ( tryRect (Rect 3) 4 0 `shouldBe` (Just 32))
 
 
     it "doCase 0" (doCase [0,0] `shouldBe` (Output 0))

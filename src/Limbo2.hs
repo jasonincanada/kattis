@@ -17,8 +17,7 @@ module Limbo2 (
   Rect(..)  , toRectangle,
   Square(..), toSquare,
 
-  f, g
-  ,doCase,Output(..),rectCorner,rectTop
+  trySquare,tryRect,doCase,Output(..),rectCorner,rectTop
 ) where
 
 
@@ -73,14 +72,15 @@ doCase (row:column:_) = Output $ fromJust block
   where
     block
       | row + column == 0  = Just 0
-      | otherwise          = f square row column <|> g rect row column
+      | otherwise          =     trySquare square row column
+                             <|> tryRect   rect   row column
 
     square = toSquare column
     rect   = fromJust $ toRectangle row
 
 
-f :: Square -> Row -> Col -> Maybe Block
-f square row col
+trySquare :: Square -> Row -> Col -> Maybe Block
+trySquare square row col
   | row >= height  = Nothing
   | otherwise      = Just block
   where
@@ -91,8 +91,8 @@ f square row col
     left   = squareLeft   square
 
 
-g :: Rect -> Row -> Col -> Maybe Block
-g rect row col
+tryRect :: Rect -> Row -> Col -> Maybe Block
+tryRect rect row col
   | col >= width  = Nothing
   | otherwise     = Just block
   where
