@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 2020 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+1 Jul | [3.5](https://open.kattis.com/problems/limbo2) | [Limbo2.hs](src/Limbo2.hs) | Find a specific cell number within a broader pattern
 20 Jun | [3.4](https://open.kattis.com/problems/limbo1) | [Limbo1.hs](src/Limbo1.hs) | Simple calculation with triangular numbers
 3 May | [3.2](https://open.kattis.com/problems/lektira) | [Lektira.hs](src/Lektira.hs) | Find the first word alphabetically after reversing substrings ([Rust](rust/src/lektira.rs))
 4 Jan | [3.1](https://open.kattis.com/problems/golombrulers) | [Golomb.hs](src/Golomb.hs) | Check if input markings describe a valid Golomb ruler

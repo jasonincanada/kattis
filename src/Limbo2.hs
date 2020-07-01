@@ -1,13 +1,38 @@
-{-  Limbo2 (difficulty 3.7) - https://open.kattis.com/problems/limbo2
+{-  Limbo2 (difficulty 3.5) - https://open.kattis.com/problems/limbo2
 
     Revision:
 
-    Checking in the first version that works and passes the tests. Refactoring to follow
+    This has been refactored to reduce the number of named functions, in particular by
+    calculating the details for a given Square or Rectangle all in one place (shapeProps)
+    and returning a triple of values, instead of having six individual functions. There is
+    still a lot of repetition of code and structure overall, so I'm pretty sure there's a
+    more elegant way to write this, though whether that way will be more or less legible I
+    don't know yet.
 
+    I'm using the <|> operator for the first time. It provides a "short-circuit"
+    functionality when used with the Maybe functor. This makes the doCase function clear
+    in its intent: we try finding a Square first with the given coordinates, taking that
+    result if it succeeds, or if it returns Nothing, trying then for a Rectangle.
 
-    notes: surprise that it is logBase 2, not logBase 4
-           - probably will be better to start with the rectangle?
-             - because it is the one that returns Maybe
+    I'm still thinking of other ways to go about solving this problem. In particular I'd
+    like to tell a story in doing so, about a mouse or bug on the grid making decisions
+    based on things it notices about its environment, with the underlying implementation
+    in categorical concepts, in particular sum types, product types, and monadic binding
+    between the various considerations the mouse would have. My hope is that meaningfully
+    naming the functions and arguments and letting the category theory concepts shimmer
+    through will be an interesting new way to describe an algorithm and teach fundamental
+    theory at the same time. But as of now it isn't clear to me how I would go about that.
+    I suspect it's in an aggressive factoring out of all repetition and smartly naming the
+    resulting code.
+
+    Initially I stared for a while at my markup of the pattern described for the problem
+    (see the image at ../notes/limbo2.jpg). I noticed a few properties but probably by no
+    means all of them. (For example, the top-left block in each Square is a square, each
+    Rectangle has a width twice that of its height). The growth pattern here was contrived
+    by the author of this challenge for the purposes of the contest, and otherwise doesn't
+    appear to me to be something that would be found in nature. So there may be
+    interesting new things lurking a bit deeper in the structure here that could reward
+    further thought.
 
 -}
 
