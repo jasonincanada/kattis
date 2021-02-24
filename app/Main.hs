@@ -2,8 +2,8 @@
 
 module Main where
 
-import Limbo2
+import Commercials
 
 main :: IO ()
-main = interact limbo2
+main = interact commercials
 

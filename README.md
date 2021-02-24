@@ -2,6 +2,10 @@
 
 My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=problem_difficulty) programming challenges. The difficulty numbers listed in the table below may change on the Kattis website since they are regularly re-calculated as new results are submitted (more info [here](https://open.kattis.com/help/ranklist)).
 
+2021 | Diff. | Source | Description / Notes
+--- | --- | --- | ---
+24 Feb | [1.9](https://open.kattis.com/problems/commercials) | [Commercials.hs](src/Commercials.hs) | Find the optimal radio advertising plan
+
 2020 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
 1 Jul | [3.5](https://open.kattis.com/problems/limbo2) | [Limbo2.hs](src/Limbo2.hs) | Find a specific cell number within a broader pattern
