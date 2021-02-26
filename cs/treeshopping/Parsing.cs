@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Kattis.Parsing
 {
-    public static class Parsing
+    public static class Parse
     {
         public static int NthNumber(string s, int i)
         {

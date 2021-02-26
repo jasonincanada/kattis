@@ -21,7 +21,7 @@ using Kattis.Mits;
 using Kattis.Parsing;
 using Kattis.Semiring;
 
-namespace treeshopping
+namespace Kattis.RadioCommercials
 {
     class Program
     {
@@ -56,8 +56,8 @@ namespace treeshopping
 
             return new TestCase
             {
-                CostPerTimeslot = Parsing.NthNumber(header, 1),
-                Listeners = Parsing.NumberList(prices)
+                CostPerTimeslot = Parse.NthNumber(header, 1),
+                Listeners = Parse.NumberList(prices)
             };
         }
     }
