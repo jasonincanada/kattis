@@ -4,7 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 2021 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
-24 Feb | [1.9](https://open.kattis.com/problems/commercials) | [Commercials.hs](src/Commercials.hs) | Find the optimal radio advertising plan
+24 Feb | [1.9](https://open.kattis.com/problems/commercials) | [Commercials.hs](src/Commercials.hs) | Find the optimal radio advertising plan ([C#](cs/commercials/Program.cs))
 
 2020 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
