@@ -69,9 +69,11 @@ namespace Kattis.Semiring
                     var combined = _semiring.Mult(a.coefficients.ElementAt(i),
                                                   b.coefficients.ElementAt(j));
 
+                    // This Add combines two values to one using the underlying semiring
                     k = _semiring.Add(k, combined);
                 }
 
+                // This is List.Add tacking the next coefficient onto the end of the list
                 coefficients.Add(k);
             }
 
