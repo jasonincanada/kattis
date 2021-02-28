@@ -36,6 +36,10 @@ namespace Kattis.Semiring
 
         public LiftedSemiring(ISemiring<γ> semiring, HPredicate<Cp, T> p, List<List<(int, int)>> multMap)
         {
+            // Sanity check to make sure there's an entry in the multiplication map for
+            // each element of the predicate's state set
+            Debug.Assert(multMap.Count == p.Symbols().Count);
+
             _semiring = semiring;
             _p = p;
             _multMap = multMap;
@@ -56,9 +60,9 @@ namespace Kattis.Semiring
         {
             List<γ> coefficients = new List<γ>();
 
-            // Sanity check to make sure there's an entry in our multiplication map for
-            // each element of the predicate's state set
-            Debug.Assert(_multMap.Count == _p.Symbols().Count);
+            // Sanity check to make sure we have the right number of coefficients
+            Debug.Assert(a.coefficients.Count() == _p.Symbols().Count);
+            Debug.Assert(b.coefficients.Count() == _p.Symbols().Count);
 
             foreach (var operandIndices in _multMap)
             {
