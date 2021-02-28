@@ -4,5 +4,7 @@ namespace Kattis.Semiring
     {
         T Add(T a, T b);
         T Mult(T a, T b);
+
+        T AdditiveIdentity { get; }
     }
 }

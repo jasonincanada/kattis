@@ -18,7 +18,19 @@ namespace Kattis.LinearAlgs
 
     public class MaxSum : ISemiring<int>
     {
-        public int Add(int a, int b) { return Math.Max(a, b); }
-        public int Mult(int a, int b) { return a + b; }
+        public int Add(int a, int b)
+        {
+            return Math.Max(a, b);
+        }
+
+        public int Mult(int a, int b)
+        {
+            if (a == AdditiveIdentity || b == AdditiveIdentity)
+                return AdditiveIdentity;
+            else
+                return a + b;
+        }
+
+        public int AdditiveIdentity { get { return int.MinValue; } }
     }
 }
