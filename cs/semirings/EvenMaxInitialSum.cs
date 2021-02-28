@@ -20,7 +20,7 @@ namespace Kattis.LinearAlgs
             var multMap = new List<List<(int, int)>> { k_even, k_odd };
 
             // Starting with our old Max Sum semiring, lift the even sum H-predicate into a lifted semiring
-            ISemiring<LiftedSet<int, char>> liftedSR = new LiftedSemiring<char, int, int>(maxSumSR, evenSumHP, multMap);
+            ISemiring<LiftedSet<int, char>> liftedSR = new LiftedSemiring<int, char, int>(maxSumSR, evenSumHP, multMap);
 
             // Note this is the *same* Opt.Reduce we used for the normal maximum initial
             // segment sum problem. It has no knowledge of our goal to filter the segment

@@ -22,10 +22,10 @@ namespace Kattis.Semiring
 
     // Lifted Semiring [Emoto lemma 12]
     //
+    // γ  - gamma, the underlying semiring's symbol set
     // Cp - the H-predicate state set
     // T  - list element type
-    // γ  - gamma, the underlying semiring's symbol set
-    public class LiftedSemiring<Cp, γ, T> : ISemiring<LiftedSet<γ, Cp>>
+    public class LiftedSemiring<γ, Cp, T> : ISemiring<LiftedSet<γ, Cp>>
     {
         private ISemiring<γ> _semiring;
         private HPredicate<Cp, T> _p;
