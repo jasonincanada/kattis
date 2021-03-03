@@ -1,18 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Kattis.HPredicate;
 
 namespace Kattis.Semiring
 {
-    // Homomorphic predicates [Emoto def. 10]
-    public interface HPredicate<Cp, T>
-    {
-        bool Accept(Cp a);
-        Cp Combine(Cp a, Cp b);
-        Cp Prepare(T element);
-        IList<Cp> Symbols();
-    }
-
     // An instantiation of this class is a value in the lifted set with p
     public class LiftedSet<γ, Cp>
     {
@@ -32,12 +25,17 @@ namespace Kattis.Semiring
 
         // Have the developer specify the predicate's state symbol mapping indices to
         // avoid having to completely generalize the lifted multiplication operation
-        private List<List<(int, int)>> _multMap;
+        private List<List<Tuple<int, int>>> _multMap;
 
-        public LiftedSemiring(ISemiring<γ> semiring, HPredicate<Cp, T> p, List<List<(int, int)>> multMap)
+        public LiftedSemiring(ISemiring<γ> semiring, HPredicate<Cp, T> p, List<List<Tuple<int, int>>> multMap)
         {
             // Sanity check to make sure there's an entry in the multiplication map for
             // each element of the predicate's state set
+            if (multMap.Count != p.Symbols().Count)
+                throw new System.Exception(string.Format("Assert failed, multMap.Count = {0} p.Symbols().Count = {1}",
+                                                         multMap.Count,
+                                                         p.Symbols().Count));
+
             Debug.Assert(multMap.Count == p.Symbols().Count);
 
             _semiring = semiring;
@@ -68,8 +66,11 @@ namespace Kattis.Semiring
             {
                 γ k = _semiring.AdditiveIdentity;
 
-                foreach (var (i, j) in operandIndices)
+                foreach (var tuple in operandIndices)
                 {
+                    var i = tuple.Item1;
+                    var j = tuple.Item2;
+
                     var combined = _semiring.Mult(a.coefficients.ElementAt(i),
                                                   b.coefficients.ElementAt(j));
 

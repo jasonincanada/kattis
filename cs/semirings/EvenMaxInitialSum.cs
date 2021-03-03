@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kattis.HPredicate;
 using Kattis.Semiring;
 
 namespace Kattis.LinearAlgs
@@ -15,9 +17,9 @@ namespace Kattis.LinearAlgs
             // Generate the index map for the lifted multiplication op ahead of time
             // This is the same information carried by the (+)p operator in the definition
             // of a homomorphic predicate [Emoto def. 10]
-            var k_even = new List<(int, int)> { (0, 0), (1, 1) };
-            var k_odd = new List<(int, int)> { (0, 1), (1, 0) };
-            var multMap = new List<List<(int, int)>> { k_even, k_odd };
+            var k_even = new List<Tuple<int, int>> { new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1) };
+            var k_odd = new List<Tuple<int, int>> { new Tuple<int, int>(0, 1), new Tuple<int, int>(1, 0) };
+            var multMap = new List<List<Tuple<int, int>>> { k_even, k_odd };
 
             // Starting with our old Max Sum semiring, lift the even sum H-predicate into a lifted semiring
             ISemiring<LiftedSet<int, char>> liftedSR = new LiftedSemiring<int, char, int>(maxSumSR, evenSumHP, multMap);
