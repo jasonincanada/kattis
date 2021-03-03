@@ -1,2 +1,7 @@
 bin
 obj
+
+temp
+
+tasks.json
+launch.json
