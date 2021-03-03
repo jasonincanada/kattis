@@ -20,7 +20,7 @@ namespace centsavings
             if (b is SymInf) { return a; }
 
             // TODO: < or <= ?
-            if (a.Price <= b.Price)
+            if (a.AdditiveValue <= b.AdditiveValue)
                 return a;
             else
                 return b;
@@ -64,7 +64,7 @@ namespace centsavings
             throw new NotImplementedException("Some Sym combinations not considered");
         }
     }
-  
+
     public class ConveyorNR : INestedReducer<Sym, Marked<int, bool>>
     {
         private ISemiring<Sym> _semiring;

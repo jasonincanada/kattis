@@ -16,6 +16,23 @@ namespace centsavings
             =            18              -- the rounded price of 18 (20) is <= rounded 19 (20)
          
         (15 /= 18)
+
+
+        --------------------------------------------------------------
+        60 Found non-left-distributive triple of Syms:
+                divs:17-5|10|13, divs:9-9|5|15, divs:13-16|5|5 --- divs:30-5|45|5, divs:26-5|35|15
+
+        Debug:
+            b (+) c = divs:13-16|5|5
+            a (X) b = divs:26-5|35|15
+            a (X) c = divs:30-5|45|5
+            a (X)  (b + c) = divs:30-5|45|5                     -- not equal
+            a (X) b  (+)  (a (X) c) = divs:26-5|35|15           -- to this
+
+
+        --------------------------------------------------------------
+        9 Found non-right-distributive triple of Syms: loose:14, divs:2-1|0|14, divs:18-9|5|11
+
     */
 
     public class PropertyTests
@@ -24,6 +41,21 @@ namespace centsavings
         {
             var r = new Random();
             var conveyorSR = new ConveyorSR();
+
+            /*
+            var aa = new SymDivs(17, 5, 10, 13);
+            var bb = new SymDivs(9, 9, 5, 15);
+            var cc = new SymDivs(13, 16, 5, 5);
+
+            Console.WriteLine("Debug: {0} {1} {2}", aa, bb, cc);
+            Console.WriteLine("b (+) c = {0}", conveyorSR.Add(bb, cc));
+            Console.WriteLine("a (X) b = {0}", conveyorSR.Mult(aa, bb));
+            Console.WriteLine("a (X) c = {0}", conveyorSR.Mult(aa, cc));
+
+            Console.WriteLine("a (X)  (b + c) = {0}", conveyorSR.Mult(aa, conveyorSR.Add(bb, cc)));
+            Console.WriteLine("a (X) b  (+)  (a (X) c) = {0}", conveyorSR.Add(conveyorSR.Mult(aa, bb),
+                                                                              conveyorSR.Mult(aa, cc)));
+            */
 
             Console.WriteLine("Starting property tests");
 

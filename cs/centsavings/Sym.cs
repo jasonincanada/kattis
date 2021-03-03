@@ -7,6 +7,7 @@ namespace centsavings
     public abstract class Sym : IEquatable<Sym>
     {
         public abstract int Price { get; }
+        public abstract int AdditiveValue { get; }
 
         public static int Round(int n)
         {
@@ -42,7 +43,7 @@ namespace centsavings
     {
         public SymInf() { }
         public override int Price => throw new Exception("Called price on Inf");
-
+        public override int AdditiveValue => throw new NotImplementedException("Called AdditiveValue on Inf");
         public override string ToString() => "SymInf";
     }
 
@@ -52,6 +53,7 @@ namespace centsavings
         public int Loose { get; private set; }
         public SymLoose(int n) { Loose = n; }
         public override int Price => Sym.Round(Loose);
+        public override int AdditiveValue => Loose;
         public override string ToString() => string.Format("loose:{0}", Loose);
 
         public bool Equals(SymLoose other)
@@ -77,6 +79,9 @@ namespace centsavings
         public int Inner { get; private set; }
 
         public override int Price => Sym.Round(Left) + Inner + Sym.Round(Right);
+
+        // The value used for comparison during semiring addition
+        public override int AdditiveValue => Left + Inner + Right;
 
         // oo|oooo|ooooo|o  ->  SymDivs(3, 2, 14, 1)
         public SymDivs(int dividers, int left, int inner, int right)
