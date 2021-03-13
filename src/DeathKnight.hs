@@ -1,4 +1,3 @@
-
 {-  Death Knight Hero (difficulty 1.7) - https://open.kattis.com/problems/deathknight -}
 
 module DeathKnight (deathknight, try) where
