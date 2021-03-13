@@ -38,11 +38,10 @@ process spells = filter (not . check) spells
     compare _ _                   = False
 
 
+{- Operations -}
+
 deathknight :: String -> String
 deathknight = show . process . parse
-
-
-{- Operations -}
 
 try :: IO ()
 try = deathknight <$> readFile "inputs/deathknight.input" >>= putStrLn
