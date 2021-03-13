@@ -2,8 +2,8 @@
 
 module Main where
 
-import Commercials
+import DeathKnight
 
 main :: IO ()
-main = interact commercials
+main = interact deathknight
 
