@@ -2,8 +2,8 @@
 
 module Main where
 
-import DeathKnight
+import Erase
 
 main :: IO ()
-main = interact deathknight
+main = interact erase
 
