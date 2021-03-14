@@ -39,7 +39,7 @@ process (switches, start, end) = Output result
     compared :: [Bool]
     compared = zipWith comparer start end
 
-    comparer :: Eq a => a -> a -> Bool
+    comparer :: Char -> Char -> Bool
     comparer = if even switches
                then (==)
                else (/=)
