@@ -2,8 +2,8 @@
 
 module Main where
 
-import Erase
+import Hangman
 
 main :: IO ()
-main = interact erase
+main = interact hangman
 
