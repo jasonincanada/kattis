@@ -263,6 +263,7 @@ main = hspec $ do
                 , ( "amoebas-12.input", "1" )
                 , ( "amoebas-13.input", "3" )
                 , ( "amoebas-14.input", "1" )
+                , ( "amoebas-15.input", "1" ) -- expected 1, got 2
                 ]
 
     forM_ cases $
