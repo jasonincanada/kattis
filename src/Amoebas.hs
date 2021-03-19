@@ -104,7 +104,12 @@ process (width, pixels) = Output loops
         -- true if we've moved sufficiently beyond a coord and won't need it further
         expired :: Pixel -> Bool
         expired (Pixel r c _) =  r <= row - 2
-                              || r == row - 1  &&  c <= col - 2
+
+                              -- this will over-trim to the left... we need them there
+                              -- to be above when we get to the cells below them
+                              -- (still fails on test 8 though)
+                              --
+                              -- || r == row - 1  &&  c <= col - 2
 
 
     -- no loop on this step so our accumulated data doesn't change
