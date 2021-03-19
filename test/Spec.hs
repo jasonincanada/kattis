@@ -10,6 +10,7 @@ import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
 --import Ceiling       (ceiling)
 import Limbo1        (limbo1)
 import Limbo2        (limbo2, which, trySquare, tryRect, doCase, Output(..))
+import Amoebas       (amoebas)
 
 
 path = "test/inputs/"
@@ -238,5 +239,34 @@ main = hspec $ do
     forM_ cases $
       \(testfile, result) ->
         it testfile $ (limbo2 <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
+
+  describe "Amoebas" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "amoebas-1.input", "4" )
+                , ( "amoebas-2.input", "4" )
+
+                -- probing inputs searching for the bug
+                , ( "amoebas-3.input", "1" )
+                , ( "amoebas-4.input", "1" )
+                , ( "amoebas-5.input", "1" )
+                , ( "amoebas-6.input", "0" )
+                , ( "amoebas-7.input", "0" )
+                , ( "amoebas-8.input", "1" )
+                , ( "amoebas-9.input", "2" )
+                , ( "amoebas-10.input", "1" )
+                , ( "amoebas-11.input", "1" )
+                , ( "amoebas-12.input", "1" )
+                , ( "amoebas-13.input", "3" )
+                , ( "amoebas-14.input", "1" )
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (amoebas <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 

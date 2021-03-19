@@ -2,8 +2,8 @@
 
 module Main where
 
-import Hangman
+import Amoebas
 
 main :: IO ()
-main = interact hangman
+main = interact amoebas
 
