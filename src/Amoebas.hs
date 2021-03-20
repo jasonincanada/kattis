@@ -1,4 +1,4 @@
-{-  Amoebas (difficulty 1.7) - https://open.kattis.com/problems/amoebas
+{-  Amoebas (difficulty 1.8) - https://open.kattis.com/problems/amoebas
 
     This is an attempt at a single-pass algorithm for counting contiguous paths in a grid
     of pixels. It fails on the 8th kattis test. I probed around with various unit tests

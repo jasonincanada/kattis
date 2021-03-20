@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 2021 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+20 Mar | [1.8](https://open.kattis.com/problems/amoebas) | [Amoebas.hs](src/Amoebas.hs) | Count contiguous paths in a grid of pixels
 16 Mar | [1.5](https://open.kattis.com/problems/hangman) | [Hangman.hs](src/Hangman.hs) | Simulate a round of hangman
 14 Mar | [1.7](https://open.kattis.com/problems/erase) | [Erase.hs](src/Erase.hs) | Compare two bitstrings
 12 Mar | [1.7](https://open.kattis.com/problems/deathknight) | [DeathKnight.hs](src/DeathKnight.hs) | Check for a specific sequence of spells
