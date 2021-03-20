@@ -135,5 +135,5 @@ amoebas :: String -> String
 amoebas = show . process . parse
 
 try :: IO ()
-try = amoebas <$> readFile "inputs/amoebas-1.input" >>= putStrLn
+try = amoebas <$> readFile "test/inputs/amoebas-1.input" >>= putStrLn
 
