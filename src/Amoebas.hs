@@ -5,6 +5,10 @@
     but it's passing everything I throw at it, so I can't seem to find where my logic is
     failing (kattis doesn't show the tests it's using)
 
+    Revision: Fixing this was a matter of updating the trail to true up old path numbers
+    with the lowest of the current pixel's immediate neighbours. The code is now clunkier
+    though so a refactoring pass could improve readability
+
 -}
 
 module Amoebas (amoebas, try) where
@@ -89,17 +93,25 @@ process (width, pixels) = Output loops
                                   || r == row - 1  &&  c `elem` [col-1,col,col+1]
 
         -- other pixels in our neighbourhood may have different loop tags,
-        -- deconflict by selecting the lowest one
-        (loopID, c', seen') = if null neighbours
-                              then (c , c+1,  c : seen)
-                              else (ma, c  , ma : filter (`notElem` around) seen)
+        -- deconflict by selecting the lowest one and updating the trail to
+        -- change old loop tags to the new one
+        (loopID, c', seen', trail2)
+                = if null neighbours
+                  then (c , c+1,  c : seen, trail)
+                  else (ma, c  , ma : filter (`notElem` around) seen
+                               , map update trail)
+          where
+            update :: Pixel -> Pixel
+            update pixel
+              | loop pixel `elem` around = pixel { loop = ma }
+              | otherwise                = pixel
 
         ma      = minimum around
         around  = map loop neighbours
 
         -- trim expired steps from the trail and add on this latest step
         trail'  = trimmed ++ [Pixel row col loopID]
-        trimmed = dropWhile expired trail
+        trimmed = dropWhile expired trail2
 
         -- true if we've moved sufficiently beyond a coord and won't need it further
         expired :: Pixel -> Bool
