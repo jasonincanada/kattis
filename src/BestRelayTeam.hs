@@ -66,10 +66,10 @@ process runners = Output fastest
       where
 
         -- make this runner the first on the team and fill it out with the 3 fastest
-        -- 2nd-lappers that aren't this runner
+        -- 2nd-leggers that aren't this runner
         asFirst runner = runner : take (4-1) (delete runner sorted)
 
-        -- sort the runners by their 2nd lap time. this value is computed once
+        -- sort the runners by their 2nd leg time. this value is computed once
         -- and reused in each call to asFirst
         sorted = sortOn leg2 runners
 
