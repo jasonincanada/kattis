@@ -11,6 +11,7 @@ import Uxuhul        (ltop, ptol, pile, turn, uxuhul, Stone(..))
 import Limbo1        (limbo1)
 import Limbo2        (limbo2, which, trySquare, tryRect, doCase, Output(..))
 import Amoebas       (amoebas)
+import BestRelayTeam (bestrelayteam)
 
 
 path = "test/inputs/"
@@ -269,5 +270,28 @@ main = hspec $ do
     forM_ cases $
       \(testfile, result) ->
         it testfile $ (amoebas <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
+
+  describe "Best Relay Team" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "bestrelayteam-1.input", unlines ["35.54",
+                                                      "CARTER",
+                                                      "BOLT",
+                                                      "POWELL",
+                                                      "BLAKE"])
+                , ( "bestrelayteam-2.input", unlines ["52.67",
+                                                      "MARDELL",
+                                                      "POLACEK",
+                                                      "SODERMAN",
+                                                      "DRANGE"])
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (bestrelayteam <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 

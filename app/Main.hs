@@ -2,8 +2,8 @@
 
 module Main where
 
-import Amoebas
+import BestRelayTeam
 
 main :: IO ()
-main = interact amoebas
+main = interact bestrelayteam
 
