@@ -12,6 +12,7 @@ import Limbo1        (limbo1)
 import Limbo2        (limbo2, which, trySquare, tryRect, doCase, Output(..))
 import Amoebas       (amoebas)
 import BestRelayTeam (bestrelayteam)
+import AboveAverage  (aboveaverage)
 
 
 path = "test/inputs/"
@@ -294,4 +295,23 @@ main = hspec $ do
       \(testfile, result) ->
         it testfile $ (bestrelayteam <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
+
+
+  describe "Above Average" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "aboveaverage-1.input", unlines ["40.000%",
+                                                     "57.143%",
+                                                     "33.333%",
+                                                     "66.667%",
+                                                     "55.556%" ])
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (aboveaverage <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
 

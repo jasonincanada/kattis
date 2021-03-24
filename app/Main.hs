@@ -2,8 +2,8 @@
 
 module Main where
 
-import BestRelayTeam
+import AboveAverage
 
 main :: IO ()
-main = interact bestrelayteam
+main = interact aboveaverage
 

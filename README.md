@@ -1,9 +1,10 @@
-# kattis
+ kattis
 
 My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=problem_difficulty) programming challenges. The difficulty numbers listed in the table below may change on the Kattis website since they are regularly re-calculated as new results are submitted (more info [here](https://open.kattis.com/help/ranklist)).
 
 2021 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+24 Mar | [1.9](https://open.kattis.com/problems/aboveaverage) | [AboveAverage.hs](src/AboveAverage.hs) | Calculate percentage of grades above class average
 21 Mar | [1.8](https://open.kattis.com/problems/bestrelayteam) | [RelayTeam.hs](src/BestRelayTeam.hs) | Build the fastest team for a relay race
 20 Mar | [1.8](https://open.kattis.com/problems/amoebas) | [Amoebas.hs](src/Amoebas.hs) | Count contiguous paths in a grid of pixels
 16 Mar | [1.5](https://open.kattis.com/problems/hangman) | [Hangman.hs](src/Hangman.hs) | Simulate a round of hangman
