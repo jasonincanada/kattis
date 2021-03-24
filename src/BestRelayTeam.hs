@@ -3,7 +3,7 @@
     The key to solving this challenge efficiently is sorting the pool of runners ahead of
     time by their 2nd leg times. Regardless of which runner is chosen for the 1st leg, we
     always want the 3 fastest 2nd-leg runners from the rest of the pool. Because we only
-    need 3 runners after removing the first one, and the list is already sorted, it is a
+    need 3 runners after removing the first one, and the list is already sorted, it's a
     constant-time operation to find the other 3 and complete the team build. So this
     reduces to a linearithmic-time sort followed by a linear-time traversal to try out
     each runner as the first leg
