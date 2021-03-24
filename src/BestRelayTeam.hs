@@ -70,7 +70,7 @@ process runners = Output fastest
         asFirst :: Runner -> Team
         asFirst runner = runner : take (4-1) (delete runner sorted)
 
-        -- sort the runners by their 2nd leg time. this value is computed once
+        -- sort the runners by their 2nd leg time. this list is generated once
         -- and reused in each call to asFirst
         sorted :: [Runner]
         sorted = sortOn leg2 runners
