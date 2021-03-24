@@ -72,7 +72,7 @@ process classes = Output percents
 
         -- notice this value uses gt and n, but it's also referenced during the
         -- computation of gt and n
-        average :: Percent
+        average :: Float
         average = fromIntegral gt / fromIntegral n
 
 
