@@ -1,6 +1,6 @@
 {-  BestRelayTeam (difficulty 1.8) - https://open.kattis.com/problems/bestrelayteam
 
-    The key to solving this challenge efficiently is sorting the pool of runners ahead of
+    The key to solving this challenge efficiently is to sort the pool of runners ahead of
     time by their 2nd leg times. Regardless of which runner is chosen for the 1st leg, we
     always want the 3 fastest 2nd-leg runners from the rest of the pool. Because we only
     need 3 runners after removing the first one, and the list is already sorted, it's a
