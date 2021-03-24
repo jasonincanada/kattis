@@ -1,4 +1,4 @@
-{-  BestRelayTeam (difficulty 1.8) - https://open.kattis.com/problems/bestrelayteam
+{-  Best Relay Team (difficulty 1.8) - https://open.kattis.com/problems/bestrelayteam
 
     The key to solving this challenge efficiently is to sort the pool of runners ahead of
     time by their 2nd leg times. Regardless of which runner is chosen for the 1st leg, we
