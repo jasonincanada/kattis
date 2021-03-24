@@ -1,7 +1,7 @@
 {-  BestRelayTeam (difficulty 1.8) - https://open.kattis.com/problems/bestrelayteam
 
     The key to solving this challenge efficiently is sorting the pool of runners ahead of
-    time by the 2nd leg times. Regardless of which runner is chosen for the 1st leg, we
+    time by their 2nd leg times. Regardless of which runner is chosen for the 1st leg, we
     always want the 3 fastest 2nd-leg runners from the rest of the pool. Because we only
     need 3 runners after removing the first one, it is a constant-time operation to find
     the other 3 and complete the team build. So this reduces to a linearithmic-time sort
