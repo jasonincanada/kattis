@@ -1,4 +1,4 @@
- kattis
+# kattis
 
 My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=problem_difficulty) programming challenges. The difficulty numbers listed in the table below may change on the Kattis website since they are regularly re-calculated as new results are submitted (more info [here](https://open.kattis.com/help/ranklist)).
 
