@@ -2,10 +2,10 @@
 
     The key to solving this challenge efficiently is sorting the pool of runners ahead of
     time by the 2nd leg times. Regardless of which runner is chosen for the 1st leg, we
-    always want the three fastest 2nd-leg runners from the rest of the pool. Because we
-    only need 3 runners after removing the first one, it is a constant-time operation to
-    find the other three and complete the team build. So this reduces to a linearithmic
-    sort followed by a linear traversal to try out each runner as the first leg
+    always want the 3 fastest 2nd-leg runners from the rest of the pool. Because we only
+    need 3 runners after removing the first one, it is a constant-time operation to find
+    the other 3 and complete the team build. So this reduces to a linearithmic-time sort
+    followed by a linear-time traversal to try out each runner as the first leg
 
     The overall complexity of this solution is O(n log n + 3n). The runtime is 0.01s but
     the Haskell leaderboard is already full
