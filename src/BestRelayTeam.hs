@@ -8,7 +8,7 @@
     first runner, it is a constant-time operation to find the other three runners and
     complete the team build
 
-    The overall complexity of this solution is O(n log n + n). The runtime is 0.01s but
+    The overall complexity of this solution is O(n log n + 3n). The runtime is 0.01s but
     the Haskell leaderboard is already full
 -}
 
