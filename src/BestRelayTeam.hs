@@ -4,8 +4,8 @@
     2nd leg times. Regardless of which runner is chosen for the 1st leg, we always want
     the three fastest 2nd-leg runners from the rest of the pool. So this reduces to a
     linearithmic-time sort followed by a linear traversal to try out each runner as the
-    first leg. Because we only need at most 3 of the remaining sorted pool after removing
-    the first runner, it is a constant-time operation to find the other three runners and
+    first leg. Because we only need 3 of the sorted pool remaining after removing the
+    first runner, it is a constant-time operation to find the other three runners and
     complete the team build
 
     The overall complexity of this solution is O(n log n + n). The runtime is 0.01s but
