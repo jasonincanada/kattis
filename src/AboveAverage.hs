@@ -50,7 +50,7 @@ process classes = Output percents
     percents = map percent classes
 
     percent :: [Grade] -> Percent
-    percent grades = fromIntegral over / fromIntegral count * 100
+    percent grades = fromIntegral above / fromIntegral count * 100
       where
 
         -- visit each grade in the list, accumulating the grade total (gt) and the number
@@ -62,13 +62,13 @@ process classes = Output percents
         -- computed by the traversal
         --
         -- mapAccumR :: Traversable t => (a -> b -> (a, c)) -> a -> t b -> (a, t c)
-        (Avg gt n, overs) = mapAccumR check (Avg 0 0) grades
+        (Avg gt n, aboves) = mapAccumR check (Avg 0 0) grades
 
         check :: Avg -> Grade -> (Avg, Bool)
-        check (Avg gt n) grade = (accum, isOver)
+        check (Avg gt n) grade = (accum, isAbove)
           where
             accum   = Avg (gt+grade) (n+1)
-            isOver  = fromIntegral grade > average    -- (1)
+            isAbove = fromIntegral grade > average    -- (1)
 
 
         -- notice this value uses gt and n, but it's also referenced during the
@@ -77,10 +77,10 @@ process classes = Output percents
         average = fromIntegral gt / fromIntegral n
 
 
-        -- second phase, we have our list of booleans specifying which grades were over
+        -- second phase, we have our list of booleans specifying which grades were above
         -- the average, now calculate the percentage of Trues in the list. we could
         -- combine this and the above traversal into one
-        (over, count) = foldr tally (0, 0) overs
+        (above, count) = foldr tally (0, 0) aboves
 
         tally :: Bool -> (Int,Int) -> (Int,Int)
         tally True  (n, d) = (n+1, d+1)
