@@ -65,10 +65,10 @@ process classes = Output percents
         (Avg gt n, overs) = mapAccumR check (Avg 0 0) grades
 
         check :: Avg -> Grade -> (Avg, Bool)
-        check (Avg gt n) grade = (accum, isAbove)
+        check (Avg gt n) grade = (accum, isOver)
           where
             accum   = Avg (gt+grade) (n+1)
-            isAbove = fromIntegral grade > average    -- (1)
+            isOver  = fromIntegral grade > average    -- (1)
 
 
         -- notice this value uses gt and n, but it's also referenced during the
