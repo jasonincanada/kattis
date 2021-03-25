@@ -77,9 +77,9 @@ process classes = Output percents
         average = fromIntegral gt / fromIntegral n
 
 
-        -- second phase, we have our list of booleans specifying which grades were above
-        -- the average, now calculate the percentage of Trues in the list. we could
-        -- combine this and the above traversal into one
+        -- second phase, we have our list of booleans (aboves) specifying which grades
+        -- were above the average, now calculate the percentage of Trues in the list.
+        -- we could combine this and the above traversal into one
         (above, count) = foldr tally (0, 0) aboves
 
         tally :: Bool -> (Int,Int) -> (Int,Int)
