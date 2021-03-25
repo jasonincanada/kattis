@@ -80,12 +80,11 @@ process classes = Output percents
         -- second phase, we have our list of booleans specifying which grades were over
         -- the average, now calculate the percentage of Trues in the list. we could
         -- combine this and the above traversal into one
-        Avg over count = foldr tally (Avg 0 0) overs
+        (over, count) = foldr tally (0, 0) overs
 
-        tally :: Bool -> Avg -> Avg
-        tally isOver (Avg n d)
-          | isOver    = Avg (n+1) (d+1)
-          | otherwise = Avg  n    (d+1)
+        tally :: Bool -> (Int,Int) -> (Int,Int)
+        tally True  (n, d) = (n+1, d+1)
+        tally False (n, d) = (n  , d+1)
 
 
 
