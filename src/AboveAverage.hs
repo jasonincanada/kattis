@@ -62,10 +62,10 @@ process classes = Output percents
         -- computed by the traversal
         --
         -- mapAccumR :: Traversable t => (a -> b -> (a, c)) -> a -> t b -> (a, t c)
-        (Avg gt n, aboves) = mapAccumR check (Avg 0 0) grades
+        (Avg gt n, aboves) = mapAccumR step (Avg 0 0) grades
 
-        check :: Avg -> Grade -> (Avg, Bool)
-        check (Avg gt n) grade = (accum, isAbove)
+        step :: Avg -> Grade -> (Avg, Bool)
+        step (Avg gt n) grade = (accum, isAbove)
           where
             accum   = Avg (gt+grade) (n+1)
             isAbove = fromIntegral grade > average    -- (1)
