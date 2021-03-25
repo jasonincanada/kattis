@@ -50,7 +50,7 @@ process classes = Output percents
     percents = map percent classes
 
     percent :: [Grade] -> Percent
-    percent grades = fromIntegral over / fromIntegral total * 100
+    percent grades = fromIntegral over / fromIntegral count * 100
       where
 
         -- visit each grade in the list, accumulating the grade total (gt) and the number
@@ -80,7 +80,7 @@ process classes = Output percents
         -- second phase, we have our list of booleans specifying which grades were over
         -- the average, now calculate the percentage of Trues in the list. we could
         -- combine this and the above traversal into one
-        Avg over total = foldr tally (Avg 0 0) overs
+        Avg over count = foldr tally (Avg 0 0) overs
 
         tally :: Bool -> Avg -> Avg
         tally isOver (Avg n d)
