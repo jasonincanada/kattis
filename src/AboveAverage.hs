@@ -54,9 +54,9 @@ process classes = Output percents
       where
 
         -- visit each grade in the list, accumulating the grade total (gt) and the number
-        -- of grades (n) at each step. mapAccumR also maps over the structure as we go, so
-        -- we swap the grade with whether or not it's above the average for the class. of
-        -- course, we don't know the average yet since we're still gathering the two
+        -- of grades (n) at each step. mapAccumR also maps over the structure as it goes,
+        -- so we swap the grade with whether or not it's above the average for the class.
+        -- of course, we don't know the average yet since we're still gathering the two
         -- numbers we need to compute it. but we reference it anyway (1) and haskell
         -- remembers to finish the computation later once those two numbers are done being
         -- computed by the traversal
