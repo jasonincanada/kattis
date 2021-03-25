@@ -58,7 +58,7 @@ process classes = Output percents
         -- so we swap the grade with whether or not it's above the average for the class.
         -- of course, we don't know the average yet since we're still gathering the two
         -- numbers we need to compute it. but we reference it anyway (1) and haskell
-        -- remembers to finish the computation later once those two numbers are done being
+        -- remembers to finish the computation later once the two numbers are done being
         -- computed by the traversal
         --
         -- mapAccumR :: Traversable t => (a -> b -> (a, c)) -> a -> t b -> (a, t c)
