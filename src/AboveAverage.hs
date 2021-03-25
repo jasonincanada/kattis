@@ -12,7 +12,6 @@
 
 module AboveAverage (aboveaverage, try) where
 
-import Data.Bifunctor   (bimap)
 import Data.Traversable (mapAccumR)
 import Text.Printf      (printf)
 
@@ -21,6 +20,8 @@ import Text.Printf      (printf)
 
 type Grade   = Int
 type Percent = Float
+data Avg     = Avg Int Int  -- numerator and denominator to calculate an average
+
 data Output  = Output [Percent]
 
 instance Show Output where
@@ -61,12 +62,12 @@ process classes = Output percents
         -- computed by the traversal
         --
         -- mapAccumR :: Traversable t => (a -> b -> (a, c)) -> a -> t b -> (a, t c)
-        ((gt,n), overs) = mapAccumR check (0,0) grades
+        (Avg gt n, overs) = mapAccumR check (Avg 0 0) grades
 
-        check :: (Grade,Int) -> Grade -> ((Grade,Int), Bool)
-        check (gt,n) grade = (accum, isAbove)
+        check :: Avg -> Grade -> (Avg, Bool)
+        check (Avg gt n) grade = (accum, isAbove)
           where
-            accum   = (gt+grade, n+1)
+            accum   = Avg (gt+grade) (n+1)
             isAbove = fromIntegral grade > average    -- (1)
 
 
@@ -79,11 +80,12 @@ process classes = Output percents
         -- second phase, we have our list of booleans specifying which grades were over
         -- the average, now calculate the percentage of Trues in the list. we could
         -- combine this and the above traversal into one
-        (over, total) = foldr count (0,0) overs
+        Avg over total = foldr count (Avg 0 0) overs
 
-        count :: Bool -> (Int,Int) -> (Int,Int)
-        count isOver = bimap (if isOver then (+1) else id)
-                             (+1)
+        count :: Bool -> Avg -> Avg
+        count isOver (Avg n d)
+          | isOver    = Avg (n+1) (d+1)
+          | otherwise = Avg  n    (d+1)
 
 
 
