@@ -2,8 +2,8 @@
 
 module Main where
 
-import AboveAverage
+import Majstor
 
 main :: IO ()
-main = interact aboveaverage
+main = interact majstor
 

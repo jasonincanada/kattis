@@ -13,6 +13,7 @@ import Limbo2        (limbo2, which, trySquare, tryRect, doCase, Output(..))
 import Amoebas       (amoebas)
 import BestRelayTeam (bestrelayteam)
 import AboveAverage  (aboveaverage)
+import Majstor       (majstor)
 
 
 path = "test/inputs/"
@@ -311,6 +312,22 @@ main = hspec $ do
     forM_ cases $
       \(testfile, result) ->
         it testfile $ (aboveaverage <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
+
+  describe "Majstor" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "majstor-1.input", unlines ["5","10"])
+                , ( "majstor-2.input", unlines ["10","15"])
+                , ( "majstor-3.input", unlines ["12","21"])
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (majstor <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 
 
