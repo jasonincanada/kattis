@@ -18,9 +18,9 @@ import Text.Printf      (printf)
 
 {- Types -}
 
-type Grade   = Int
+type Grade   = Float
 type Percent = Float
-data Avg     = Avg Int Int  -- numerator and denominator to calculate an average
+data Avg     = Avg Float Float  -- numerator and denominator to calculate an average
 
 data Output  = Output [Percent]
 
@@ -68,13 +68,13 @@ process classes = Output percents
         step (Avg gt n) grade = (accum, isAbove)
           where
             accum   = Avg (gt+grade) (n+1)
-            isAbove = fromIntegral grade > average    -- (1)
+            isAbove = grade > average         -- (1)
 
 
         -- notice this value uses gt and n, but it's also referenced during the
         -- computation of gt and n
         average :: Float
-        average = fromIntegral gt / fromIntegral n
+        average = gt / n
 
 
         -- second phase, we have our list of booleans (aboves) specifying which grades
