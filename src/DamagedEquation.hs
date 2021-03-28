@@ -52,6 +52,7 @@ process (a:b:c:d:_) = Output equations
 
 
     -- all pairs of operations
+    pairs :: [ (Oper, Oper) ]
     pairs = [ (left, right) | left  <- opers,
                               right <- opers ]
     
