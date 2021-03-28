@@ -26,7 +26,8 @@ parse = map read . words . head . lines
 
 {- Methods -}
 
-type Oper = (Char, Int->Int->Int)
+-- represent an operation along with its character symbol
+data Oper = Oper Char (Int->Int->Int)
 
 
 process :: TestCase -> Output
@@ -38,7 +39,8 @@ process (a:b:c:d:_) = Output equations
     -- mapMaybe :: (a -> Maybe b) -> [a] -> [b]
 
     eval :: (Oper, Oper) -> Maybe String
-    eval ((leftChar, leftOp), (rightChar, rightOp))
+    eval (Oper leftChar  leftOp,
+          Oper rightChar rightOp)
 
       -- catch division by zero
       | leftChar  == '/' && b == 0     = Nothing
@@ -58,10 +60,10 @@ process (a:b:c:d:_) = Output equations
                               right <- opers ]
     
     opers :: [Oper]
-    opers = [ ('*', (*))
-            , ('+', (+))
-            , ('-', (-))
-            , ('/', div) -- integer division (discard the remainder)
+    opers = [ Oper '*' (*)
+            , Oper '+' (+)
+            , Oper '-' (-)
+            , Oper '/' div  -- integer division (discard the remainder)
             ]
 
 
