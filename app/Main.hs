@@ -2,8 +2,8 @@
 
 module Main where
 
-import Majstor
+import DamagedEquation
 
 main :: IO ()
-main = interact majstor
+main = interact damagedequation
 

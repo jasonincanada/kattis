@@ -14,6 +14,7 @@ import Amoebas       (amoebas)
 import BestRelayTeam (bestrelayteam)
 import AboveAverage  (aboveaverage)
 import Majstor       (majstor)
+import DamagedEquation (damagedequation)
 
 
 path = "test/inputs/"
@@ -328,6 +329,21 @@ main = hspec $ do
     forM_ cases $
       \(testfile, result) ->
         it testfile $ (majstor <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
+
+  describe "Damaged Equation" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "damagedequation-1.input", unlines [ "1 - 2 = 3 - 4"
+                                                       , "1 / 2 = 3 / 4" ])
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (damagedequation <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 
 

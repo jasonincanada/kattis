@@ -4,6 +4,7 @@ My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=
 
 2021 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+28 Mar | [2.8](https://open.kattis.com/problems/damagedequation) | [DamagedEquation.hs](src/DamagedEquation.hs) | Find permutations of ops that solve an equation
 24 Mar | [1.9](https://open.kattis.com/problems/aboveaverage) | [AboveAverage.hs](src/AboveAverage.hs) | Calculate percentage of grades above class average
 21 Mar | [1.8](https://open.kattis.com/problems/bestrelayteam) | [RelayTeam.hs](src/BestRelayTeam.hs) | Build the fastest team for a relay race
 20 Mar | [1.8](https://open.kattis.com/problems/amoebas) | [Amoebas.hs](src/Amoebas.hs) | Count contiguous paths in a grid of pixels
