@@ -32,6 +32,7 @@ type Oper = (Char, Int->Int->Int)
 process :: TestCase -> Output
 process (a:b:c:d:_) = Output equations
   where
+    equations :: [String]
     equations = mapMaybe eval pairs
 
     -- mapMaybe :: (a -> Maybe b) -> [a] -> [b]
