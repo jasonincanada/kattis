@@ -15,6 +15,7 @@ import BestRelayTeam (bestrelayteam)
 import AboveAverage  (aboveaverage)
 import Majstor       (majstor)
 import DamagedEquation (damagedequation)
+import TrainBoarding (trainboarding)
 
 
 path = "test/inputs/"
@@ -346,5 +347,19 @@ main = hspec $ do
         it testfile $ (damagedequation <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 
+
+
+  describe "Train Boarding" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "trainboarding-1.input", unlines [ "27", "1" ])
+                , ( "trainboarding-2.input", unlines [ "28", "1" ])
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (trainboarding <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
 
 

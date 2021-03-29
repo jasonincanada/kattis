@@ -2,8 +2,8 @@
 
 module Main where
 
-import DamagedEquation
+import TrainBoarding
 
 main :: IO ()
-main = interact damagedequation
+main = interact trainboarding
 
