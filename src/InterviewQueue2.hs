@@ -1,4 +1,4 @@
-{-  Interview Queue (difficulty 7.2) - https://open.kattis.com/problems/interviewqueue
+{-  Interview Queue 2 (difficulty 7.2) - https://open.kattis.com/problems/interviewqueue
 
     This iteration of the original InterviewQueue.hs uses a new inner recursion scheme in
     an attempt to improve runtime, but it's still exceeding the 4s time limit on the sixth
