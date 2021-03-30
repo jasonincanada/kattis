@@ -16,6 +16,7 @@ import AboveAverage  (aboveaverage)
 import Majstor       (majstor)
 import DamagedEquation (damagedequation)
 import TrainBoarding (trainboarding)
+import InterviewQueue (interviewqueue, step, Result(..))
 
 
 path = "test/inputs/"
@@ -362,4 +363,30 @@ main = hspec $ do
         it testfile $ (trainboarding <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 
+
+
+  describe "Interview Queue" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "interviewqueue-1.input", unlines [ "2", "3 2 2 1 5", "3 2 2", "6 6" ])
+                , ( "interviewqueue-2.input", unlines [ "0", "17 17 17" ])
+                , ( "interviewqueue-3.input", unlines [ "2", "1 2 3 5 6", "7", "8" ])
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (interviewqueue <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
+
+
+    it "step 1 1"   $ step [1,1]   `shouldBe` (Result []  [1,1] True)
+    it "step 1 2"   $ step [1,2]   `shouldBe` (Result [1]   [2] False)
+    it "step 2 1"   $ step [2,1]   `shouldBe` (Result [1]   [2] True )
+    it "step 1 2 3" $ step [1,2,3] `shouldBe` (Result [1,2] [3] False)
+    it "step 3 2 1" $ step [3,2,1] `shouldBe` (Result [2,1] [3] True )
+
+    it "step" $ step [3,6,2,3,2,2,2,1,5,6] `shouldBe` (Result [3,2,2,1,5]
+                                                              [6,3,2,2,6]
+                                                              False)
 
