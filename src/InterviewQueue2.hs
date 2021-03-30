@@ -4,6 +4,11 @@
     an attempt to improve runtime, but it's still exceeding the 4s time limit on the sixth
     kattis test, so we'll keep refactoring
 
+    Revision Notes
+
+     a) it turns out we don't need to consider the last two values as a pair, we can
+        handle the singleton list by itself. this simplifies the code a lot
+
 -}
 
 module InterviewQueue2 (interviewqueue2, try, step, Result(..)) where
@@ -65,23 +70,13 @@ data Result = Result { prior  :: Maybe Value
 
 step :: [Value] -> Result -> Result
 
--- lists with exactly two elements
-step [v,w] (Result Nothing leave remain)
-  | v < w                = Result (Just v) (reverse $   v:leave) (reverse $   w:remain)
-  | v > w                = Result (Just v) (reverse $   w:leave) (reverse $   v:remain)
-  | otherwise            = Result (Just v) (reverse $     leave) (reverse $ v:w:remain)
+-- single-element lists
+step [v]   (Result Nothing leave remain)
+                         = Result (Just v) leave remain
 
-step [v,w] (Result (Just prior) leave remain)
-  | v <  w               = Result (Just v) (reverse $   v:leave) (reverse $   w:remain)
-
-  -- v >= w
-  | v == w && v <  prior = Result (Just v) (reverse $   v:leave) (reverse $   w:remain)
-  | v == w && v >= prior = Result (Just v) (reverse $     leave) (reverse $ w:v:remain)
-
-  -- v > w
-  | v <  prior           = Result (Just v) (reverse $ w:v:leave) (reverse $     remain)
-  | v >= prior           = Result (Just v) (reverse $   w:leave) (reverse $   v:remain)
-
+step [v]   (Result (Just prior) leave remain)
+  | v < prior            = Result (Just v) (reverse $ v:leave) (reverse $   remain)
+  | otherwise            = Result (Just v) (reverse $   leave) (reverse $ v:remain)
 
 -- lists with more than two elements, we consider only whether the current candidate
 -- value v is leaving or remaining and let recursion on the tail consider the rest
