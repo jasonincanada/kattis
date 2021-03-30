@@ -9,6 +9,11 @@
      a) it turns out we don't need to consider the last two values as a pair, we can
         handle the singleton list by itself. this simplifies the code a lot
 
+     b) step is a fold-like function, so we make it internal to a new function called
+        partition. this lets us factor out the calls to reverse, since reversing the final
+        accumulated strings shouldn't be the responsibility of the fold function. step
+        could be indented to be local to partition but then the unit tests wouldn't see it
+
 -}
 
 module InterviewQueue2 (interviewqueue2, try, step, Result(..)) where
@@ -56,8 +61,11 @@ process input = Output num (reverse vals)
     go values (Accum n vs)
       | null leave = Accum  n    (remain : vs)
       | otherwise  = Accum (n+1) (leave  : vs) & go remain
+
       where
-        Result _ leave remain = step values (Result Nothing [] [])
+        -- scan through the list of candidates, partitioning it into two lists,
+        -- tracking who leaves and who remains in this round
+        (leave, remain) = partition values
 
 
 -- the result of a call to step: the first value from the prior step, if any,
@@ -68,6 +76,12 @@ data Result = Result { prior  :: Maybe Value
                      } deriving (Eq, Show)
 
 
+partition :: [Value] -> ([Value], [Value])
+partition values = (reverse leave, reverse remain)
+  where
+    Result _ leave remain = step values (Result Nothing [] [])
+
+
 step :: [Value] -> Result -> Result
 
 -- single-element lists
@@ -75,8 +89,8 @@ step [v]   (Result Nothing leave remain)
                          = Result (Just v) leave remain
 
 step [v]   (Result (Just prior) leave remain)
-  | v < prior            = Result (Just v) (reverse $ v:leave) (reverse $   remain)
-  | otherwise            = Result (Just v) (reverse $   leave) (reverse $ v:remain)
+  | v < prior            = Result (Just v) (v:leave)    remain
+  | otherwise            = Result (Just v)    leave  (v:remain)
 
 -- lists with more than two elements, we consider only whether the current candidate
 -- value v is leaving or remaining and let recursion on the tail consider the rest
