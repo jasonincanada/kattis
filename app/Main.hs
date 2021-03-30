@@ -2,8 +2,8 @@
 
 module Main where
 
-import InterviewQueue
+import InterviewQueue2
 
 main :: IO ()
-main = interact interviewqueue
+main = interact interviewqueue2
 
