@@ -1,3 +1,5 @@
+{-# Language ViewPatterns #-}
+
 {-  Interview Queue 2 (difficulty 7.2) - https://open.kattis.com/problems/interviewqueue
 
     This iteration of the original InterviewQueue.hs uses a new inner recursion scheme in
@@ -14,11 +16,23 @@
         accumulated strings shouldn't be the responsibility of the fold function. step
         could be indented to be local to partition but then the unit tests wouldn't see it
 
+     c) we're now using difference lists, which have constant-time append so we can avoid
+        calling reverse all the time. i couldn't figure out how to pattern-match on them
+        in the step function though, so I enabled ViewPatterns, and now call tl on each
+        step to convert the difference list to a normal haskell list. then back to a diff
+        list with fl before recursing on step. unfortunately, this round-trip seems to
+        have caused the code to run slower overall, since it now fails on the fourth
+        kattis test where it made it to the sixth test before. nonetheless, it feels like
+        a step in the right direction
+
 -}
 
 module InterviewQueue2 (interviewqueue2, try, step, Result(..)) where
 
+import qualified Data.DList as DL
+import Data.DList    (DList(..), empty, singleton)
 import Data.Function ((&))
+
 
 
 {- Types -}
@@ -26,10 +40,30 @@ import Data.Function ((&))
 type Value    = Int
 type TestCase = [Value]
 
-data Output   = Output Int [[Value]]
+data Output   = Output Int (DL (DL Value))
 
 instance Show Output where
-  show (Output num values) = unlines $ show num : map (unwords . map show) values
+  show (Output num values) = unlines $ show num : tl (DL.map (unwords . map show .
+                                                      tl) values)
+
+
+{- Aliases -}
+
+type DL = DList
+
+-- alias DList's element append operators to something more terse and fancy
+(<++) :: a -> DL a -> DL a
+(<++) = DL.cons
+
+(++>) :: DL a -> a -> DL a
+(++>) = DL.snoc
+
+fl :: [a] -> DL a
+fl = DL.fromList
+
+tl :: DL a -> [a]
+tl = DL.toList
+
 
 
 {- Parsing -}
@@ -44,23 +78,23 @@ parse = map read . words . (!! 1) . lines
 
 {- Methods -}
 
-data Accum = Accum Int [[Value]]
+data Accum = Accum Int (DL (DL Value))
 
 
 process :: TestCase -> Output
-process input = Output num (reverse vals)
+process input = Output num vals
   where
-    Accum num vals = go input (Accum 0 [])
+    Accum num vals = go (fl input) (Accum 0 empty)
     
     -- go is the outer recursion, called every round until we have a round with
     -- no candidates leaving (always true for a single candidate left in line)
 
-    go :: [Value] -> Accum -> Accum
-    go [x] (Accum n vs) = Accum n ([x] : vs)
+    go :: DL Value -> Accum -> Accum
+    go (tl -> [x]) (Accum n vs) = Accum n (vs ++> singleton x)
 
     go values (Accum n vs)
-      | null leave = Accum  n    (remain : vs)
-      | otherwise  = Accum (n+1) (leave  : vs) & go remain
+      | null leave = Accum  n    (vs ++> remain)
+      | otherwise  = Accum (n+1) (vs ++> leave ) & go remain
 
       where
         -- scan through the list of candidates, partitioning it into two lists,
@@ -70,37 +104,41 @@ process input = Output num (reverse vals)
 
 -- the result of a call to step: the first value from the prior step, if any,
 -- and the values that left and remained in the queue
-data Result = Result { prior  :: Maybe Value
-                     , leave  :: [Value]
-                     , remain :: [Value]
-                     } deriving (Eq, Show)
+data Result a = Result { prior  :: Maybe Value
+                       , leave  :: a
+                       , remain :: a
+                       } deriving (Eq, Show)
+
+instance Functor Result where
+  fmap f (Result p leave remain) = Result p (f leave) (f remain)
 
 
-partition :: [Value] -> ([Value], [Value])
-partition values = (reverse leave, reverse remain)
+partition :: DL Value -> (DL Value, DL Value)
+partition values = (leave, remain)
   where
-    Result _ leave remain = step values (Result Nothing [] [])
+    Result _ leave remain = step values (Result Nothing empty empty)
 
 
-step :: [Value] -> Result -> Result
+
+step :: DL Value -> Result (DL Value) -> Result (DL Value)
 
 -- single-element lists
-step [v]   (Result Nothing leave remain)
+step (tl -> [v])   (Result Nothing leave remain)
                          = Result (Just v) leave remain
 
-step [v]   (Result (Just prior) leave remain)
-  | v < prior            = Result (Just v) (v:leave)    remain
-  | otherwise            = Result (Just v)    leave  (v:remain)
+step (tl -> [v])   (Result (Just prior) leave remain)
+  | v < prior            = Result (Just v) (leave ++> v) remain
+  | otherwise            = Result (Just v) leave (remain ++> v)
 
 -- lists with more than two elements, we consider only whether the current candidate
 -- value v is leaving or remaining and let recursion on the tail consider the rest
-step (v:w:rest) (Result Nothing leave remain)
-  | v < w                = step (w:rest) (Result (Just v) (v:leave)    remain )
-  | otherwise            = step (w:rest) (Result (Just v)    leave  (v:remain))
+step (tl -> (v:w:rest)) (Result Nothing leave remain)
+  | v < w                = step (w <++ fl rest) (Result (Just v) (leave ++> v) remain)
+  | otherwise            = step (w <++ fl rest) (Result (Just v) leave (remain ++> v))
 
-step (v:w:rest) (Result (Just prior) leave remain)
-  | v < w || v < prior   = step (w:rest) (Result (Just v) (v:leave)    remain )
-  | otherwise            = step (w:rest) (Result (Just v)    leave  (v:remain))
+step (tl -> (v:w:rest)) (Result (Just prior) leave remain)
+  | v < w || v < prior   = step (w <++ fl rest) (Result (Just v) (leave ++> v) remain)
+  | otherwise            = step (w <++ fl rest) (Result (Just v) leave (remain ++> v))
 
 
 

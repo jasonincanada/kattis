@@ -1,5 +1,6 @@
 import Test.Hspec
 import Control.Monad (forM_)
+import qualified Data.DList as DL
 
 import Golomb        (golomb)
 import Lektira       (lektira)
@@ -406,16 +407,18 @@ main = hspec $ do
         it testfile $ (IQ2.interviewqueue2 <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
 
-    let acc = IQ2.Result Nothing [] []
+    let acc = IQ2.Result Nothing DL.empty DL.empty
+        fl  = DL.fromList
+        c   = fmap DL.fromList
 
-    it "step 1 1"   $ IQ2.step [1,1] acc  `shouldBe` (IQ2.Result (Just 1) []  [1,1])
-    it "step 1 2"   $ IQ2.step [1,2] acc  `shouldBe` (IQ2.Result (Just 2) [1]   [2])
-    it "step 2 1"   $ IQ2.step [2,1] acc  `shouldBe` (IQ2.Result (Just 1) [1]   [2])
-    it "step 1 2 3" $ IQ2.step [1,2,3] acc `shouldBe` (IQ2.Result (Just 3) [2,1] [3])
-    it "step 3 2 1" $ IQ2.step [3,2,1] acc `shouldBe` (IQ2.Result (Just 1) [1,2] [3])
-    it "step 3 3 2 1" $ IQ2.step [3,3,2,1] acc `shouldBe` (IQ2.Result (Just 1) [1,2] [3,3])
-    it "step 2 2 3 1" $ IQ2.step [2,2,3,1] acc `shouldBe` (IQ2.Result (Just 1) [1,2] [3,2])
+    it "step 1 1"   $ IQ2.step (fl [1,1]) acc  `shouldBe` c (IQ2.Result (Just 1) [] [1,1])
+    it "step 1 2"   $ IQ2.step (fl [1,2]) acc  `shouldBe` c (IQ2.Result (Just 2) [1]   [2])
+    it "step 2 1"   $ IQ2.step (fl [2,1]) acc  `shouldBe` c (IQ2.Result (Just 1) [1]   [2])
+    it "step 1 2 3" $ IQ2.step (fl [1,2,3]) acc `shouldBe` c (IQ2.Result (Just 3) [1,2] [3])
+    it "step 3 2 1" $ IQ2.step (fl [3,2,1]) acc `shouldBe` c (IQ2.Result (Just 1) [2,1] [3])
+    it "step 3 3 2 1" $ IQ2.step (fl [3,3,2,1]) acc `shouldBe` c (IQ2.Result (Just 1) [2,1] [3,3])
+    it "step 2 2 3 1" $ IQ2.step (fl [2,2,3,1]) acc `shouldBe` c (IQ2.Result (Just 1) [2,1] [2,3])
 
-    it "step" $ IQ2.step [3,6,2,3,2,2,2,1,5,6] acc `shouldBe` (IQ2.Result (Just 6) [5,1,2,2,3]
-                                                                                   [6,2,2,3,6])
+    it "step" $ IQ2.step (fl [3,6,2,3,2,2,2,1,5,6]) acc `shouldBe` c (IQ2.Result (Just 6) [3,2,2,1,5]
+                                                                                          [6,3,2,2,6])
 
