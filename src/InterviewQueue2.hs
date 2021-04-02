@@ -28,7 +28,7 @@
      d) this is actually doing two things per step: taking out values we want to print,
         and keeping values around for the next iteration--two really different operations
 
-     e) idea: split the list into monotically increasing segments and map over those
+     e) idea: split the list into monotonically increasing segments and map over those
               segments somehow
 
         split:
