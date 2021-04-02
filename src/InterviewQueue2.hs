@@ -55,7 +55,7 @@
           segment, and the first of the next segment is by definition less
               |
               |
-              same reasoning as 1st segment, take the 2
+              same reasoning as first segment, take the 2
 
                     ^
                     only the first of a repeated digit
