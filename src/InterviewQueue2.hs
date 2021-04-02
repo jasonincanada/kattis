@@ -25,6 +25,43 @@
         kattis test where it made it to the sixth test before. nonetheless, it feels like
         a step in the right direction
 
+     d) this is actually doing two things per step: taking out values we want to print,
+        and keeping values around for the next iteration--two really different operations
+
+     e) idea: split the list into monotically increasing segments and map over those
+              segments somehow
+
+        split:
+        8 1 2 3 5 6 7
+
+              -
+              |
+              |
+              V
+
+        8   1 2 3 5 6 7
+
+
+        split:                                  step:
+        3 6 2 3 2 2 2 1 5 6
+              -
+              |
+              |
+              V
+        3 6   2 3   2 2 2   1 5 6               (3 2 2 1 5, 6 3 2 2 6)
+        ^     ^
+        init! |
+        **not the 6, because it's greater than the number to the left in the same
+          segment, and the first of the next segment is by definition less
+              |
+              |
+              same reasoning as 1st segment, take the 2
+
+                    ^
+                    only the first of a repeated digit
+
+                            ^ init takes both 1 and 5 here
+
 -}
 
 module InterviewQueue2 (interviewqueue2, try, step, Result(..)) where
