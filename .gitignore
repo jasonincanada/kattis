@@ -5,3 +5,6 @@ temp
 
 tasks.json
 launch.json
+.stack-work/
+kattis.cabal
+*.lock
