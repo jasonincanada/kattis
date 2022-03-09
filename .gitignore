@@ -10,3 +10,4 @@ kattis.cabal
 *.lock
 
 target/
+.vscode/
