@@ -8,3 +8,5 @@ launch.json
 .stack-work/
 kattis.cabal
 *.lock
+
+target/
