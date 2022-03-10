@@ -1,6 +1,10 @@
 # kattis
 
-My solutions in Haskell for the [Kattis](https://open.kattis.com/problems?order=problem_difficulty) programming challenges. The difficulty numbers listed in the table below may change on the Kattis website since they are regularly re-calculated as new results are submitted (more info [here](https://open.kattis.com/help/ranklist)).
+My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/problems?order=problem_difficulty) programming challenges. The difficulty numbers listed in the table below may change on the Kattis website since they are regularly re-calculated as new results are submitted (more info [here](https://open.kattis.com/help/ranklist)).
+
+2022 | Diff. | Source | Description / Notes
+--- | --- | --- | ---
+10 Mar | [3.6](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers.rs](rust/spumbers/src/main.rs) | Permute equations until they're correct
 
 2021 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
