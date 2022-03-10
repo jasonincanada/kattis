@@ -92,9 +92,9 @@ fn do_case(equation: &Equation) -> Option<String> {
     // first instead of on-demand, the server runtime is still rounding down to 0.00s
     let mut tries: Vec<Equation> = Vec::new();
 
-    add_permutations(&mut tries, &equation, &Component::Arg1, &Component::Arg2);
-    add_permutations(&mut tries, &equation, &Component::Arg1, &Component::Result);
-    add_permutations(&mut tries, &equation, &Component::Arg2, &Component::Result);
+    add_permutations(&mut tries, equation, &Component::Arg1, &Component::Arg2);
+    add_permutations(&mut tries, equation, &Component::Arg1, &Component::Result);
+    add_permutations(&mut tries, equation, &Component::Arg2, &Component::Result);
 
     // try the permutations
     for attempt in tries {
