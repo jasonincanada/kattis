@@ -78,7 +78,7 @@ fn main() {
     let input = std::io::stdin().lock().lines().next().unwrap().unwrap();
     let equation = Equation::new(&input);
 
-    let result: Option<String> = do_case(&equation);
+    let result: Option<String> = do_case(equation);
 
     match result {
         Some(output) => println!("{}", output),
@@ -86,15 +86,15 @@ fn main() {
     }    
 }
 
-fn do_case(equation: &Equation) -> Option<String> {
+fn do_case(equation: Equation) -> Option<String> {
 
     // build all permutations of the equation and try them all. even with computing all these
     // first instead of on-demand, the server runtime is still rounding down to 0.00s
     let mut tries: Vec<Equation> = Vec::new();
 
-    add_permutations(&mut tries, equation, &Component::Arg1, &Component::Arg2);
-    add_permutations(&mut tries, equation, &Component::Arg1, &Component::Result);
-    add_permutations(&mut tries, equation, &Component::Arg2, &Component::Result);
+    add_permutations(&mut tries, &equation, &Component::Arg1, &Component::Arg2);
+    add_permutations(&mut tries, &equation, &Component::Arg1, &Component::Result);
+    add_permutations(&mut tries, &equation, &Component::Arg2, &Component::Result);
 
     // try the permutations
     for attempt in tries {
@@ -168,10 +168,10 @@ mod tests {
     #[test]
     fn test_do_case() {
         // sample inputs
-        assert_eq!("6692 + 2803 = 9495"  , do_case(&Equation::new("92 + 2803 = 669495")).unwrap());
-        assert_eq!("7291 * 683 = 4979753", do_case(&Equation::new("6891 * 723 = 4979753")).unwrap());
+        assert_eq!("6692 + 2803 = 9495"  , do_case(Equation::new("92 + 2803 = 669495")).unwrap());
+        assert_eq!("7291 * 683 = 4979753", do_case(Equation::new("6891 * 723 = 4979753")).unwrap());
 
         // test 2-char numbers
-        assert_eq!("12 * 34 = 408"       , do_case(&Equation::new("32 * 14 = 408")).unwrap());
+        assert_eq!("12 * 34 = 408"       , do_case(Equation::new("32 * 14 = 408")).unwrap());
     }
 }
