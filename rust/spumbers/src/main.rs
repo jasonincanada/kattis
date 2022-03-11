@@ -34,11 +34,11 @@ impl Equation {
         }
     }
 
-    fn set_part(&mut self, component: &Component, val: &str) {
+    fn set_part(&mut self, component: &Component, val: String) {
         match component {
-            Component::Arg1   => self.arg1   = val.to_owned(),
-            Component::Arg2   => self.arg2   = val.to_owned(),
-            Component::Result => self.result = val.to_owned(),
+            Component::Arg1   => self.arg1   = val,
+            Component::Arg2   => self.arg2   = val,
+            Component::Result => self.result = val,
         }
     }
 
@@ -121,8 +121,8 @@ fn add_permutations(tries: &mut Vec<Equation>,
 
         let mut equation = equation.clone();
 
-        equation.set_part(comp1, &swapped1);
-        equation.set_part(comp2, &swapped2);
+        equation.set_part(comp1, swapped1);
+        equation.set_part(comp2, swapped2);
 
         tries.push(equation);
     }
