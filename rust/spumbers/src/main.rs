@@ -5,10 +5,10 @@ use std::io::BufRead;
 // An equation stored as its string components
 #[derive(Clone)]
 struct Equation {
-    arg1: String,
-    arg2: String,
+    arg1:      String,
+    arg2:      String,
     operation: char,
-    result: String
+    result:    String
 }
 
 impl Equation {
@@ -50,17 +50,17 @@ impl Equation {
         match self.operation {
             '+' => arg1 + arg2 == res,
             '*' => arg1 * arg2 == res,
-            _   => panic!("Unknown operation")
+             _  => panic!("Unknown operation")
         }
     }
 
     // Convert back to string for the solution checker
     fn render(&self) -> String {
-        [&self.arg1,
-         &self.operation.to_string(),
-         &self.arg2,
-         "=",
-         &self.result].join(" ")
+        [ &self.arg1,
+          &self.operation.to_string(),
+          &self.arg2,
+          "=",
+          &self.result ].join(" ")
     }
 }
 
@@ -82,7 +82,7 @@ fn main() {
 
     match result {
         Some(output) => println!("{}", output),
-        None => println!("no result")
+        None         => println!("no result")
     }    
 }
 
