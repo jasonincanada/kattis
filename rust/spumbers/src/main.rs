@@ -110,7 +110,7 @@ fn do_case(equation: Equation) -> Option<String> {
 fn add_permutations(tries: &mut Vec<Equation>,
                     equation: &Equation,
                     comp1: &Component,
-                    comp2: &Component) -> () {
+                    comp2: &Component) {
 
     let num1 = equation.part(comp1);
     let num2 = equation.part(comp2);
