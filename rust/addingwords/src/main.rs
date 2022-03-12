@@ -2,6 +2,11 @@
 
     This has a 0.01s runtime which isn't enough to get onto the Rust leaderboard, which currently
     has five solutions submitted at 0.00s. Where to find those precious few cycles...
+
+    Revision: This change avoids copying the variable name out of calc(), passing a reference back
+    to the calling code instead. This required us to use a lifetime parameter (the 'a in calc<'a>),
+    which tells the compiler the reference to the key name must (of course) not outlive the map
+    itself. Still clocking in at 0.01s however, so not on the board yet
 */
 
 use std::collections::HashMap;
@@ -29,7 +34,7 @@ fn main() {
 
                                 match calc(&vars, &tokens[1..]) {
                                     Some(result) => result,
-                                    None         => "unknown".to_owned()
+                                    None         => "unknown"
                                 }),
 
             "clear" => clear(&mut vars),
@@ -47,8 +52,8 @@ fn def(vars:  &mut HashMap<String, i32>,
 }
 
 // attempt a calculation
-fn calc(vars:   &HashMap<String, i32>,
-        tokens: &[&str]) -> Option<String>
+fn calc<'a>(vars:   &'a HashMap<String, i32>,
+            tokens: &[&str]) -> Option<&'a String>
 {
     let mut accum : i32;
 
@@ -63,7 +68,7 @@ fn calc(vars:   &HashMap<String, i32>,
     loop {
         if tokens[i] == "=" {
             match find_var_for_value(&vars, accum) {
-                Some(var) => return Some(var.to_owned()),
+                Some(var) => return Some(var),
                 None      => return None
             }
         }
