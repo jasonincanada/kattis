@@ -26,7 +26,11 @@ fn main() {
 
             "calc"  => println!("{} {}",
                                 tokens[1..].join(" "),
-                                calc(&vars, &tokens[1..])),
+
+                                match calc(&vars, &tokens[1..]) {
+                                    Some(result) => result,
+                                    None         => "unknown".to_owned()
+                                }),
 
             "clear" => clear(&mut vars),
              _      => panic!("Unknown line type")
@@ -44,14 +48,14 @@ fn def(vars:  &mut HashMap<String, i32>,
 
 // attempt a calculation
 fn calc(vars:   &HashMap<String, i32>,
-        tokens: &[&str]) -> String
+        tokens: &[&str]) -> Option<String>
 {
     let mut accum : i32;
 
     // the first variable doesn't have an operation yet, start our accumulator with it
     match vars.get(tokens[0]) {
         Some(val) => accum = *val,
-        None      => return "unknown".to_owned()
+        None      => return None
     }
 
     let mut i = 1;
@@ -59,8 +63,8 @@ fn calc(vars:   &HashMap<String, i32>,
     loop {
         if tokens[i] == "=" {
             match find_var_for_value(&vars, accum) {
-                Some(var) => return var.to_owned(),
-                None      => return "unknown".to_owned()
+                Some(var) => return Some(var.to_owned()),
+                None      => return None
             }
         }
 
@@ -71,7 +75,7 @@ fn calc(vars:   &HashMap<String, i32>,
                               _  => panic!("calc(): Unknown operation")
                          },
 
-                 None => return "unknown".to_owned()
+                 None => return None
         }
 
         // done with this variable name and its operation
