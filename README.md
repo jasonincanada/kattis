@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+13 Mar | [3.1](https://open.kattis.com/problems/socialdistancing2) | [socialdistancing2.rs](rust/socialdistancing2/src/main.rs) | Count how many more people can sit around a table
 12 Mar | [3.5](https://open.kattis.com/problems/addingwords) | [addingwords.rs](rust/addingwords/src/main.rs) | Basic arithmetic calculations with a changing map
 11 Mar | [2.4](https://open.kattis.com/problems/charged) | [charged.rs](rust/charged/src/main.rs) | Render an electric potential field in 2D ASCII
 10 Mar | [3.6](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers.rs](rust/spumbers/src/main.rs) | Permute equations until they're correct
