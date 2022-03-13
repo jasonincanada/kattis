@@ -10,10 +10,10 @@ struct Particle {
 }
 
 impl Particle {
-    fn measure_potential_from(&self, row: &i8, col: &i8) -> f64 {
+    fn measure_potential_from(&self, row: i8, col: i8) -> f64 {
 
-        let dr = (self.row as f64) - (*row as f64);
-        let dc = (self.col as f64) - (*col as f64);
+        let dr = (self.row as f64) - (row as f64);
+        let dc = (self.col as f64) - (col as f64);
         
         let distance : f64 = (dr*dr + dc*dc).sqrt();
     
@@ -49,7 +49,7 @@ fn main() {
             let draw : char;
 
             // if there's a particle at this exact point just print its sign
-            if let Some(sign) = sign_of_particle_at(&particles, &row, &col) {
+            if let Some(sign) = sign_of_particle_at(&particles, row, col) {
                 
                 if sign > 0 {
                     draw = '+';                
@@ -62,7 +62,7 @@ fn main() {
 
                 // sum the contributions to this point from every particle
                 for particle in &particles {
-                    sum += particle.measure_potential_from(&row, &col);
+                    sum += particle.measure_potential_from(row, col);
                 }
 
                 // for negative potentials use {%,X,x}
@@ -92,9 +92,9 @@ fn main() {
     }  
 }
 
-fn sign_of_particle_at(particles: &[Particle], row: &i8, col: &i8) -> Option<i8> {
+fn sign_of_particle_at(particles: &[Particle], row: i8, col: i8) -> Option<i8> {
     for p in particles {
-        if p.row == *row && p.col == *col {
+        if p.row == row && p.col == col {
             return Some(p.charge)
         }
     }
