@@ -11,8 +11,6 @@ use std::collections::HashMap;
 use std::io::BufRead;
 
 fn main() {
-    let stdin = std::io::stdin();
-    let mut input = stdin.lock().lines();
         
     // map of events to their index in the list
     let mut event_map = HashMap::<String, usize>::new();
@@ -20,7 +18,10 @@ fn main() {
     // keep a separate ordered list of events so we know which to remove from the
     // event map during a dream() step (by popping off the end n times)
     let mut event_vec = Vec::<String>::new();
-    
+
+    let     stdin = std::io::stdin();
+    let mut input = stdin.lock().lines();
+
     // discard the first line, the line count
     input.next();
     
