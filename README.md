@@ -4,7 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
-15 Mar | [7.7](https://open.kattis.com/problems/riseandfall) | [riseandfall.rs](rust/dream/src/main.rs) | Find the rise-and-fall integer closest to the input
+15 Mar | [7.7](https://open.kattis.com/problems/riseandfall) | [riseandfall.rs](rust/riseandfall/src/main.rs) | Find the rise-and-fall integer closest to the input
 14 Mar | [5.2](https://open.kattis.com/problems/dream) | [dream.rs](rust/dream/src/main.rs) | Track events and determine if scenarios happened
 13 Mar | [3.1](https://open.kattis.com/problems/socialdistancing2) | [socialdistancing2.rs](rust/socialdistancing2/src/main.rs) | Count how many more people can sit around a table
 12 Mar | [3.5](https://open.kattis.com/problems/addingwords) | [addingwords.rs](rust/addingwords/src/main.rs) | Basic arithmetic calculations with a changing map
