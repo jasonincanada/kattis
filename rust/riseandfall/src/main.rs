@@ -4,7 +4,7 @@
     on the second server test. My logic is described in the comments throughout the file, though I
     must have made an incorrect assumption somewhere. The 0.00s solutions tell me there's a really
     quick, probably linear pass through this. In fact, the below solution is streaming one byte at
-    a time so, despite the scary sounding bounds in the problem description, this actually runs in
+    a time, so despite the scary sounding bounds in the problem description, this actually runs in
     constant memory (2 bytes! the current and prior bytes from the input). I have probably over-
     simplified somewhere in my reasoning
 */
@@ -35,6 +35,7 @@ fn main() {
             continue;
         }
         
+        // handle unix line endings
         if ch == b'\n' {
             if mode != Mode::FirstLine {
                 println!("");
