@@ -42,7 +42,7 @@ fn main() {
             // total assignments
             assigned       += 1;
 
-            if assigned >= capacity {
+            if assigned == capacity {
                 break;
             }
         }
