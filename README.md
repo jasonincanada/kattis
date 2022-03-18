@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+18 Mar | [5.0](https://open.kattis.com/problems/scalingrecipe) | [scalingrecipe.rs](rust/scalingrecipe/src/main.rs) | Scale recipe ingredients to required amounts
 17 Mar | [3.9](https://open.kattis.com/problems/sacredtexts) | [sacredtexts.rs](rust/sacredtexts/src/main.rs) | Decode runes
 16 Mar | [4.9](https://open.kattis.com/problems/whogoesthere) | [whogoesthere.rs](rust/whogoesthere/src/main.rs) | Assign teams from a waitlist to a roster
 15 Mar | [7.7](https://open.kattis.com/problems/riseandfall) | [riseandfall.rs](rust/riseandfall/src/main.rs) | Find the rise-and-fall integer closest to the input
