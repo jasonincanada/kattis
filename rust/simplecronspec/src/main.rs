@@ -1,7 +1,5 @@
 /*  https://open.kattis.com/problems/simplecronspec  */
 
-use std::io::BufRead;
-
 struct CronJob {
     hours   : Vec<u8>,
     minutes : Vec<u8>,
@@ -64,6 +62,8 @@ impl CronJob {
     }    
 }
 
+
+use std::io::BufRead;
 
 fn main() {
     let     stdin = std::io::stdin();
