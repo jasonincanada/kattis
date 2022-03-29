@@ -18,6 +18,8 @@ import Majstor       (majstor)
 import DamagedEquation (damagedequation)
 import TrainBoarding (trainboarding)
 import InterviewQueue (interviewqueue, step, Result(..))
+import Pivot         (pivot)
+
 import qualified InterviewQueue2 as IQ2
 
 
@@ -421,4 +423,18 @@ main = hspec $ do
 
     it "step" $ IQ2.step (fl [3,6,2,3,2,2,2,1,5,6]) acc `shouldBe` c (IQ2.Result (Just 6) [3,2,2,1,5]
                                                                                           [6,3,2,2,6])
+
+
+  describe "Pivot" $ do
+
+    let cases = [
+                -- Sample inputs from the problem page
+                  ( "pivot-1.input", "3" )
+                , ( "pivot-2.input", "5" )
+                ]
+
+    forM_ cases $
+      \(testfile, result) ->
+        it testfile $ (pivot <$> readFile (path ++ testfile))
+                        >>= (`shouldBe` result)
 

@@ -27,6 +27,7 @@ dependencies:
 - dlist
 - array
 - hspec
+- tardis
 
 library:
   source-dirs: src

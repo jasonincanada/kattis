@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+29 Mar | [2.7](https://open.kattis.com/problems/pivot) | [Pivot.hs](src/Pivot.hs) | Use reverse state to count pivot points in a list
 28 Mar | [2.0](https://open.kattis.com/problems/simplecronspec) | [simplecronspec.rs](rust/simplecronspec/src/main.rs) | Count number of cronjobs running in a day
 20 Mar | [3.5](https://open.kattis.com/problems/interpreter) | [interpreter.rs](rust/interpreter/src/main.rs) | Emulate a computer with registers, opcodes and RAM
 19 Mar | [5.5](https://open.kattis.com/problems/alphabetanimals) | [alphabetanimals.rs](rust/alphabetanimals/src/main.rs) | Play a word game, trying to eliminate players
