@@ -85,7 +85,7 @@ fn main() {
         tally(cronjob, &mut seconds);
     }
 
-    // how many seconds have at least one job starting (ie, count the bools that are true)
+    // how many seconds have at least one job starting
     let at_least_one = &seconds.iter()
                                .filter(|s| *s > &0)
                                .count();
