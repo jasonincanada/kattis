@@ -11,3 +11,5 @@ kattis.cabal
 
 target/
 .vscode/
+
+notes/.obsidian/workspace
