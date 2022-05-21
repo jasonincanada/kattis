@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+21 May | [link](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers2.rs](rust/spumbers2/src/main.rs) | Rewrite of spumbers to avoid cloning
 7 May | [link](https://open.kattis.com/problems/99problems) | [99problems.rs](rust/problems99/src/main.rs) | Map an integer to the closest ending in 99
 29 Mar | [2.7](https://open.kattis.com/problems/pivot) | [Pivot.hs](src/Pivot.hs) | Use reverse state to count pivot points in a list
 28 Mar | [2.0](https://open.kattis.com/problems/simplecronspec) | [simplecronspec.rs](rust/simplecronspec/src/main.rs) | Count number of cronjobs running in a day
