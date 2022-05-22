@@ -101,10 +101,10 @@ fn do_case(equation: Equation) -> Option<String> {
     for anchor in parts {
 
         // get the two terms that aren't the anchor
-        let (perm1, perm2) = equation.parts_other_than(&anchor);
+        let (term1, term2) = equation.parts_other_than(&anchor);
 
         // permute the two terms' prefixes with each other
-        let swapper = PairPrefixSwapper::new(perm1, perm2);
+        let swapper = PairPrefixSwapper::new(term1, term2);
 
         for (left, right) in swapper {
 
