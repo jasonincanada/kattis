@@ -1,19 +1,21 @@
 /*  https://open.kattis.com/problems/noonerizedspumbers  
 
-    This is a rewrite of my first attempt at this challenge (../spumbers). The first solution has a
+    This is a rewrite of my first attempt at this challenge (../spumbers). The first attempt had a
     glaring inefficiency: it calls .clone() on the whole Equation object in the innermost loop,
-    which allocates three new strings each time even though one (which I've called the "anchor")
-    doesn't change at all from the original equation, and the other two get overwritten right away
-    with permutations of those fields. In this new solution, the old Equation object is still here
-    but it's only used one time, to hold (and own) the original strings from the input equation.
-    For each attempt to permute this equation, a new EquationBuilder object is constructed whose
-    anchor term is only a reference to the original term, and the two permuted fields are
-    constructed (during the swapping operation) and kept around only long enough to test the newly
-    built equation for validity. The net effect is that no strings are duplicated needlessly
+    which allocates three new strings each time even though one (the "anchor") doesn't change at
+    all from the original equation, and the other two get overwritten right away with permutations
+    of each other
 
-    I've factored the prefix permuting into its own structure PairPrefixSwapper. Rather than using
-    two nested for loops for the core loop, the iteration is a legit implementation of Iterator for
-    this structure, so the main search loop is now a foreach instead of nested fors
+    In this new solution, the old Equation object is still here but it's only used one time, to
+    hold (and own) the original strings from the input equation. For each attempt to permute this
+    equation, a new EquationBuilder object is constructed whose anchor term is only a reference to
+    the original term, and the two permuted fields are constructed (during the swapping operation)
+    and kept around only long enough to test the newly built equation for validity. The net effect
+    is that no strings are duplicated needlessly
+
+    I've factored the prefix permuting into its own structure PairPrefixSwapper. This structure has
+    a legit implementation of the Iterator trait, so rather than using two nested for loops for the
+    core loop, it is now a foreach instead of nested fors
 
     The runtime is showing 0.00s on the server, but the original one did as well. We can only
     assume it runs even faster this time because there is no superfluous copying going on, though
