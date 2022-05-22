@@ -4,8 +4,8 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
-21 May | [link](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers2.rs](rust/spumbers2/src/main.rs) | Rewrite of spumbers to avoid cloning
-7 May | [link](https://open.kattis.com/problems/99problems) | [99problems.rs](rust/problems99/src/main.rs) | Map an integer to the closest ending in 99
+21 May | [2.9](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers2.rs](rust/spumbers2/src/main.rs) | Rewrite of spumbers to avoid cloning
+7 May | [1.6](https://open.kattis.com/problems/99problems) | [99problems.rs](rust/problems99/src/main.rs) | Map an integer to the closest ending in 99
 29 Mar | [2.7](https://open.kattis.com/problems/pivot) | [Pivot.hs](src/Pivot.hs) | Use reverse state to count pivot points in a list
 28 Mar | [2.0](https://open.kattis.com/problems/simplecronspec) | [simplecronspec.rs](rust/simplecronspec/src/main.rs) | Count number of cronjobs running in a day
 20 Mar | [3.5](https://open.kattis.com/problems/interpreter) | [interpreter.rs](rust/interpreter/src/main.rs) | Emulate a computer with registers, opcodes and RAM
@@ -18,7 +18,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 13 Mar | [3.1](https://open.kattis.com/problems/socialdistancing2) | [socialdistancing2.rs](rust/socialdistancing2/src/main.rs) | Count how many more people can sit around a table
 12 Mar | [3.5](https://open.kattis.com/problems/addingwords) | [addingwords.rs](rust/addingwords/src/main.rs) | Basic arithmetic calculations with a changing map
 11 Mar | [2.4](https://open.kattis.com/problems/charged) | [charged.rs](rust/charged/src/main.rs) | Render an electric potential field in 2D ASCII
-10 Mar | [3.6](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers.rs](rust/spumbers/src/main.rs) | Permute equations until they're correct
+10 Mar | [2.9](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers.rs](rust/spumbers/src/main.rs) | Permute equations until they're correct
 
 2021 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
