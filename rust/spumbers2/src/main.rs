@@ -68,11 +68,9 @@ fn do_case(equation: Equation) -> Option<String> {
         // build equations starting with a common base equation and anchor
         let builder = EquationBuilder::new(&equation, &anchor);
 
-        // get the two terms that aren't the anchor
+        // permute the prefixes of the two non-anchor terms and try them until one works
         let (term1, term2) = equation.parts_other_than(&anchor);
-
-        // permute the two terms' prefixes with each other
-        let swapper = PairPrefixSwapper::new(term1, term2);
+        let swapper        = PairPrefixSwapper::new(term1, term2);
 
         for (left, right) in swapper {
             if builder.is_valid_with(&left, &right) {
@@ -85,7 +83,7 @@ fn do_case(equation: Equation) -> Option<String> {
 }
 
 
-// An equation (invalid) from the input stored as owned string components
+// The equation (invalid) from the input stored as owned string components
 struct Equation {
     arg1:      String,
     arg2:      String,
