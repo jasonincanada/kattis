@@ -41,48 +41,6 @@
 
 use std::io::BufRead;
 
-
-// An equation (invalid) from the input stored as owned string components
-struct Equation {
-    arg1:      String,
-    arg2:      String,
-    operation: char,
-    result:    String
-}
-
-impl Equation {
-
-    // construct an Equation from a string like "92 + 2803 = 669495"
-    fn new(input: &str) -> Self {
-        let tokens : Vec<&str> = input.split(' ').collect();
-
-        Equation {
-            arg1:      tokens[0].to_string(),
-            operation: tokens[1].chars().next().unwrap(),
-            arg2:      tokens[2].to_string(),
-            result:    tokens[4].to_string()
-        }
-    }
-
-    // the anchor is the term that is not changing throughout the permutations.
-    // return the other two parts that are
-    fn parts_other_than(&self, anchor: &Part) -> (&str, &str) {
-        match anchor {
-            Part::Arg1   => (&self.arg2, &self.result),
-            Part::Arg2   => (&self.arg1, &self.result),
-            Part::Result => (&self.arg1, &self.arg2)
-        }
-    }
-}
-
-// The parts of an equation that can be edited (ie, the operation always stays the same)
-enum Part {
-    Arg1,
-    Arg2,
-    Result
-}
-
-
 fn main() {
 
     // get first line of input and parse it into an Equation
@@ -124,6 +82,47 @@ fn do_case(equation: Equation) -> Option<String> {
     }
 
     None
+}
+
+
+// An equation (invalid) from the input stored as owned string components
+struct Equation {
+    arg1:      String,
+    arg2:      String,
+    operation: char,
+    result:    String
+}
+
+impl Equation {
+
+    // construct an Equation from a string like "92 + 2803 = 669495"
+    fn new(input: &str) -> Self {
+        let tokens : Vec<&str> = input.split(' ').collect();
+
+        Equation {
+            arg1:      tokens[0].to_string(),
+            operation: tokens[1].chars().next().unwrap(),
+            arg2:      tokens[2].to_string(),
+            result:    tokens[4].to_string()
+        }
+    }
+
+    // the anchor is the term that is not changing throughout the permutations.
+    // return the other two parts that are
+    fn parts_other_than(&self, anchor: &Part) -> (&str, &str) {
+        match anchor {
+            Part::Arg1   => (&self.arg2, &self.result),
+            Part::Arg2   => (&self.arg1, &self.result),
+            Part::Result => (&self.arg1, &self.arg2)
+        }
+    }
+}
+
+// The parts of an equation that can be edited (ie, the operation always stays the same)
+enum Part {
+    Arg1,
+    Arg2,
+    Result
 }
 
 struct EquationBuilder<'a> {
