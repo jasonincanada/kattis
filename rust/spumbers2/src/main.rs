@@ -21,6 +21,11 @@
     assume it runs even faster this time because there is no superfluous copying going on, though
     the kattis servers can't help us confirm this
 
+    Revision: This update resolves the last obvious inefficiency. The anchor was parsed again every
+    time a new pair of terms was tried even though it doesn't change its value like the other two
+    terms do. The EquationBuilder object is now constructed once per anchor change (three times
+    total) and we call render_with() on it once per pair of permuted terms
+
     Differences to note between the old and new solutions:
 
       - #[derive(Clone)] is gone from Equation because .clone() is gone from the code!
@@ -102,6 +107,9 @@ fn do_case(equation: Equation) -> Option<String> {
     // the anchor is the term that doesn't change when going through permutations
     for anchor in parts {
 
+        // build equations starting with a common base equation and anchor
+        let builder = EquationBuilder::new(&equation, &anchor);
+
         // get the two terms that aren't the anchor
         let (term1, term2) = equation.parts_other_than(&anchor);
 
@@ -109,12 +117,8 @@ fn do_case(equation: Equation) -> Option<String> {
         let swapper = PairPrefixSwapper::new(term1, term2);
 
         for (left, right) in swapper {
-
-            // build and try this particular prefix swapping
-            let built = EquationBuilder::new(&anchor, &left, &right, &equation);
-
-            if built.is_valid_equation() {
-                return Some(built.render())
+            if builder.is_valid_with(&left, &right) {
+                return Some(builder.render_with(&left, &right))
             }
         }
     }
@@ -123,49 +127,48 @@ fn do_case(equation: Equation) -> Option<String> {
 }
 
 struct EquationBuilder<'a> {
-    arg1:      &'a str,
-    arg2:      &'a str,
-    operation: char,
-    result:    &'a str
+    equation:      &'a Equation,
+    anchor:        &'a Part,
+
+    // cache the anchor's integer value
+    anchor_parsed: i64
 }
 
 impl<'a> EquationBuilder<'a> {
 
-    fn new(anchor: &'a Part, left: &'a str, right: &'a str, equation: &'a Equation) -> Self {
-        
-        // it's a bit clumsy building the new equation this way (ie, without lenses) but it's
-        // clear what it's doing: for the anchor term, it borrows the same term from the underlying
-        // equation, then it uses the left/right permuted terms to fill in the other two fields.
-        // the operation is copied from the underlying equation but it's a stack-based char so
-        // we lose no efficiency
-        match anchor {
-            Part::Arg1 => EquationBuilder { arg1: &equation.arg1,
-                                            arg2: left,
-                                            result: right,
-                                            operation: equation.operation
-                                          },
+    fn new(equation: &'a Equation, anchor: &'a Part) -> Self {
+        EquationBuilder {
+            equation,
+            anchor,
 
-            Part::Arg2 => EquationBuilder { arg1: left,
-                                            arg2: &equation.arg2,
-                                            result: right,
-                                            operation: equation.operation
-                                          },
-
-            Part::Result => EquationBuilder { arg1: left,
-                                              arg2: right,
-                                              result: &equation.result,
-                                              operation: equation.operation
-                                            }
+            // parse the anchor once during construction and keep it around since it doesn't change
+            anchor_parsed: match anchor {
+                Part::Arg1   => parsei64(&equation.arg1),
+                Part::Arg2   => parsei64(&equation.arg2),
+                Part::Result => parsei64(&equation.result),
+            },
         }
     }
-    
-    fn is_valid_equation(&self) -> bool {
 
-        let num1 = self.arg1.parse::<i64>().unwrap();
-        let num2 = self.arg2.parse::<i64>().unwrap();
-        let res  = self.result.parse::<i64>().unwrap();
+    fn is_valid_with(&self, left: &str, right: &str) -> bool {
+       
+        let num1 = match self.anchor {
+              Part::Arg1 => { self.anchor_parsed },
+                       _ => { parsei64(&left) },
+        };
 
-        match self.operation {
+        let num2 = match self.anchor {
+            Part::Arg1   => { parsei64(&left) },
+            Part::Arg2   => { self.anchor_parsed },
+            Part::Result => { parsei64(&right) },
+        };
+        
+        let res = match self.anchor {
+            Part::Result => { self.anchor_parsed },
+                       _ => { parsei64(&right) },
+        };
+        
+        match self.equation.operation {
             '+' => num1 + num2 == res,
             '*' => num1 * num2 == res,
              _  => panic!("Unknown operation")
@@ -173,12 +176,28 @@ impl<'a> EquationBuilder<'a> {
     }
 
     // Convert back to string for the solution checker
-    fn render(&self) -> String {
-        format!("{} {} {} = {}", self.arg1,
-                                 self.operation,
-                                 self.arg2,
-                                 self.result)
+    fn render_with(&self, left: &str, right: &str) -> String {
+        match self.anchor {
+            Part::Arg1   => format!("{} {} {} = {}", self.equation.arg1,
+                                                     self.equation.operation,
+                                                     left,
+                                                     right),
+
+            Part::Arg2   => format!("{} {} {} = {}", left,
+                                                     self.equation.operation,
+                                                     self.equation.arg2,
+                                                     right),
+
+            Part::Result => format!("{} {} {} = {}", left,
+                                                     self.equation.operation,
+                                                     right,
+                                                     self.equation.result),
+        }
     }
+}
+
+fn parsei64(number: &str) -> i64 {
+    number.parse::<i64>().unwrap()
 }
 
 struct PairPrefixSwapper<'a> {
