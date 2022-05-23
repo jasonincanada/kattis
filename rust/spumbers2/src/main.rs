@@ -58,8 +58,8 @@ fn main() {
 fn do_case(equation: Equation) -> Option<String> {
     
     // the parts of the equation are just another list of things to iterate over
-    let parts = vec![ Part::Arg1,
-                      Part::Arg2,
+    let parts = vec![ Part::Term1,
+                      Part::Term2,
                       Part::Result ];
 
     // the anchor is the term that doesn't change when going through permutations
@@ -85,8 +85,8 @@ fn do_case(equation: Equation) -> Option<String> {
 
 // The equation (invalid) from the input stored as owned string components
 struct Equation {
-    arg1:      String,
-    arg2:      String,
+    term1:     String,
+    term2:     String,
     operation: char,
     result:    String
 }
@@ -98,9 +98,9 @@ impl Equation {
         let tokens : Vec<&str> = input.split(' ').collect();
 
         Equation {
-            arg1:      tokens[0].to_string(),
+            term1:     tokens[0].to_string(),
             operation: tokens[1].chars().next().unwrap(),
-            arg2:      tokens[2].to_string(),
+            term2:     tokens[2].to_string(),
             result:    tokens[4].to_string()
         }
     }
@@ -109,17 +109,17 @@ impl Equation {
     // return the other two parts that are
     fn parts_other_than(&self, anchor: &Part) -> (&str, &str) {
         match anchor {
-            Part::Arg1   => (&self.arg2, &self.result),
-            Part::Arg2   => (&self.arg1, &self.result),
-            Part::Result => (&self.arg1, &self.arg2)
+            Part::Term1  => (&self.term2, &self.result),
+            Part::Term2  => (&self.term1, &self.result),
+            Part::Result => (&self.term1, &self.term2)
         }
     }
 }
 
 // The parts of an equation that can be edited (ie, the operation always stays the same)
 enum Part {
-    Arg1,
-    Arg2,
+    Term1,
+    Term2,
     Result
 }
 
@@ -140,8 +140,8 @@ impl<'a> EquationBuilder<'a> {
 
             // parse the anchor once during construction and keep it around since it doesn't change
             anchor_parsed: match anchor {
-                Part::Arg1   => parsei64(&equation.arg1),
-                Part::Arg2   => parsei64(&equation.arg2),
+                Part::Term1  => parsei64(&equation.term1),
+                Part::Term2  => parsei64(&equation.term2),
                 Part::Result => parsei64(&equation.result),
             },
         }
@@ -149,14 +149,14 @@ impl<'a> EquationBuilder<'a> {
 
     fn is_valid_with(&self, left: &str, right: &str) -> bool {
        
-        let num1 = match self.anchor {
-              Part::Arg1 => { self.anchor_parsed },
+        let term1 = match self.anchor {
+             Part::Term1 => { self.anchor_parsed },
                        _ => { parsei64(&left) },
         };
 
-        let num2 = match self.anchor {
-            Part::Arg1   => { parsei64(&left) },
-            Part::Arg2   => { self.anchor_parsed },
+        let term2 = match self.anchor {
+            Part::Term1  => { parsei64(&left) },
+            Part::Term2  => { self.anchor_parsed },
             Part::Result => { parsei64(&right) },
         };
         
@@ -166,8 +166,8 @@ impl<'a> EquationBuilder<'a> {
         };
         
         match self.equation.operation {
-            '+' => num1 + num2 == res,
-            '*' => num1 * num2 == res,
+            '+' => term1 + term2 == res,
+            '*' => term1 * term2 == res,
              _  => panic!("Unknown operation")
         }
     }
@@ -175,14 +175,14 @@ impl<'a> EquationBuilder<'a> {
     // Convert back to string for the solution checker
     fn render_with(&self, left: &str, right: &str) -> String {
         match self.anchor {
-            Part::Arg1   => format!("{} {} {} = {}", self.equation.arg1,
+            Part::Term1  => format!("{} {} {} = {}", self.equation.term1,
                                                      self.equation.operation,
                                                      left,
                                                      right),
 
-            Part::Arg2   => format!("{} {} {} = {}", left,
+            Part::Term2  => format!("{} {} {} = {}", left,
                                                      self.equation.operation,
-                                                     self.equation.arg2,
+                                                     self.equation.term2,
                                                      right),
 
             Part::Result => format!("{} {} {} = {}", left,
