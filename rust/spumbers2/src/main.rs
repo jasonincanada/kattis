@@ -6,25 +6,26 @@
     all from the original equation, and the other two get overwritten right away with permutations
     of each other
 
-    In this new solution, the old Equation object is still here but it's only used one time, to
-    hold (and own) the original strings from the input equation. For each attempt to permute this
-    equation, a new EquationBuilder object is constructed whose anchor term is only a reference to
-    the original term, and the two permuted fields are constructed (during the swapping operation)
-    and kept around only long enough to test the newly built equation for validity. The net effect
-    is that no strings are duplicated needlessly
+    In this new solution, the old Equation object is still here but it's used only once, to hold
+    (and own) the original strings from the input equation. For each of the three parts of the
+    input equation, an EquationBuilder object is constructed with a read-only reference to the term
+    in the underlying equation that isn't changing. This requires the use of lifetime parameters
+    (the 'a notation) to inform the Rust compiler that the referent value lives at least as long as
+    the reference to it
 
-    I've factored the prefix permuting into its own structure PairPrefixSwapper. This structure has
-    a legit implementation of the Iterator trait, so rather than using two nested for loops for the
-    core loop, it is now a foreach instead of nested fors
+    I've factored the prefix swapping into its own structure PairPrefixSwapper. This structure has
+    the Iterator trait implemented on it, so rather than using two nested and indexed for loops for
+    the core swapping loop, it is now a single foreach that tries each of the pairs. Holding
+    references to the underlying terms that are being permuted requires us again to use lifetime
+    parameters to convince Rust that the referents will last at least as long as the references
 
     The runtime is showing 0.00s on the server, but the original one did as well. We can only
     assume it runs even faster this time because there is no superfluous copying going on, though
     the kattis servers can't help us confirm this
 
-    Revision: This update resolves the last obvious inefficiency. The anchor was parsed again every
-    time a new pair of terms was tried even though it doesn't change its value like the other two
-    terms do. The EquationBuilder object is now constructed once per anchor change (three times
-    total) and we call render_with() on it once per pair of permuted terms
+    Revision: This update resolves the last obvious inefficiency. The anchor was being parsed
+    repeatedly every time a new pair of terms was tried, even though it doesn't change its value
+    like the other two terms do
 
     Differences to note between the old and new solutions:
 
