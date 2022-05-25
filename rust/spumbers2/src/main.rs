@@ -58,18 +58,18 @@ fn main() {
 
 fn do_case(equation: Equation) -> Option<String> {
     
-    // the parts of the equation are just another list of things to iterate over
+    // hold one part of the equation constant at a time (the "anchor") while swapping the prefixes
+    // of the other two terms
     let parts = vec![ Part::Term1,
                       Part::Term2,
                       Part::Result ];
 
-    // the anchor is the term that doesn't change when going through permutations
     for anchor in parts {
 
-        // build equations starting with a common base equation and anchor
+        // try equations starting with a common base equation and anchor
         let builder = EquationBuilder::new(&equation, &anchor);
 
-        // permute the prefixes of the two non-anchor terms and try them until one works
+        // swap the prefixes of the two non-anchor terms and try them until one works
         let (term1, term2) = equation.parts_other_than(&anchor);
         let swapper        = PairPrefixSwapper::new(term1, term2);
 
@@ -84,7 +84,7 @@ fn do_case(equation: Equation) -> Option<String> {
 }
 
 
-// The equation (invalid) from the input stored as owned string components
+// the equation from the input, stored as owned string components
 struct Equation {
     term1:     String,
     term2:     String,
@@ -173,7 +173,7 @@ impl<'a> EquationBuilder<'a> {
         }
     }
 
-    // Convert back to string for the solution checker
+    // convert an equation to a string for the solution checker
     fn render_with(&self, left: &str, right: &str) -> String {
         match self.anchor {
             Part::Term1  => format!("{} {} {} = {}", self.equation.term1,
@@ -202,7 +202,7 @@ struct PairPrefixSwapper<'a> {
     left:  &'a str,
     right: &'a str,
 
-    // remember where we are in the permutation space between calls to next()
+    // remember where we are in the permutation space between calls to .next()
     l: usize,
     r: usize
 }
@@ -220,8 +220,7 @@ impl<'a> PairPrefixSwapper<'a> {
         }
     }
     
-    // Swap the prefixes of two strings at a certain index in each. This function is identical
-    // to the one in the original solution
+    // swap the prefixes of two strings at a certain index in each
     fn swap(s1: &str, s2: &str, idx1: usize, idx2: usize) -> (String, String) {
         
         let prefix1 = &s1[..idx1];
@@ -238,7 +237,7 @@ impl<'a> PairPrefixSwapper<'a> {
 
 impl Iterator for PairPrefixSwapper<'_> {
 
-    // each iteration returns a pair of strings (with their prefixes freshly swapped)
+    // each iteration returns a pair of strings
     type Item = (String, String);
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -260,7 +259,8 @@ impl Iterator for PairPrefixSwapper<'_> {
             self.l += 1;
         }
 
-        // move these newly constructed owned strings into the caller of .next()
+        // move these newly constructed owned strings into the caller of .next(), which is 
+        // called implicitly by the for (left,right) loop in do_case()
         Some((swapped1, swapped2))
     }
 }
