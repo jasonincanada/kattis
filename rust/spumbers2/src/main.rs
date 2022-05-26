@@ -260,7 +260,7 @@ impl Iterator for PairPrefixSwapper<'_> {
         }
 
         // move these newly constructed owned strings into the caller of .next(), which is 
-        // called implicitly by the for (left,right) loop in do_case()
+        // called behind the scenes by the for (left,right) loop in do_case()
         Some((swapped1, swapped2))
     }
 }
