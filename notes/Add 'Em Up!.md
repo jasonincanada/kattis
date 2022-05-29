@@ -39,7 +39,7 @@ fn do_case(input: Input) -> String {
     for (num1, i1) in &vec {
     for (num2, i2) in &vec {
 
-	    if *num1 + *num2 == input.sum {
+        if *num1 + *num2 == input.sum {
 
             // the problem says 2 cards so make sure this isn't the same one twice
             if i1 == i2 {
