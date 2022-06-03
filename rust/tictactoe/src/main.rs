@@ -1,6 +1,6 @@
 /*  https://open.kattis.com/problems/tictactoecounting - Tic Tac Toe Counting
 
-    Update: I simulated all possible games starting with an empty board, taking a snapshot of the
+    Update: I simulated all valid moves starting with an empty board, taking a snapshot of the
     board after every move. Since the gameplay logic itself seems to be solid (it returns the
     correct amount of wins for X and O starting with an empty board), I assumed the problem was
     with the get_board_state() function, which takes the first look at a board to determine its
