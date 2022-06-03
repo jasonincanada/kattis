@@ -1,18 +1,20 @@
 /*  https://open.kattis.com/problems/tictactoecounting - Tic Tac Toe Counting
 
-    This solution returns the wrong answer for test 3 (of 15) on the kattis servers. My first
-    attempt was too slow to complete the 2nd test even with 3 seconds to run. I overcame this by
-    caching the results of the gameplay simulations, after noticing there were up to 100,000 boards
-    in a single test, but only 19,683 possible starting configurations (3^9). However there is
-    still some error somewhere in my reasoning since it fails on the 3rd test. I've spent a few
-    days on this already so I'm moving on to another challenge for now
+    Update: I simulated all possible games starting with an empty board, taking a snapshot of the
+    board after every move. Since the gameplay logic itself seems to be solid (it returns the
+    correct amount of wins for X and O starting with an empty board), I assumed the problem was
+    with the get_board_state() function, which takes the first look at a board to determine its
+    validity. Tic Tac Toe has so few possible board configurations (including invalid ones), we can
+    just run through all possible *invalid* configurations and make sure get_board_state() is
+    returning Unreachable for every one. This way I found a board that the code thought was a win
+    for O even though it was an unreachable board
 
 */
 
 #![allow(clippy::match_like_matches_macro)]
 
 use std::io::BufRead;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 fn main() {
 
@@ -107,6 +109,79 @@ fn next_player(player: Player) -> Player {
     }
 }
 
+
+/* Diagnostics */
+
+fn find_the_problem() {
+    
+    // from an empty board, try all possible valid moves, and remember all of the partial game boards
+    let mut valid_boards : HashSet<String> = HashSet::new();
+    let mut board = TicTacToe::new(".........");
+
+    record_games(&mut board, &mut valid_boards, Player::X);
+
+    // try all possible starting configurations that *aren't* in our valid board collection and make sure
+    // we get GameState::Invalid back from get_board_state() for each
+    for board_idx in 0 .. 3_i32.pow(8) {
+        let board_string = idx_to_board_string(board_idx);
+
+        if valid_boards.contains(&board_string) {
+            continue
+        }
+
+        let board = TicTacToe::new(&board_string);
+        match board.get_board_state() {
+            GameState::Invalid => {},
+
+            state => panic!("Board {} should be Invalid but is {:?}", board_string, state)            
+        }        
+    }
+}
+
+// similar to play_games() but instead of counting wins we're just snapshotting boards in mid-game
+fn record_games(board: &mut TicTacToe, set: &mut HashSet<String>, player: Player) {
+
+    let cells = board.get_empty_cells();
+
+    set.insert(board.to_string());
+
+    // try each empty cell in turn, first marking it, recursing on the rest of the board
+    // for the other player's turn, then unmarking the cell when the recursive call returns
+    for cell in cells {
+        board.mark(cell, player);
+
+        // take a snapshot
+        set.insert(board.to_string());
+
+        if !board.is_winning_mark(cell) {
+            record_games(board, set, next_player(player));
+        }
+
+        // undo this move so we can try the next cell
+        board.unmark(cell);
+    }
+}
+
+// generate a board string from ......... to OOOOOOOOO
+// adapted from: https://stackoverflow.com/a/50278316
+fn idx_to_board_string(mut idx: i32) -> String {
+    let radix = 3;
+    let digits = vec!['.', 'X', 'O'];
+
+    let mut string = String::from("");
+
+    for _ in 0..9 {
+        let dig = idx % radix;
+        idx /= radix;
+
+        string.push(digits[dig as usize]);
+    }
+
+    string
+}
+
+
+/* Types */
 
 #[derive(Clone, Debug, PartialEq)]
 enum Result {
@@ -255,11 +330,23 @@ impl TicTacToe {
             return GameState::Invalid
         }
 
-        if num_wins_x >= 1 {            
+        if num_o_cells > num_x_cells {
+            return GameState::Invalid
+        }
+
+        if num_wins_x >= 1 {
+            if num_o_cells >= num_x_cells {
+                return GameState::Invalid
+            }
+
             return GameState::Winner(Player::X)
         }
        
         if num_wins_o >= 1 {
+            if num_o_cells != num_x_cells {
+                return GameState::Invalid
+            }
+
             return GameState::Winner(Player::O)
         }
 
@@ -335,6 +422,17 @@ impl TicTacToe {
 
 }
 
+impl ToString for TicTacToe {
+    fn to_string(&self) -> String {
+        self.cells.iter()
+                  .map(|c| match c {
+                    Cell::MarkedBy(Player::X) => 'X',
+                    Cell::MarkedBy(Player::O) => 'O',
+                    Cell::Empty               => '.'
+                  })
+                  .collect()
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -342,7 +440,22 @@ mod tests {
 
     #[test]
     fn test_get_board_state_winner_x() {
-        assert_eq!(TicTacToe::new("XOOX.OXO.").get_board_state(), GameState::Winner(Player::X))
+        assert_eq!(TicTacToe::new("XOOX..X..").get_board_state(), GameState::Winner(Player::X))
+
+        /*  XOO
+            X..
+            X..
+         */
+    }
+
+    #[test]
+    fn test_get_board_state_o_after_x_wins() {
+        assert_eq!(TicTacToe::new("XOOX.OX..").get_board_state(), GameState::Invalid)
+
+        /*  XOO
+            X.O
+            X..
+         */
     }
 
     #[test]
@@ -401,6 +514,36 @@ mod tests {
     fn test_empty_board() {
         // numbers from: https://www.quora.com/What-is-the-probability-of-the-first-player-winning-in-Tic-Tac-Toe-as-well-as-the-second-one-winning/answer/Kshitij-Rastogi
         assert_eq!(do_case(".........".to_owned()), Result::Wins(131184, 77904))
+    }
+
+    #[test]
+    fn test_idx_to_board_string() {
+        assert_eq!(idx_to_board_string(0), ".........");
+        assert_eq!(idx_to_board_string(1), "X........");
+        assert_eq!(idx_to_board_string(2), "O........");
+        assert_eq!(idx_to_board_string(3), ".X.......");
+
+        assert_eq!(idx_to_board_string(3_i32.pow(1)    ), ".X.......");
+        assert_eq!(idx_to_board_string(3_i32.pow(2)    ), "..X......");
+        assert_eq!(idx_to_board_string(3_i32.pow(3)    ), "...X.....");
+        assert_eq!(idx_to_board_string(3_i32.pow(8)    ), "........X");
+        assert_eq!(idx_to_board_string(3_i32.pow(9) - 1), "OOOOOOOOO");
+    }
+
+    #[test]
+    fn test_find_the_problem() {
+        find_the_problem()
+
+        // thread 'tests::test_find_the_problem' panicked at 'Board OXXOXXO.. should be Invalid but is Winner(O)'
+
+        // OXX
+        // OXX
+        // O..
+    }
+
+    #[test]
+    fn test_the_fix() {
+        assert_eq!(do_case("OXXOXXO..".to_owned()), Result::Unreachable);
     }
 
 }
