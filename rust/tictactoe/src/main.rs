@@ -120,6 +120,10 @@ fn find_the_problem() {
 
     record_games(&mut board, &mut valid_boards, Player::X);
 
+    // the above function call will miss the empty board since it
+    // takes a snapshot only after a move has been made
+    valid_boards.insert(".........".to_owned());
+
     // try all possible starting configurations that *aren't* in our valid board collection and make sure
     // we get GameState::Invalid back from get_board_state() for each
     for board_idx in 0 .. 3_i32.pow(8) {
@@ -142,8 +146,6 @@ fn find_the_problem() {
 fn record_games(board: &mut TicTacToe, set: &mut HashSet<String>, player: Player) {
 
     let cells = board.get_empty_cells();
-
-    set.insert(board.to_string());
 
     // try each empty cell in turn, first marking it, recursing on the rest of the board
     // for the other player's turn, then unmarking the cell when the recursive call returns
