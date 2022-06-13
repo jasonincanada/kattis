@@ -31,73 +31,32 @@ fn do_case(number: u32) -> Option<u32> {
 
 fn roman(mut decimal: u32) -> String {
 
+    let table = vec![
+       (1000, "M"),
+       (900, "CM"),
+       (500, "D"),
+       (400, "CD"),
+       (100, "C"),
+       (90, "XC"),
+       (50, "L"),
+       (40, "XL"),
+       (10, "X"),
+       (9, "IX"),
+       (5, "V"),
+       (4, "IV"),
+       (1, "I")
+    ];
+
     let mut roman = String::new();
 
-    while decimal > 0 {
-
-        if decimal >= 1000 {
-            roman.push('M');
-            decimal -= 1000;
-        }
-
-        else if decimal >= 900 {
-            roman.push_str("CM");
-            decimal -= 900;
-        }
-
-        else if decimal >= 500 {
-            roman.push_str("D");
-            decimal -= 500;
-        }
-
-        else if decimal >= 400 {
-            roman.push_str("CD");
-            decimal -= 400;
-        }
-
-        else if decimal >= 100 {
-            roman.push_str("C");
-            decimal -= 100;
-        }
-
-        else if decimal >= 90 {
-            roman.push_str("XC");
-            decimal -= 90;
-        }
-
-        else if decimal >= 50 {
-            roman.push_str("L");
-            decimal -= 50;
-        }
-        
-        else if decimal >= 10 {
-            roman.push_str("X");
-            decimal -= 10;
-        }
-
-        else if decimal >= 9 {
-            roman.push_str("IX");
-            decimal -= 9;
-        }
-
-        else if decimal >= 5 {
-            roman.push_str("V");
-            decimal -= 5;
-        }
-
-        else if decimal >= 4 {
-            roman.push_str("IV");
-            decimal -= 4;
-        }
-        
-        else if decimal >= 1 {
-            roman.push('I');
-            decimal -= 1;
-        }
-      
-        else {
-            return "no-value".to_owned()
-        }    
+    while decimal > 0 {        
+        for (level, numerals) in table.iter() {
+            if decimal >= *level {
+                roman.push_str(numerals);
+                decimal -= level;                
+                break;
+            }
+        }                
     }
 
     roman
