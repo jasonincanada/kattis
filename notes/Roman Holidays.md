@@ -74,8 +74,8 @@ $ head 1-999.txt
 Split into sorted numbers before and after M in lexicographic order:
 
 ```bash
-$ cut -d' ' -f 2 1-999.txt | awk '/^[CDIL]/ { print }' | sort > before-M.txt
-$ cut -d' ' -f 2 1-999.txt | awk '/^[VX]/   { print }' | sort >  after-M.txt
+$ cut -d' ' -f 2 1-999.txt | awk '/^[CDIL]/ { print }' | sort    > before-M.txt
+$ cut -d' ' -f 2 1-999.txt | awk '/^[VX]/   { print }' | sort -r >  after-M.txt
 
 # quick sanity check to make sure we still have all 999 numbers across the two files:
 $ wc -l {before,after}-M.txt
