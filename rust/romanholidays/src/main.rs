@@ -1,7 +1,6 @@
 /*  https://open.kattis.com/problems/romanholidays  */
 
 use std::io::BufRead;
-use std::collections::HashMap;
 
 fn main() {
 
@@ -25,8 +24,8 @@ fn main() {
 }
 
 fn do_case(number:    u32,
-           before_m: &HashMap<String, usize>,
-           after_m:  &HashMap<String, usize>) -> Result {
+           before_m: &[&'static str],
+           after_m:  &[&'static str]) -> Result {
 
     let thousands = (number / 1000) as usize;
     let remainder = (number % 1000) as u32;
@@ -42,14 +41,14 @@ fn do_case(number:    u32,
 
     // if the first non-M letter is a letter "less" than M (alphabetically less)
     if "CDIL".contains(first) {
-        let offset = *before_m.get(&roman).unwrap();
+        let offset = before_m.binary_search_by(|r| (*r).cmp(&roman)).unwrap();
 
         Result::FromStart(thousands * (before_m.len() + 1) + offset + 1)
     } 
     
     // the first non-M letter is greater than M
     else {
-        let offset = *after_m.get(&roman).unwrap();
+        let offset = after_m.binary_search_by(|r| (*r).cmp(&roman).reverse()).unwrap();
 
         Result::FromEnd(thousands * after_m.len() + offset + 1)
     }
@@ -180,7 +179,7 @@ mod tests {
 
 /* Static data pre-generated to save the cost of sorting the lists of roman numbers from 1-999 */
 
-fn get_before_m() -> HashMap<String, usize> {
+fn get_before_m() -> Vec<&'static str> {
     let before_m = vec![
         "C",
         "CC",
@@ -1129,10 +1128,10 @@ fn get_before_m() -> HashMap<String, usize> {
         "LXXXVIII",
     ];
 
-    map_with_index(before_m)    
+    before_m
 }
 
-fn get_after_m() -> HashMap<String, usize> {
+fn get_after_m() -> Vec<&'static str> {
     let after_m = vec![
         "XXXVIII",
         "XXXVII",
@@ -1190,7 +1189,7 @@ fn get_after_m() -> HashMap<String, usize> {
         "V",
     ];
     
-    map_with_index(after_m)
+    after_m
 }
 
 fn map_with_index(numerals: Vec<&str>) -> HashMap<String, usize> {

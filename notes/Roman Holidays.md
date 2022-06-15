@@ -89,3 +89,8 @@ Get it into Rust as static lists:
 ```bash
 $ ./generate_vecs.sh
 ```
+
+
+## Revision Notes
+
+- We don't need to use a `HashMap` for this since we're looking for the index of an element in a *sorted* list. Rust's `Vec` conveniently implements a [binary_search()](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.binary_search) method, so we can still achieve the O(log n) lookups we were using the `HashMap` for
