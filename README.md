@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+14 Jun | [5.0](https://open.kattis.com/problems/romanholidays) | [romanholidays.rs](rust/romanholidays/src/main.rs) | Locate a roman number in the ordered list of them
 3 Jun | [2.4](https://open.kattis.com/problems/tictactoecounting) | [tictactoe.rs](rust/tictactoe/src/main.rs) | Count wins in Tic Tac Toe from a given board
 29 May | [4.9](https://open.kattis.com/problems/addemup) | [addemup.rs](rust/addemup/src/main.rs) | Find two cards that sum to x, some can rotate
 21 May | [2.9](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers2.rs](rust/spumbers2/src/main.rs) | Rewrite of spumbers to avoid cloning

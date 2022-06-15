@@ -2,8 +2,6 @@
 
 */
 
-#![allow(dead_code, unused_variables)]
-
 use std::io::BufRead;
 use std::collections::HashMap;
 
@@ -21,16 +19,49 @@ fn main() {
       for line in lines {
           let number = line.unwrap().parse().unwrap();
 
-          match do_case(number) {
-            Some(ordinal) => println!("{}", ordinal),
-            None          => println!("-1")
+          match do_case(number, &before_m, &after_m) {
+            Result::FromStart(offset) => println!( "{}", offset),
+            Result::FromEnd(offset)   => println!("-{}", offset)
         }
       }
 }
 
-fn do_case(number: u32) -> Option<u32> {
-  
-    None
+fn do_case(number:    u32,
+           before_m: &HashMap<String, usize>,
+           after_m:  &HashMap<String, usize>) -> Result {
+
+    let thousands = (number / 1000) as usize;
+    let remainder = (number % 1000) as u32;
+
+    // if we have an even multiple of 1000, a basic calculation suffices instead of a lookup
+    if remainder == 0 {
+        return Result::FromStart(before_m.len() * thousands
+                                                + thousands)
+    }
+    
+    let roman = roman(remainder);
+    let first = roman.chars().next().unwrap();
+
+    // if the first non-M letter is a letter "less" than M (alphabetically less)
+    if "CDIL".contains(first) {
+        let offset = *before_m.get(&roman).unwrap();
+
+        Result::FromStart(thousands * (before_m.len() + 1) + offset + 1)
+    } 
+    
+    // the first non-M letter is greater than M
+    else {
+        let offset = *after_m.get(&roman).unwrap();
+
+        Result::FromEnd(thousands * after_m.len() + (after_m.len() - offset))
+    }
+
+}
+
+#[derive(Debug, PartialEq)]
+enum Result {
+    FromStart(usize),
+    FromEnd(usize)
 }
 
 fn print_from(from: u32, to: u32) {
@@ -76,11 +107,41 @@ fn roman(mut decimal: u32) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-/*
-    #[test] fn test_sample_1() { assert_eq!(do_case(100), Some(1)); }
-    #[test] fn test_sample_2() { assert_eq!(do_case(101), Some(302)); }
-    #[test] fn test_sample_3() { assert_eq!(do_case(38), None); }
- */
+
+    #[test]
+    fn test_do_case()
+    {
+        let before_m = get_before_m();
+        let after_m  = get_after_m();
+
+        // offset from start of ordering
+        assert_eq!(do_case(100, &before_m, &after_m), Result::FromStart(1));        // C
+        assert_eq!(do_case(200, &before_m, &after_m), Result::FromStart(2));        // CC
+        assert_eq!(do_case(101, &before_m, &after_m), Result::FromStart(302));      // CI
+        assert_eq!(do_case(102, &before_m, &after_m), Result::FromStart(303));      // CII
+        assert_eq!(do_case(188, &before_m, &after_m), Result::FromStart(346));      // CLXXXVIII
+        assert_eq!(do_case(900, &before_m, &after_m), Result::FromStart(346+1));    // CM
+        assert_eq!(do_case(901, &before_m, &after_m), Result::FromStart(346+2));    // CMI
+        assert_eq!(do_case(500, &before_m, &after_m), Result::FromStart(501));      // D
+        assert_eq!(do_case(1  , &before_m, &after_m), Result::FromStart(901));      // I
+        assert_eq!(do_case(2  , &before_m, &after_m), Result::FromStart(902));      // II
+        assert_eq!(do_case(87 , &before_m, &after_m), Result::FromStart(944));      // LXXXVII
+        assert_eq!(do_case(88 , &before_m, &after_m), Result::FromStart(945));      // LXXXVIII
+
+        // M
+        assert_eq!(do_case(1000, &before_m, &after_m), Result::FromStart(before_m.len() + 1));
+        assert_eq!(do_case(1100, &before_m, &after_m), Result::FromStart(before_m.len() + 2)); // MC
+
+        // MM
+        assert_eq!(do_case(2000, &before_m, &after_m), Result::FromStart(before_m.len() + before_m.len() + 1 + 1));
+
+        // offset from end of ordering
+        assert_eq!(do_case(1037, &before_m, &after_m), Result::FromEnd(after_m.len() + 2));  // MXXXVII
+        assert_eq!(do_case(1038, &before_m, &after_m), Result::FromEnd(after_m.len() + 1));  // MXXXVIII
+        assert_eq!(do_case(5   , &before_m, &after_m), Result::FromEnd(after_m.len()    ));  // V
+        assert_eq!(do_case(37  , &before_m, &after_m), Result::FromEnd(2));                  // XXXVII
+        assert_eq!(do_case(38  , &before_m, &after_m), Result::FromEnd(1));                  // XXXVIII    
+    }
 
     #[test]
     fn test_roman() {
@@ -127,7 +188,7 @@ mod tests {
 
 /* Static data pre-generated to save the cost of sorting the lists of roman numbers from 1-999 */
 
-fn get_before_m() -> HashMap<String, u32> {
+fn get_before_m() -> HashMap<String, usize> {
     let before_m = vec![
         "C",
         "CC",
@@ -1079,7 +1140,7 @@ fn get_before_m() -> HashMap<String, u32> {
     map_with_index(before_m)    
 }
 
-fn get_after_m() -> HashMap<String, u32> {
+fn get_after_m() -> HashMap<String, usize> {
     let after_m = vec![
         "V",
         "VI",
@@ -1140,11 +1201,11 @@ fn get_after_m() -> HashMap<String, u32> {
     map_with_index(after_m)
 }
 
-fn map_with_index(numerals: Vec<&str>) -> HashMap<String, u32> {
+fn map_with_index(numerals: Vec<&str>) -> HashMap<String, usize> {
     let mut map = HashMap::new();
     
     for (idx, val) in numerals.iter().enumerate() {
-        map.insert((*val).to_owned(), idx as u32);
+        map.insert((*val).to_owned(), idx);
     }
 
     map
