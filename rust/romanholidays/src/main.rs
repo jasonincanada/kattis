@@ -1,29 +1,27 @@
-/*  https://open.kattis.com/problems/romanholidays
-
-*/
+/*  https://open.kattis.com/problems/romanholidays  */
 
 use std::io::BufRead;
 use std::collections::HashMap;
 
 fn main() {
 
-      // parse the problem input
-      let stdin  = std::io::stdin();
-      let mut lines  = stdin.lock().lines(); 
-      
-      lines.next();
+    let     stdin  = std::io::stdin();
+    let mut lines  = stdin.lock().lines(); 
 
-      let before_m = get_before_m();
-      let after_m  = get_after_m();
+    // skip the first line
+    lines.next();
 
-      for line in lines {
-          let number = line.unwrap().parse().unwrap();
+    let before_m = get_before_m();
+    let after_m  = get_after_m();
 
-          match do_case(number, &before_m, &after_m) {
+    for line in lines {
+        let number = line.unwrap().parse().unwrap();
+
+        match do_case(number, &before_m, &after_m) {
             Result::FromStart(offset) => println!( "{}", offset),
             Result::FromEnd(offset)   => println!("-{}", offset)
         }
-      }
+    }
 }
 
 fn do_case(number:    u32,
@@ -62,12 +60,6 @@ fn do_case(number:    u32,
 enum Result {
     FromStart(usize),
     FromEnd(usize)
-}
-
-fn print_from(from: u32, to: u32) {
-    for number in from..=to {
-        println!("{} {}", number, roman(number));
-    }
 }
 
 fn roman(mut decimal: u32) -> String {
