@@ -1191,13 +1191,3 @@ fn get_after_m() -> Vec<&'static str> {
     
     after_m
 }
-
-fn map_with_index(numerals: Vec<&str>) -> HashMap<String, usize> {
-    let mut map = HashMap::new();
-    
-    for (idx, val) in numerals.iter().enumerate() {
-        map.insert((*val).to_owned(), idx);
-    }
-
-    map
-}
