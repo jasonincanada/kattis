@@ -1,6 +1,5 @@
 ---
 name: Roman Holidays
-slug: romanholidays
 url: https://open.kattis.com/problems/romanholidays
 difficulty: 4.9
 ---

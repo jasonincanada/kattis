@@ -1,6 +1,5 @@
 ---
 name: Add ''Em Up!
-slug: addemup
 url: https://open.kattis.com/problems/addemup
 difficulty: 4.9
 ---
