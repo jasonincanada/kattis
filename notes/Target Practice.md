@@ -73,7 +73,7 @@ The more interesting case is when we do have a point not on our original line, t
 
 ### Step 2 - Find Collinear Point
 
-Next, find a point collinear with any one of the sides of the triangle. If we have points unaccounted for that are not collinear with one of the sides of the triangle, we'll necessarily need to draw more than two lines to cover all the points, so it's a failure case and we can stop.
+Next, find a point collinear with any one of the sides of the triangle. If none of the remaining points are collinear, we'll necessarily need to draw more than two lines to cover all the points, so it's a failure case and we can stop.
 
 Say we did find a point $R$ (for red). The side the point is collinear with is identified as $MN$, and the other vertex of the triangle we identify as point $O$, as below:
 

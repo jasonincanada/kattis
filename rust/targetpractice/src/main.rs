@@ -53,9 +53,9 @@ fn do_case(points: Vec<Point>) -> Result {
                                               || is_collinear(&ac, p)
                                               || is_collinear(&bc, p)));
 
-        // figure out which side that was, and the third vertex of the triangle
         if let Some(red) = red {
-            
+
+            // figure out which side that was, and the third vertex of the triangle            
             let side   : &Side;
             let vertex : &Point;
 
@@ -97,8 +97,14 @@ fn do_case(points: Vec<Point>) -> Result {
                 return Result::Success
             }
         }
+        
+        else {
 
-        Result::Failure
+            // there are no points collinear with any side of the triangle. but since we know we
+            // have at least 5 points, we know there is a point that causes at least one more line
+            // to be drawn in addition to the two required to cover the triangle's vertices
+            Result::Failure
+        }
     } else {    
         
         // all points were collinear with AB, meaning a single line can pass through all points
