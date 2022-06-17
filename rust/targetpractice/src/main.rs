@@ -164,6 +164,7 @@ fn slope(p: &Point, q: &Point) -> Slope {
     }
 }
 
+// this is the slope formula method from: https://www.vedantu.com/maths/collinear-points
 fn is_collinear(side: &Side,
                 p:    &Point) -> bool
 {    
