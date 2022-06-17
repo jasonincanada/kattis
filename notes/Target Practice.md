@@ -25,7 +25,7 @@ Try drawing one line through the remaining blue points!
 
 ## Algorithm
 
-**Summary**: Iterate over points until we have a triangle. Pick a fourth point, R. In the success case this point must be collinear with one of the sides MN of the triangle. Then every other point must be collinear with side MN or the line from point R to vertex O of the triangle not belonging to side MN. If so, it's a success case, otherwise a failure
+**Summary**: Iterate over points until we have a triangle. Pick a fourth point, R. In the success case this point must be collinear with one of the sides MN of the triangle. Then every other point must be collinear with side MN or the line from a new point B (which is not collinear with MN), to vertex O of the triangle not belonging to side MN. If so, it's a success case, otherwise a failure
 
 
 ### Notes
