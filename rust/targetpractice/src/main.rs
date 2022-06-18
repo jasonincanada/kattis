@@ -89,12 +89,12 @@ fn do_case(points: Vec<Point>) -> Result {
                                           && !is_collinear(&line, p));
 
                 if rogue.is_none() {
-                    return Result::Success
+                    Result::Success
                 } else {
-                    return Result::Failure
+                    Result::Failure
                 }
             } else {
-                return Result::Success
+                Result::Success
             }
         }
         
