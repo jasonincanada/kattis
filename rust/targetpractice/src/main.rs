@@ -226,4 +226,39 @@ mod tests {
         assert_eq!(true,  is_collinear(&Side::new(&p00, &p11), &p22));
         assert_eq!(false, is_collinear(&Side::new(&p00, &p11), &p23));
     }
+
+    #[test]
+    fn test_cube_with_5th_point()
+    {
+        let points = vec![
+            // line 1
+            Point { x: 0, y: 0 },
+            Point { x: 1, y: 0 },
+
+            // line 2
+            Point { x: 0, y: 1 },
+            Point { x: 1, y: 1 },
+            Point { x: 2, y: 1 },
+        ];
+
+        // this should pass but it doesn't, the code doesn't find a point collinear to triangle MNO
+        assert_eq!(Result::Success, do_case(points));
+    }
+
+    #[test]
+    fn test_cube()
+    {
+        let points = vec![
+            // line 1
+            Point { x: 0, y: 0 },
+            Point { x: 1, y: 0 },
+
+            // line 2
+            Point { x: 0, y: 1 },
+            Point { x: 1, y: 1 },
+        ];
+
+        // this one passes only because the first check in do_case() for <= 4 points returns Success
+        assert_eq!(Result::Success, do_case(points));
+    }
 }

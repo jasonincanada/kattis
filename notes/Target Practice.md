@@ -106,3 +106,12 @@ until B not collinear with MN
 
 all points are collinear with MN or OB
 ```
+
+
+## Incorrect
+
+The algorithm is not correct, I found a successful test case that the code nonetheless reports as a failure. It's surprising that it got past the kattis tests; there are 26 of them for this challenge, and usually the tests are pretty thoroughly thought out to catch corner cases. This isn't even a complicated test case, here's it is:
+
+![[targetpractice-test-fail.png]]
+
+The points are given to the code starting with the bottom left, then bottom right. So the bottom two are picked as $a$ and $b$ by the code to form the triangle $abc$ with the top left point (triangle $MNO$ in the above image). The second step in the algorithm looks for a point collinear to a side of the triangle, but it doesn't find one and therefore concludes the points cannot be covered with two lines, though clearly they can, shown by the red and blue lines in the example above
