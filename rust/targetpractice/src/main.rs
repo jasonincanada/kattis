@@ -145,7 +145,6 @@ struct Point {
 }
 
 struct Side {
-    p:     Point,
     q:     Point,
     slope: Slope,
 }
@@ -153,7 +152,6 @@ struct Side {
 impl Side {
     fn new(p: &Point, q: &Point) -> Self {
         Side {
-            p: (*p).clone(),
             q: (*q).clone(),
             slope: slope(p, q)
         }
