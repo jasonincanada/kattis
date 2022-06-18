@@ -115,3 +115,20 @@ The algorithm is not correct, I found a successful test case that the code nonet
 ![[targetpractice-test-fail.png]]
 
 The points are given to the code starting with the bottom left, then bottom right. So the bottom two are picked as $a$ and $b$ by the code to form the triangle $abc$ with the top left point (triangle $MNO$ in the above image). The second step in the algorithm looks for a point collinear to a side of the triangle, but it doesn't find one and therefore concludes the points cannot be covered with two lines, though clearly they can, shown by the red and blue lines in the example above
+
+### Fix
+
+The fix for this was straightforward. If there are no points collinear to MNO, it can still be a successful test case as long as all the remaining points form a line and the line includes one of the vertices of the triangle. The runtime is still 0.01s so we are still tied for first. I will reach out to the kattis team in case they want to add my new test case and re-run the submissions
+
+#### Sample Input 3
+
+My code initially failed on the following input until I found the fix:
+
+```text
+5
+0 0
+1 0
+0 1
+1 1
+2 1
+```

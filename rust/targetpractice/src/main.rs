@@ -100,9 +100,25 @@ fn do_case(points: Vec<Point>) -> Result {
         
         else {
 
-            // there are no points collinear with any side of the triangle. but since we know we
-            // have at least 5 points, we know there is a point that causes at least one more line
-            // to be drawn in addition to the two required to cover the triangle's vertices
+            // there are no points collinear with any side of the triangle. it is still a success case
+            // if all the other points are in one line containing one of the triangle's vertices
+            let d = points.iter()
+                          .skip(2)
+                          .find(|&p| *p != *c)
+                          .unwrap();
+
+            for vertex in vec![a, b, c].iter() {
+                let side = Side::new(vertex, d);
+
+                // if all remaining points are collinear with this side it's a success case
+                if points.iter()
+                         .skip(2)
+                         .all(|p| is_collinear(&side, p))
+                {
+                    return Result::Success
+                }
+            }
+            
             Result::Failure
         }
     } else {    
@@ -241,7 +257,7 @@ mod tests {
             Point { x: 2, y: 1 },
         ];
 
-        // this should pass but it doesn't, the code doesn't find a point collinear to triangle MNO
+        // this test now passes when the code doesn't find a point collinear to triangle MNO
         assert_eq!(Result::Success, do_case(points));
     }
 
@@ -257,8 +273,7 @@ mod tests {
             Point { x: 0, y: 1 },
             Point { x: 1, y: 1 },
         ];
-
-        // this one passes only because the first check in do_case() for <= 4 points returns Success
+        
         assert_eq!(Result::Success, do_case(points));
     }
 }
