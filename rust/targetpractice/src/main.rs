@@ -34,7 +34,7 @@ fn do_case(points: Vec<Point>) -> Result {
     let a = &points[0];
     let b = &points[1];
 
-    let ab = Side::new(a, b);
+    let ab = Line::new(a, b);
     
     // find the first point not collinear with the line AB, to form a triangle ABC
     let c = points.iter()
@@ -43,8 +43,8 @@ fn do_case(points: Vec<Point>) -> Result {
 
     if let Some(c) = c {
 
-        let ac = Side::new(a, c);
-        let bc = Side::new(b, c);
+        let ac = Line::new(a, c);
+        let bc = Line::new(b, c);
 
         // find a point that is collinear with one of the sides of the triangle
         let red = points.iter()
@@ -56,7 +56,7 @@ fn do_case(points: Vec<Point>) -> Result {
         if let Some(red) = red {
 
             // figure out which side that was, and the third vertex of the triangle            
-            let side   : &Side;
+            let side   : &Line;
             let vertex : &Point;
 
             if is_collinear(&ab, red) {
@@ -78,7 +78,7 @@ fn do_case(points: Vec<Point>) -> Result {
                              .find(|&p| p != vertex && !is_collinear(side, p));
 
             if let Some(blue) = blue {
-                let line = Side::new(blue, vertex);
+                let line = Line::new(blue, vertex);
 
                 // at this point, if this is a successful test case, then every point must lie on
                 // the line MN or the line from the blue point to the triangle vertex. try to find
@@ -108,12 +108,12 @@ fn do_case(points: Vec<Point>) -> Result {
                           .unwrap();
 
             for vertex in vec![a, b, c].iter() {
-                let side = Side::new(vertex, d);
+                let line = Line::new(vertex, d);
 
-                // if all remaining points are collinear with this side it's a success case
+                // if all remaining points are collinear with this line it's a success case
                 if points.iter()
                          .skip(2)
-                         .all(|p| is_collinear(&side, p))
+                         .all(|p| is_collinear(&line, p))
                 {
                     return Result::Success
                 }
@@ -144,14 +144,15 @@ struct Point {
     y: i32
 }
 
-struct Side {
+struct Line {
     q:     Point,
     slope: Slope,
 }
 
-impl Side {
+// a line can be described either with two points or with one point and a slope
+impl Line {
     fn new(p: &Point, q: &Point) -> Self {
-        Side {
+        Line {
             q: (*q).clone(),
             slope: slope(p, q)
         }
@@ -179,10 +180,10 @@ fn slope(p: &Point, q: &Point) -> Slope {
 }
 
 // this is the slope formula method from: https://www.vedantu.com/maths/collinear-points
-fn is_collinear(side: &Side,
+fn is_collinear(line: &Line,
                 p:    &Point) -> bool
 {    
-    side.slope == slope(&side.q, p)
+    line.slope == slope(&line.q, p)
 }
 
 
@@ -237,8 +238,8 @@ mod tests {
         let p22 = Point { x: 2, y: 2 };
         let p23 = Point { x: 2, y: 3 };
 
-        assert_eq!(true,  is_collinear(&Side::new(&p00, &p11), &p22));
-        assert_eq!(false, is_collinear(&Side::new(&p00, &p11), &p23));
+        assert_eq!(true,  is_collinear(&Line::new(&p00, &p11), &p22));
+        assert_eq!(false, is_collinear(&Line::new(&p00, &p11), &p23));
     }
 
     #[test]
