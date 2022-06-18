@@ -105,7 +105,10 @@ fn do_case(points: Vec<Point>) -> Result {
             let d = points.iter()
                           .skip(2)
                           .find(|&p| p != c)
-                          .unwrap();
+                          .unwrap();    // this unwrap is safe because we check at the start of
+                                        // this method for at least 4 points, and we've only
+                                        // skipped over two (a and b) and avoided a third one (c)
+                                        // in this iter, which guarantees we have at least 1 left
 
             for vertex in vec![a, b, c].iter() {
                 let line = Line::new(vertex, d);
