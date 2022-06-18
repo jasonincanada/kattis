@@ -145,7 +145,7 @@ struct Point {
 }
 
 struct Line<'a> {
-    q:     &'a Point,
+    point: &'a Point,
     slope: Slope,
 }
 
@@ -153,7 +153,7 @@ struct Line<'a> {
 impl<'a> Line<'a> {
     fn new(p: &Point, q: &'a Point) -> Self {
         Line {
-            q,
+            point: q,
             slope: slope(p, q)
         }
     }
@@ -183,7 +183,7 @@ fn slope(p: &Point, q: &Point) -> Slope {
 fn is_collinear(line: &Line,
                 p:    &Point) -> bool
 {    
-    line.slope == slope(line.q, p)
+    line.slope == slope(line.point, p)
 }
 
 
