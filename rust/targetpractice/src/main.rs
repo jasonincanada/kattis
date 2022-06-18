@@ -49,9 +49,9 @@ fn do_case(points: Vec<Point>) -> Result {
         // find a point that is collinear with one of the sides of the triangle
         let red = points.iter()
                         .skip(2)
-                        .find(|&p| *p != *c && ( is_collinear(&ab, p)
-                                              || is_collinear(&ac, p)
-                                              || is_collinear(&bc, p)));
+                        .find(|&p| p != c && ( is_collinear(&ab, p)
+                                            || is_collinear(&ac, p)
+                                            || is_collinear(&bc, p)));
 
         if let Some(red) = red {
 
@@ -75,7 +75,7 @@ fn do_case(points: Vec<Point>) -> Result {
             // find a point that is not collinear with our triangle side
             let blue = points.iter()
                              .skip(2)
-                             .find(|&p| *p != *vertex && !is_collinear(side, p));
+                             .find(|&p| p != vertex && !is_collinear(side, p));
 
             if let Some(blue) = blue {
                 let line = Side::new(blue, vertex);
@@ -104,7 +104,7 @@ fn do_case(points: Vec<Point>) -> Result {
             // if all the other points are in one line containing one of the triangle's vertices
             let d = points.iter()
                           .skip(2)
-                          .find(|&p| *p != *c)
+                          .find(|&p| p != c)
                           .unwrap();
 
             for vertex in vec![a, b, c].iter() {
