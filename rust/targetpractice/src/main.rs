@@ -144,16 +144,16 @@ struct Point {
     y: i32
 }
 
-struct Line {
-    q:     Point,
+struct Line<'a> {
+    q:     &'a Point,
     slope: Slope,
 }
 
 // a line can be described either with two points or with one point and a slope
-impl Line {
-    fn new(p: &Point, q: &Point) -> Self {
+impl<'a> Line<'a> {
+    fn new(p: &Point, q: &'a Point) -> Self {
         Line {
-            q: (*q).clone(),
+            q,
             slope: slope(p, q)
         }
     }
@@ -183,7 +183,7 @@ fn slope(p: &Point, q: &Point) -> Slope {
 fn is_collinear(line: &Line,
                 p:    &Point) -> bool
 {    
-    line.slope == slope(&line.q, p)
+    line.slope == slope(line.q, p)
 }
 
 
