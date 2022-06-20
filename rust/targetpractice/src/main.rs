@@ -115,7 +115,8 @@ fn do_case(points: Vec<Point>) -> Result {
 
                 // if all remaining points are collinear with this line it's a success case
                 if points.iter()
-                         .skip(2)
+                         .skip(2)             // skip a, b
+                         .filter(|&p| p != c) // skip c
                          .all(|p| is_collinear(&line, p))
                 {
                     return Result::Success
@@ -276,6 +277,34 @@ mod tests {
             Point { x: 1, y: 1 },
         ];
         
+        assert_eq!(Result::Success, do_case(points));
+    }
+
+    #[test]
+    fn test_pincer()
+    {
+        let points = vec![
+            Point { x: 0, y: 0 },
+            Point { x: 1, y: 0 },
+            Point { x: 0, y: 1 },
+            Point { x: -1, y: -1 },
+            Point { x: -2, y: -2 },
+        ];
+
+        assert_eq!(Result::Success, do_case(points));
+    }
+
+    #[test]
+    fn test_down_from_b()
+    {
+        let points = vec![
+            Point { x: 0, y: 0 },
+            Point { x: 1, y: 0 },
+            Point { x: 0, y: 1 },
+            Point { x: 1, y: -1 },
+            Point { x: 2, y: -2 },
+        ];
+
         assert_eq!(Result::Success, do_case(points));
     }
 }
