@@ -73,11 +73,15 @@ The more interesting case is when we do have a point not on our original line, t
 
 ### Step 2 - Find Collinear Point
 
-Next, find a point collinear with any one of the sides of the triangle. If none of the remaining points are collinear, we'll necessarily need to draw more than two lines to cover all the points, so it's a failure case and we can stop.
+Next, find a point collinear with any one of the sides of the triangle. If there isn't one, go to Step 2b.
 
 Say we did find a point $R$ (for red). The side the point is collinear with is identified as $MN$, and the other vertex of the triangle we identify as point $O$, as below:
 
 ![[tp-2.png]]
+
+### Step 2b - No Collinear Point
+
+If none of the remaining points are collinear to a triangle edge, it can still be a success case if the non-triangle points are all collinear to one of the triangle's vertices. This can be seen in the above image if you imagine the only two red points are the triangle vertices M and N.
 
 ### Step 3 - Find Non-collinear Point
 
@@ -98,15 +102,18 @@ loop
   R <- next point
 until R is collinear with side MN of triangle T
 
-O <- the point of triangle T other than M and N
+if R
+    O <- the point of triangle T other than M and N
 
-loop
-  B <- next point
-until B not collinear with MN
+    loop
+      B <- next point
+    until B not collinear with MN
 
-all points are collinear with MN or OB
+    all points are collinear with MN or OB
+else
+    all non-triangle points are collinear with a triangle point
+end
 ```
-
 
 ## Incorrect
 
