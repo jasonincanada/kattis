@@ -157,7 +157,7 @@ flowchart TB
 
 ## Incorrect
 
-The algorithm is not correct, I found a successful test case that the code nonetheless reports as a failure. It's surprising that it got past the kattis tests; there are 26 of them for this challenge, and usually the tests are pretty thoroughly thought out to catch corner cases. This isn't even a complicated test case, here's it is:
+The initial attempt at this algorithm was not correct, I found a successful test case that the code nonetheless reports as a failure. It's surprising that it got past the kattis tests; there are 26 of them for this challenge, and usually the tests are pretty thoroughly thought out to catch corner cases. This isn't even a complicated test case, here's it is:
 
 ![[targetpractice-test-fail.png]]
 
