@@ -127,11 +127,11 @@ flowchart TB
         F                    -->|Triangle MNO| B
     end
 
-	 B{Find collinear<br/>point} -->|No point| 2B
-	 B                           -->|Point R| R
+	B{Find collinear<br/>point} -->|No point| 2B
+	B                           -->|Point R| R
     
     subgraph Step 2b - No Collinear Point
-        2B{All points collinear<br/>to any vertex} -->|Yes| S2[Success]
+        2B{All points collinear<br/>to the same vertex} -->|Yes| S2[Success]
     end
 
     2B -->|No| FL[Failure]
