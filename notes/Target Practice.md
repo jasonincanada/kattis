@@ -115,6 +115,46 @@ else
 end
 ```
 
+## Flowchart
+
+This is a [mermaid flowchart](https://mermaid-js.github.io/mermaid/#/flowchart) of the fixed algorithm:
+
+```mermaid
+flowchart TB
+    
+    subgraph Step 1/2 - Find Triangle and Point
+        F{Find<br/>triangle} -->|No triangle| S1[Success]
+        F                    -->|Triangle MNO| B
+    end
+
+	 B{Find collinear<br/>point} -->|No point| 2B
+	 B                           -->|Point R| R
+    
+    subgraph Step 2b - No Collinear Point
+        2B{All points collinear<br/>to any vertex} -->|Yes| S2[Success]
+    end
+
+    2B -->|No| FL[Failure]
+    
+    subgraph Step 3 - Find Non-collinear Point
+        R{Next point not<br/>collinear to MN}    -->|Point B| B2
+        R                                        -->|No point| S3[Success]
+        B2{All points collinear<br/>to MN or OB} -->|Yes| S4[Success]
+    end
+    
+    B2 -->|No| FL
+    
+    
+    %% Styling
+    classDef successCase fill:#CFC;
+    class S1,S2,S3,S4 successCase;
+    
+    classDef failureCase fill:#FAA;
+    class FL failureCase;
+    
+```
+
+
 ## Incorrect
 
 The algorithm is not correct, I found a successful test case that the code nonetheless reports as a failure. It's surprising that it got past the kattis tests; there are 26 of them for this challenge, and usually the tests are pretty thoroughly thought out to catch corner cases. This isn't even a complicated test case, here's it is:
