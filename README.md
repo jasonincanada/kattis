@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+4 Jul | [tbd](https://open.kattis.com/problems/klockan2) | [klockan2.rs](rust/klockan2/src/main.rs) | Map angle between hour/min hands to time on clock
 4 Jul | [tbd](https://open.kattis.com/problems/busskortet) | [busskortet.rs](rust/busskortet/src/main.rs) | Count number of payments for a bus card
 17 Jun | [4.8](https://open.kattis.com/problems/targetpractice) | [targetpractice.rs](rust/targetpractice/src/main.rs) | Draw two lines through all points if possible
 14 Jun | [5.0](https://open.kattis.com/problems/romanholidays) | [romanholidays.rs](rust/romanholidays/src/main.rs) | Locate a roman number in the ordered list of them
