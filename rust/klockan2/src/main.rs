@@ -22,11 +22,12 @@ fn do_case(mut angle: i32) -> String {
         
     angle += 3600 * index as i32;
     
-    let hourmin = angle / 55;
-    let hour    = hourmin / 60;
-    let min     = hourmin % 60;
+    let total_minutes = angle / 55;
     
-    format!("{:02}:{:02}", hour, min)
+    let hours = total_minutes / 60;
+    let mins  = total_minutes % 60;
+    
+    format!("{:02}:{:02}", hours, mins)
 }
 
 
