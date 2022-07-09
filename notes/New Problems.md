@@ -1,3 +1,16 @@
+## 9 July 2022
+
+[Palindrome-Free Numbers](https://open.kattis.com/problems/palindromefree)
+- Detect palindromes in large ranges of numbers (up to $10^{18}$)
+- No chance of brute force, need to find a pattern
+
+[Going to School](https://open.kattis.com/problems/skolvagen)
+- I think this has a dynamic programming solution
+
+[MeTube](https://open.kattis.com/problems/dutub)
+- Looks like a good optimization problem
+
+
 ## 8 July 2022
 
 ### Chocolate Division / Board Game
