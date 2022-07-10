@@ -17,7 +17,7 @@ struct Board {
 
 impl Board {
     fn new(n: i32, m: i32) -> Self {
-        // make sure n < m during construction
+        // make sure n <= m during construction
         if n > m {
             Board { n: m, m: n }
         } else {
