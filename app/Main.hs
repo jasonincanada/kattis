@@ -2,8 +2,8 @@
 
 module Main where
 
-import Pivot
+import Bradspelet
 
 main :: IO ()
-main = interact pivot
+main = interact bradspelet
 

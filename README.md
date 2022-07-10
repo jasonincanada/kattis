@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+9 Jul | [tbd](https://open.kattis.com/problems/bradspelet) | [Bradspelet.hs](src/Bradspelet.hs) | Determine the winner of a board-cutting game
 5 Jul | [tbd](https://open.kattis.com/problems/fibonaccisum) | [fibonaccisum.rs](rust/fibonaccisum/src/main.rs) | Find fibonacci numbers adding to a sum
 4 Jul | [tbd](https://open.kattis.com/problems/klockan2) | [klockan2.rs](rust/klockan2/src/main.rs) | Map angle between hour/min hands to time on clock
 4 Jul | [tbd](https://open.kattis.com/problems/busskortet) | [busskortet.rs](rust/busskortet/src/main.rs) | Count number of payments for a bus card

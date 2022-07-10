@@ -19,6 +19,7 @@ import DamagedEquation (damagedequation)
 import TrainBoarding (trainboarding)
 import InterviewQueue (interviewqueue, step, Result(..))
 import Pivot         (pivot)
+import Bradspelet    (bradspelet, cuts)
 
 import qualified InterviewQueue2 as IQ2
 
@@ -437,4 +438,63 @@ main = hspec $ do
       \(testfile, result) ->
         it testfile $ (pivot <$> readFile (path ++ testfile))
                         >>= (`shouldBe` result)
+
+
+  describe "Bradspelet" $ do
+
+    -- sample inputs
+    it "bradspelet 2 3" $ bradspelet "2 3" `shouldBe` "A"
+    it "bradspelet 2 6" $ bradspelet "2 6" `shouldBe` "B"
+    it "bradspelet 6 8" $ bradspelet "6 8" `shouldBe` "A"
+
+    -- probing inputs
+    it "bradspelet 1 1" $ bradspelet "1 1" `shouldBe` "B"
+    it "bradspelet 1 2" $ bradspelet "1 2" `shouldBe` "A"
+    it "bradspelet 2 2" $ bradspelet "2 2" `shouldBe` "B"
+    it "bradspelet 1 3" $ bradspelet "1 3" `shouldBe` "B"
+    it "bradspelet 3 3" $ bradspelet "3 3" `shouldBe` "B"
+    it "bradspelet 3 2" $ bradspelet "3 2" `shouldBe` "A"
+
+    -- XX
+    it "cuts 1 2" $ cuts 1 2 `shouldBe` [((1,1), (1,1))]
+
+    -- XX
+    -- XX
+    it "cuts 2 2" $ cuts 2 2 `shouldBe` [
+                                          -- XX XX
+                                          ((1,2), (1,2))
+                                        ]
+
+    -- XXX
+    -- XXX
+    it "cuts 2 3" $ cuts 2 3 `shouldBe` [
+                                          -- XXX XXX
+                                          ((1,3), (1,3)),
+
+                                          -- X XX
+                                          -- X XX
+                                          ((2,1), (2,2))
+                                        ]
+
+    -- XX
+    -- XX
+    -- XX
+    it "cuts 3 2" $ cuts 3 2 `shouldBe` [
+                                          -- XXX XXX
+                                          ((1,3), (1,3)),
+
+                                          -- X XX
+                                          -- X XX
+                                          ((2,1), (2,2))
+                                        ]
+
+    -- XXX
+    -- XXX
+    -- XXX
+    it "cuts 3 3" $ cuts 3 3 `shouldBe` [
+                                          -- XXX XXX
+                                          --     XXX
+                                          ((1,3), (2,3))
+                                        ]
+
 
