@@ -2,8 +2,8 @@
 
 module Main where
 
-import Bradspelet
+import Skolvagen
 
 main :: IO ()
-main = interact bradspelet
+main = interact skolvagen
 

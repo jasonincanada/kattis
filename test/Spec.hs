@@ -20,6 +20,7 @@ import TrainBoarding (trainboarding)
 import InterviewQueue (interviewqueue, step, Result(..))
 import Pivot         (pivot)
 import Bradspelet    (bradspelet, cuts)
+import Skolvagen     (skolvagen)
 
 import qualified InterviewQueue2 as IQ2
 
@@ -497,4 +498,9 @@ main = hspec $ do
                                           ((1,3), (2,3))
                                         ]
 
+  describe "Skolvagen" $ do
 
+    -- sample inputs
+    it "SNBNNSB"          $ skolvagen "SNBNNSB"          `shouldBe` "4"
+    it "SBSNNBSNNSSSNNNB" $ skolvagen "SBSNNBSNNSSSNNNB" `shouldBe` "8"
+    
