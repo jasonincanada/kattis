@@ -19,7 +19,7 @@ $$
 \end{align}
 $$
 
-where function $g : \text{Board} \to \mathbb{N} \times \mathbb{N}$ destructures a board into its $n$ and $m$ fields before calling $f$ on them:
+where function $g : \text{Board} \to \{0,1\}$ destructures a board into its $n$ and $m$ fields before calling $f$ on them:
 
 $$g(\text{board}) = f(\text{board.n}, \text{board.m})$$
 
