@@ -28,14 +28,11 @@ process (TestCase n m) = Output $ array A.! (n,m)
       where
         bounds = ((1,1), (n,m))
 
+    -- the player wins with a block if they can cut it in such a way the other player can't win
+    -- with either of the remaining two blocks
     winfrom :: Int -> Int -> Bool
     winfrom 1 1 = False
-    winfrom n m
-      | n > m     = winfrom m n
-
-      -- the player wins with a block if they can cut it in such a way the other player can't win
-      -- with either of the remaining two blocks
-      | otherwise = or [ losefrom n m && losefrom n' m' | ((n,m), (n',m')) <- cuts n m ]
+    winfrom n m = or [ losefrom n m && losefrom n' m' | ((n,m), (n',m')) <- cuts n m ]
       where
         losefrom n m = not (array A.! (n,m))
 
