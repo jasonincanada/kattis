@@ -4,7 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
-10 Jul | [tbd](https://open.kattis.com/problems/skolvagen) | [Skolvagen.hs](src/Skolvagen.hs) | Find minimum number of street crossings to goal
+10 Jul | [tbd](https://open.kattis.com/problems/skolvagen) | [skolvagen.rs](rust/skolvagen/src/main.rs) | Find minimum number of street crossings ([Haskell](src/Skolvagen.hs))
 9 Jul | [tbd](https://open.kattis.com/problems/bradspelet) | [bradspelet.rs](rust/bradspelet/src/main.rs) | Determine the winner of a board-cutting game ([Haskell](src/Bradspelet.hs))
 5 Jul | [tbd](https://open.kattis.com/problems/fibonaccisum) | [fibonaccisum.rs](rust/fibonaccisum/src/main.rs) | Find fibonacci numbers adding to a sum
 4 Jul | [tbd](https://open.kattis.com/problems/klockan2) | [klockan2.rs](rust/klockan2/src/main.rs) | Map angle between hour/min hands to time on clock
