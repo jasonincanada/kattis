@@ -18,33 +18,12 @@ fn is_winner(board: Board) -> bool {
     for n in 1..=board.n {
     for m in n..=board.m {
         
-        if n == 1 {
-            if m == 1 {
-                
-                // base case
-                table[1][1] = false;
-
-            } else {
-                for i in 1..=(m/2) {
-                    if table[1][i] == false && table[1][m-i] == false {
-                        table[n][m] = true;
-                        table[m][n] = true;
-                        break
-                    }
-                }
-            }
-        } else {
-
-            // horizontal cuts
-            for i in 1..=(n/2) {
-                if table[i][m] == false && table[n-i][m] == false {
-                    table[n][m] = true;
-                    table[m][n] = true;
-                    break
-                }
-            }
-
-            if n == m { continue }
+        // base case
+        if n == 1 && m == 1 {            
+            table[1][1] = false;
+        }
+        
+        else {
 
             // vertical cuts
             for i in 1..=(m/2) {
@@ -52,6 +31,19 @@ fn is_winner(board: Board) -> bool {
                     table[n][m] = true;
                     table[m][n] = true;
                     break
+                }
+            }
+
+            if n == m { continue }
+            
+            // horizontal cuts
+            if n > 1 {
+                for i in 1..=(n/2) {
+                    if table[i][m] == false && table[n-i][m] == false {
+                        table[n][m] = true;
+                        table[m][n] = true;
+                        break
+                    }
                 }
             }
         }
