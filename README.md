@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+12 Jul | [tbd](https://open.kattis.com/problems/chocolatedivision) | [chocolatedivision.rs](rust/chocolatedivision/src/main.rs) | Find winner of another board-cutting game
 10 Jul | [tbd](https://open.kattis.com/problems/skolvagen) | [skolvagen.rs](rust/skolvagen/src/main.rs) | Find minimum number of street crossings ([Haskell](src/Skolvagen.hs))
 9 Jul | [tbd](https://open.kattis.com/problems/bradspelet) | [bradspelet.rs](rust/bradspelet2/src/main.rs) | Determine winner of a board-cutting game ([1](rust/bradspelet/src/main.rs), [Haskell](src/Bradspelet.hs))
 5 Jul | [tbd](https://open.kattis.com/problems/fibonaccisum) | [fibonaccisum.rs](rust/fibonaccisum/src/main.rs) | Find fibonacci numbers adding to a sum
