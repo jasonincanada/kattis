@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+19 Jul | [6.4](https://open.kattis.com/problems/digitsum) | [digitsum.rs](rust/digitsum/src/main.rs) | Sum digits in a large range of numbers
 14 Jul | [4.8](https://open.kattis.com/problems/spiderman) | [spiderman.rs](rust/spiderman/src/main.rs) | Minimize the height of a climbing plan
 12 Jul | [tbd](https://open.kattis.com/problems/chocolatedivision) | [chocolatedivision.rs](rust/chocolatedivision/src/main.rs) | Find winner of another board-cutting game
 10 Jul | [tbd](https://open.kattis.com/problems/skolvagen) | [skolvagen.rs](rust/skolvagen/src/main.rs) | Find minimum number of street crossings ([Haskell](src/Skolvagen.hs))
