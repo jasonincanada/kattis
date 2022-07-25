@@ -4,6 +4,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+24 Jul | [5.6](https://open.kattis.com/problems/mathworksheet) | [mathworksheet.rs](rust/mathworksheet/src/main.rs) | Evaluate expressions and right-justify
 19 Jul | [6.4](https://open.kattis.com/problems/digitsum) | [digitsum.rs](rust/digitsum/src/main.rs) | Sum digits in a large range of numbers
 14 Jul | [4.8](https://open.kattis.com/problems/spiderman) | [spiderman.rs](rust/spiderman/src/main.rs) | Minimize the height of a climbing plan
 12 Jul | [tbd](https://open.kattis.com/problems/chocolatedivision) | [chocolatedivision.rs](rust/chocolatedivision/src/main.rs) | Find winner of another board-cutting game
