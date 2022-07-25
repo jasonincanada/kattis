@@ -56,8 +56,8 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 2019 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
 25 Nov | [3.1](https://open.kattis.com/problems/knightsearch) | [KnightSearch.hs](src/KnightSearch.hs) | Check if a chess knight can walk a sequence ([2](src/KnightSearch2.hs), [3](src/KnightSearch3.hs))
-17 Nov | [3.2](https://open.kattis.com/problems/flippingpatties) | [FlippingPatties.hs](src/FlippingPatties.hs) | Find minimum number of cooks needed to fill an order
-10 Nov | [3.0](https://open.kattis.com/problems/rotatecut) | [RotateCut.hs](src/RotateCut.hs) | Trim sides of a string by a quarter of its length recursively
+17 Nov | [3.2](https://open.kattis.com/problems/flippingpatties) | [FlippingPatties.hs](src/FlippingPatties.hs) | Find minimum number of cooks to fill an order
+10 Nov | [3.0](https://open.kattis.com/problems/rotatecut) | [RotateCut.hs](src/RotateCut.hs) | Trim sides of a string by a quarter length recursively
 15 Oct | [2.7](https://open.kattis.com/problems/orchard) | [Orchard.hs](src/Orchard.hs) | Calculate the probability of winning First Orchard
 9 Oct | [2.7](https://open.kattis.com/problems/circular) | [Circular.hs](src/Circular.hs) | Find optimal cut of a circular DNA strand
 9 Oct | [2.7](https://open.kattis.com/problems/competitivearcadebasketball) | [Basketball.hs](src/Basketball.hs) | Find which players win a basketball competition
@@ -72,5 +72,5 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 28 Aug | [2.1](https://open.kattis.com/problems/towering) | [Towering.hs](src/Towering.hs) | Stack boxes into two towers with specified heights
 28 Aug | [2.1](https://open.kattis.com/problems/compromise) | [Compromise.hs](src/Compromise.hs) | Find the best compromise for set of yes/no beliefs
 26 Aug | [2.1](https://open.kattis.com/problems/lawnmower) | [LawnMower.hs](src/LawnMower.hs) | Check if a lawn-mowing pattern fully covers a lawn
-25 Aug | [2.1](https://open.kattis.com/problems/semafori) | [Semafori.hs](src/Semafori.hs) | Calculate time to drive down a road, stopping at red lights
+25 Aug | [2.1](https://open.kattis.com/problems/semafori) | [Semafori.hs](src/Semafori.hs) | Find time to drive down a road, stopping at red lights
 
