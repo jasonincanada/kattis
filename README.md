@@ -5,18 +5,18 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
 24 Jul | [5.6](https://open.kattis.com/problems/mathworksheet) | [mathworksheet.rs](rust/mathworksheet/src/main.rs) | Evaluate expressions and right-justify
-19 Jul | [6.4](https://open.kattis.com/problems/digitsum) | [digitsum.rs](rust/digitsum/src/main.rs) | Sum digits in a large range of numbers [n](notes/Digit Sum.md)
+19 Jul | [6.4](https://open.kattis.com/problems/digitsum) | [digitsum.rs](rust/digitsum/src/main.rs) | Sum digits in a large range of numbers [+](notes/Digit%20Sum.md)
 14 Jul | [4.8](https://open.kattis.com/problems/spiderman) | [spiderman.rs](rust/spiderman/src/main.rs) | Minimize the height of a climbing plan
 12 Jul | [tbd](https://open.kattis.com/problems/chocolatedivision) | [chocolatedivision.rs](rust/chocolatedivision/src/main.rs) | Find winner of another board-cutting game
 10 Jul | [tbd](https://open.kattis.com/problems/skolvagen) | [skolvagen.rs](rust/skolvagen/src/main.rs) | Find minimum number of street crossings ([Haskell](src/Skolvagen.hs))
-9 Jul | [tbd](https://open.kattis.com/problems/bradspelet) | [bradspelet.rs](rust/bradspelet2/src/main.rs) | Determine winner of a board-cutting game ([1](rust/bradspelet/src/main.rs), [Haskell](src/Bradspelet.hs), [n](notes/Bradspelet.md))
+9 Jul | [tbd](https://open.kattis.com/problems/bradspelet) | [bradspelet.rs](rust/bradspelet2/src/main.rs) | Determine winner of a board-cutting game ([1](rust/bradspelet/src/main.rs), [Haskell](src/Bradspelet.hs), [+](notes/Bradspelet.md))
 5 Jul | [tbd](https://open.kattis.com/problems/fibonaccisum) | [fibonaccisum.rs](rust/fibonaccisum/src/main.rs) | Find fibonacci numbers adding to a sum
 4 Jul | [tbd](https://open.kattis.com/problems/klockan2) | [klockan2.rs](rust/klockan2/src/main.rs) | Map angle between hour/min hands to time on clock
 4 Jul | [tbd](https://open.kattis.com/problems/busskortet) | [busskortet.rs](rust/busskortet/src/main.rs) | Count number of payments for a bus card
-17 Jun | [4.8](https://open.kattis.com/problems/targetpractice) | [targetpractice.rs](rust/targetpractice/src/main.rs) | Draw two lines through all points if possible [n](notes/Target Practice.md)
-14 Jun | [5.0](https://open.kattis.com/problems/romanholidays) | [romanholidays.rs](rust/romanholidays/src/main.rs) | Locate a roman number in the ordered list of them [n](notes/Roman Holidays.md)
+17 Jun | [4.8](https://open.kattis.com/problems/targetpractice) | [targetpractice.rs](rust/targetpractice/src/main.rs) | Draw two lines through all points if possible [+](notes/Target%20Practice.md)
+14 Jun | [5.0](https://open.kattis.com/problems/romanholidays) | [romanholidays.rs](rust/romanholidays/src/main.rs) | Locate a roman number in the ordered list of them [+](notes/Roman%20Holidays.md)
 3 Jun | [2.4](https://open.kattis.com/problems/tictactoecounting) | [tictactoe.rs](rust/tictactoe/src/main.rs) | Count wins in Tic Tac Toe from a given board
-29 May | [4.9](https://open.kattis.com/problems/addemup) | [addemup.rs](rust/addemup/src/main.rs) | Find two cards that sum to x, some can rotate [n](notes/Add 'Em Up!.md)
+29 May | [4.9](https://open.kattis.com/problems/addemup) | [addemup.rs](rust/addemup/src/main.rs) | Find two cards that sum to x, some can rotate [+](notes/Add%20'Em%20Up!.md)
 21 May | [2.9](https://open.kattis.com/problems/noonerizedspumbers) | [spumbers2.rs](rust/spumbers2/src/main.rs) | Rewrite of spumbers to avoid cloning
 7 May | [1.6](https://open.kattis.com/problems/99problems) | [99problems.rs](rust/problems99/src/main.rs) | Map an integer to the closest ending in 99
 29 Mar | [2.7](https://open.kattis.com/problems/pivot) | [Pivot.hs](src/Pivot.hs) | Use reverse state to count pivot points in a list
