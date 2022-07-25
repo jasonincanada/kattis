@@ -7,9 +7,9 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 24 Jul | [5.6](https://open.kattis.com/problems/mathworksheet) | [mathworksheet.rs](rust/mathworksheet/src/main.rs) | Evaluate expressions and right-justify
 19 Jul | [6.4](https://open.kattis.com/problems/digitsum) | [digitsum.rs](rust/digitsum/src/main.rs) | Sum digits in a large range of numbers [+](notes/Digit%20Sum.md)
 14 Jul | [4.8](https://open.kattis.com/problems/spiderman) | [spiderman.rs](rust/spiderman/src/main.rs) | Minimize the height of a climbing plan
-12 Jul | [tbd](https://open.kattis.com/problems/chocolatedivision) | [chocolatedivision.rs](rust/chocolatedivision/src/main.rs) | Find winner of another board-cutting game
+12 Jul | [tbd](https://open.kattis.com/problems/chocolatedivision) | [division.rs](rust/chocolatedivision/src/main.rs) | Find winner of another board-cutting game
 10 Jul | [tbd](https://open.kattis.com/problems/skolvagen) | [skolvagen.rs](rust/skolvagen/src/main.rs) | Find minimum number of street crossings ([Haskell](src/Skolvagen.hs))
-9 Jul | [tbd](https://open.kattis.com/problems/bradspelet) | [bradspelet.rs](rust/bradspelet2/src/main.rs) | Determine winner of a board-cutting game ([1](rust/bradspelet/src/main.rs), [Haskell](src/Bradspelet.hs), [+](notes/Bradspelet.md))
+9 Jul | [tbd](https://open.kattis.com/problems/bradspelet) | [bradspelet.rs](rust/bradspelet2/src/main.rs) | Find winner of a board-cutting game ([1](rust/bradspelet/src/main.rs), [Haskell](src/Bradspelet.hs), [+](notes/Bradspelet.md))
 5 Jul | [tbd](https://open.kattis.com/problems/fibonaccisum) | [fibonaccisum.rs](rust/fibonaccisum/src/main.rs) | Find fibonacci numbers adding to a sum
 4 Jul | [tbd](https://open.kattis.com/problems/klockan2) | [klockan2.rs](rust/klockan2/src/main.rs) | Map angle between hour/min hands to time on clock
 4 Jul | [tbd](https://open.kattis.com/problems/busskortet) | [busskortet.rs](rust/busskortet/src/main.rs) | Count number of payments for a bus card
@@ -21,7 +21,7 @@ My solutions in Haskell and Rust for the [Kattis](https://open.kattis.com/proble
 7 May | [1.6](https://open.kattis.com/problems/99problems) | [99problems.rs](rust/problems99/src/main.rs) | Map an integer to the closest ending in 99
 29 Mar | [2.7](https://open.kattis.com/problems/pivot) | [Pivot.hs](src/Pivot.hs) | Use reverse state to count pivot points in a list
 28 Mar | [2.0](https://open.kattis.com/problems/simplecronspec) | [simplecronspec.rs](rust/simplecronspec/src/main.rs) | Count number of cronjobs running in a day
-20 Mar | [3.5](https://open.kattis.com/problems/interpreter) | [interpreter.rs](rust/interpreter/src/main.rs) | Emulate a computer with registers, opcodes and RAM
+20 Mar | [3.5](https://open.kattis.com/problems/interpreter) | [interpreter.rs](rust/interpreter/src/main.rs) | Emulate a computer with registers, opcodes, RAM
 19 Mar | [5.5](https://open.kattis.com/problems/alphabetanimals) | [alphabetanimals.rs](rust/alphabetanimals/src/main.rs) | Play a word game, trying to eliminate players
 18 Mar | [5.0](https://open.kattis.com/problems/scalingrecipe) | [scalingrecipe.rs](rust/scalingrecipe/src/main.rs) | Scale recipe ingredients to required amounts
 17 Mar | [3.9](https://open.kattis.com/problems/sacredtexts) | [sacredtexts.rs](rust/sacredtexts/src/main.rs) | Decode runes
