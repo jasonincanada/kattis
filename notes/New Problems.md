@@ -1,3 +1,10 @@
+## 25 September 2022
+
+[Mad Diamond](https://open.kattis.com/problems/maddiamond)
+- Similar to the tilting labyrinth game
+- Gravity component is just a vector that rotates, don't rotate the whole dataset
+
+
 ## 3 August 2022
 
 [Guma](https://open.kattis.com/problems/guma)
