@@ -1,3 +1,12 @@
+## 3 August 2022
+
+[Guma](https://open.kattis.com/problems/guma)
+- Surprised this has no accepted solutions as of September 25, it looks relatively easy
+
+[Inheritance](https://open.kattis.com/problems/inheritance)
+- Find the divisors of a number which consist only of digits 2 and 4
+
+
 ## 9 July 2022
 
 [Palindrome-Free Numbers](https://open.kattis.com/problems/palindromefree)
