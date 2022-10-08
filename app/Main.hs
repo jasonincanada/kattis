@@ -2,8 +2,8 @@
 
 module Main where
 
-import Skolvagen
+import CoffeeCupCombo
 
 main :: IO ()
-main = interact skolvagen
+main = interact coffeecupcombo
 

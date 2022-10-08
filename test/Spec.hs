@@ -21,6 +21,8 @@ import InterviewQueue (interviewqueue, step, Result(..))
 import Pivot         (pivot)
 import Bradspelet    (bradspelet, cuts)
 import Skolvagen     (skolvagen)
+import Infinite2DArray (infinite2darray)
+import CoffeeCupCombo (coffeecupcombo)
 
 import qualified InterviewQueue2 as IQ2
 
@@ -503,4 +505,19 @@ main = hspec $ do
     -- sample inputs
     it "SNBNNSB"          $ skolvagen "SNBNNSB"          `shouldBe` "4"
     it "SBSNNBSNNSSSNNNB" $ skolvagen "SBSNNBSNNSSSNNNB" `shouldBe` "8"
+    
+
+  describe "Infinite2DArray" $ do
+
+    -- sample inputs
+    it "2 2" $ infinite2darray "2 2" `shouldBe` "6"
+    it "1 6" $ infinite2darray "1 5" `shouldBe` "13"
+    
+
+  describe "Coffee Cup Combo" $ do
+
+    -- sample inputs
+    it "0100010100" $ coffeecupcombo "10\n0100010100" `shouldBe` "8"
+    it "1100000000" $ coffeecupcombo "10\n1100000000" `shouldBe` "4"
+    it "0"          $ coffeecupcombo "1\n0"           `shouldBe` "0"
     
