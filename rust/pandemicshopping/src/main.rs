@@ -38,7 +38,7 @@ impl Mall {
                 // same reasoning for trying or not trying this direction for Aisle B
                 if have_and_not_equal_to(&self.aisle_b, aisle_b) { continue }
                 
-                // we have our pair of A and B aisle directions, now count valid floorplans
+                // we have our pair of A and B aisle directions, now count valid floor plans
                 // assuming the two side aisles were to be set as these
                 count += self.count_with(aisle_a, aisle_b);
             }
@@ -69,7 +69,7 @@ impl Mall {
 
         // if the side aisles are the same direction, there can be only one valid floor plan:
         // the number of product aisles must be odd and the customer must zig-zag east/west as
-        // they travel up the store (or down if they side aisles are pointed N2S)
+        // they travel up the store (or down if the side aisles are pointed N2S)
         if aisle_a == "S2N" && aisle_b == "S2N" {
 
             if is_even(self.n) { return 0 }
@@ -94,7 +94,7 @@ impl Mall {
                 if !is_even(*id) && dir != "E2W" { return 0 }
             }
 
-            // same reasoning as for S2N aisles, we can count this as 1 valid floorplan
+            // same reasoning as for S2N aisles, we can count this as 1 valid floor plan
             1
 
         } else {
@@ -103,7 +103,7 @@ impl Mall {
             // product aisles already checked, the interior aisle directions don't matter because
             // the shopper can loop around the perimeter as much as they want to get to the start
             // of any aisle. so we only have to count the number of unspecified interior aisles
-            // and counsider each one as 2 possible directions
+            // and consider each one as 2 possible directions
             let unspec = self.n
                             - 2
                             - self.product_aisles.iter()
@@ -168,7 +168,6 @@ impl Mall {
         false
     }
 }
-
 
 fn have_and_not_equal_to(maybe_aisle: &Option<String>, compare: &str) -> bool {
     if let Some(dir) = maybe_aisle.as_ref() {
