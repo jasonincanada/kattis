@@ -4,7 +4,7 @@ My solutions in Rust and Haskell for the [Kattis](https://open.kattis.com/proble
 
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
-6 Nov | [7.8](https://open.kattis.com/problems/pandemicshopping) | [pandemic.rs](rust/pandemicshopping/src/main.rs) | Count valid floor plans with partial specs [+](notes/Pandemic%20Shopping.md)
+6 Nov | [7.2](https://open.kattis.com/problems/pandemicshopping) | [pandemic.rs](rust/pandemicshopping/src/main.rs) | Count valid floor plans with partial specs [+](notes/Pandemic%20Shopping.md)
 24 Jul | [5.6](https://open.kattis.com/problems/mathworksheet) | [mathworksheet.rs](rust/mathworksheet/src/main.rs) | Evaluate expressions and right-justify
 19 Jul | [6.4](https://open.kattis.com/problems/digitsum) | [digitsum.rs](rust/digitsum/src/main.rs) | Sum digits in a large range of numbers [+](notes/Digit%20Sum.md)
 14 Jul | [4.8](https://open.kattis.com/problems/spiderman) | [spiderman.rs](rust/spiderman/src/main.rs) | Minimize the height of a climbing plan
