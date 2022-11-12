@@ -59,7 +59,72 @@ The output string for this contrived input must be `01` to satisfy all constrain
 	- `SetBit i {0,1}`
 	- `SwapBit i j`
 	- Would we ever need to `SetBit i 0`, or can we just initially set as many `1`s as we need then swap with remaining `0`s?
+- Sort constraints *ascending* by $T_i$ then $L_i$ then $R_i$, then *descending* by $V_i$
 
+## Algorithm
+
+Phase 0: Generate all required `1`s, exactly as many as needed and as far to the right as possible
+Phase 1: Evict `1`s as needed by throwing them to the left while maintaining prior constraints
+Phase 2: Render to string
+
+```
+    phase 0 generation 1 (all "0 1 r v" constraints, sorted r ASC, v DESC)
+
+    new 16-chain:  0000000000000000   (conceptually, don't actually store a 16-bit vector)
+    0 1 4 4        0000               no change
+    0 1 4 2        0001               bring into compliance by filling 1s from the RIGHT
+    0 1 4 0        0011               we could have ignored the first two constraints and ended
+                                      up with the same chain by this point. for a set of constraints
+                                      0 l r {v1,v2,...,vn} we need only consider 0 l r (min vi)
+                                      
+                 --1234567890123456-- (ruler)
+    0 1 10 2       0011000011         catch up by adding two 1s on the right
+    0 1 10 0       0011000111         one more 1.  if we had *only* this constraint we'd have
+                                      0000011111 but we already have two 1s from earlier constraints
+                                      so we only needed to add a total of three 1s to the right
+
+    new example:   0000000000000000
+    0 1 4 0        0011
+    0 1 12 6       001100000001
+    0 1 16 0       0011000000111111   new phenomenon: we have to add five 1s from the right but
+                                      we have to JUMP a 1 already set from a prior constraint
+                                      
+                                      all of these ones can be shifted to the left as far as the
+                                      start of the generation that created them (l=1 here). we'll
+                                      need to do so in phase 1 wherever we have to evict 1s
+    
+    -- end of phase 0 generation 1
+
+    -- start phase 0 generation 2 (l=2)
+                   0011000000111111
+    0 2 7 0        0011001000011111   new phenomenon: we can "tractor beam" any 1 that is right of
+                         ^...v        r=7 instead of generating a new 1. all ones to the right were
+                                      created in prior generations, meaning they can be moved
+                                      without breaking any constraint from phase 0, because they
+                                      were added by generation l < 2 (explain this better)
+    .
+    .
+    . 
+
+    -- start phase 1: evict 1s
+
+    -- start phase 1 generation 13
+	. .. .. .     0011001000011111
+	1 13 16 0     0011001001110011   evict two 1s, throwing them to the left only as far as needed
+		                   ^^.vv
+									 (prove there will always be an "available" 0 to the left of l=13)
+									 (prove there will always be enough "movable" 1s in 13..16)
+
+
+    Sample Input 2
+    --------------
+    Input     String  Stash of (n/2) 1s for tractoring
+    6 3       000000  111
+    0 1 4 0   001100  001
+    0 1 6 0   001101  000
+    1 3 4 0   010101  000
+
+```
 
 ## Reasoning
 
@@ -72,3 +137,6 @@ The output string for this contrived input must be `01` to satisfy all constrain
 
 *Proof.* There are an even number of elements within each range, and the length $n$ of the whole string is even. Because the bits in `0101...01` alternate `0` and `1` and the ranges are even-length, the count of `1` bits will equal the count of `0` bits--they will always balance out. The constraints are on the count of one of the bits being at most $V_i$ more than the other, with $0 \le V_i$. In addition, it is the lexicographically smallest such balanced string (the other being `1010...10`)
 
+*Proposition.* The total number of `1`s will never exceed $n/2$.
+*Proposition.* When throwing `1`s to the left, there will always be room for the `1`s to the left.
+*Proposition.* When throwing `1`s to the left, there will always be enough evictable `1`s to do so.
