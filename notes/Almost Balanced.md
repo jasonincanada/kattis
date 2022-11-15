@@ -109,11 +109,11 @@ Phase 2: Render to string
     -- start phase 1: evict 1s
 
     -- start phase 1 generation 13
-	. .. .. .     0011001000011111
-	1 13 16 0     0011001001110011   evict two 1s, throwing them to the left only as far as needed
-		                   ^^.vv
-									 (prove there will always be an "available" 0 to the left of l=13)
-									 (prove there will always be enough "movable" 1s in 13..16)
+                  0011001000011111
+    1 13 16 0     0011001001110011   evict two 1s, throwing them to the left only as far as needed
+                           ^^.vv
+                                     (prove there will always be an "available" 0 to the left of l=13)
+                                     (prove there will always be enough "movable" 1s in 13..16)
 
 
     Sample Input 2
