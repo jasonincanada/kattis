@@ -21,6 +21,12 @@ struct Mall {
 
 type Direction = String;
 
+enum Aisle {
+    A,
+    B,
+    Product(usize)
+}
+
 impl Mall {
 
     fn count_floor_plans(&self) -> u32 {
@@ -32,11 +38,11 @@ impl Mall {
         for aisle_a in directions.iter() {
             // try this direction for Aisle A only if no direction was specified in the
             // input for it, or it was and it matches this direction. skip it otherwise
-            if have_and_not_equal_to(&self.aisle_a, aisle_a) { continue }
+            if self.have_aisle_and_not_equal_to(Aisle::A, aisle_a) { continue }
 
             for aisle_b in directions.iter() {
                 // same reasoning for trying or not trying this direction for Aisle B
-                if have_and_not_equal_to(&self.aisle_b, aisle_b) { continue }
+                if self.have_aisle_and_not_equal_to(Aisle::B, aisle_b) { continue }
                 
                 // we have our pair of A and B aisle directions, now count valid floor plans
                 // assuming the two side aisles were to be set as these
@@ -55,16 +61,16 @@ impl Mall {
         // the top and bottom product aisles are determined by the side aisles. if the
         // wrong direction has been specified, there can't be any valid floor plans
         if aisle_a == "S2N" {
-            if self.have_aisle_and_not_equal_to(self.n, "W2E") { return 0 }
+            if self.have_aisle_and_not_equal_to(Aisle::Product(self.n), "W2E") { return 0 }
         } else {
-            if self.have_aisle_and_not_equal_to(self.n, "E2W") { return 0 }
+            if self.have_aisle_and_not_equal_to(Aisle::Product(self.n), "E2W") { return 0 }
         }
 
         // same deal for Aisle B
         if aisle_b == "N2S" {
-            if self.have_aisle_and_not_equal_to(1, "E2W") { return 0 }
+            if self.have_aisle_and_not_equal_to(Aisle::Product(1), "E2W") { return 0 }
         } else {
-            if self.have_aisle_and_not_equal_to(1, "W2E") { return 0 }
+            if self.have_aisle_and_not_equal_to(Aisle::Product(1), "W2E") { return 0 }
         }
 
         // if the side aisles are the same direction, there can be only one valid floor plan:
@@ -158,25 +164,25 @@ impl Mall {
     }
 
     // do we have this aisle specified and it's not equal to the passed string
-    fn have_aisle_and_not_equal_to(&self, n: usize, compare: &str) -> bool {
-        if let Some(dir) = self.product_aisles.get(&n) {
-            if dir != compare {
-                return true
-            }
-        }
+    fn have_aisle_and_not_equal_to(&self, aisle: Aisle, compare: &str) -> bool {
+
+        match aisle {
+            Aisle::A => if let Some(dir) = self.aisle_a.as_ref() {
+                            if dir != compare { return true }
+                        },
+
+            Aisle::B => if let Some(dir) = self.aisle_b.as_ref() {
+                            if dir != compare { return true }
+                        },
+
+            Aisle::Product(n) =>
+                        if let Some(dir) = self.product_aisles.get(&n) {
+                            if dir != compare { return true }
+                        }
+        }        
     
         false
     }
-}
-
-fn have_and_not_equal_to(maybe_aisle: &Option<String>, compare: &str) -> bool {
-    if let Some(dir) = maybe_aisle.as_ref() {
-        if dir != compare {
-            return true
-        }
-    }
-
-    false
 }
 
 fn is_even(n: usize) -> bool {
