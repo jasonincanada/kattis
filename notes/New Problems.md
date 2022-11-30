@@ -1,3 +1,8 @@
+## 28 November 2022
+
+[Faster Than Light](https://open.kattis.com/problems/fasterthanlight)
+- Similar to [Target Practice](https://open.kattis.com/problems/targetpractice)
+
 ## 25 September 2022
 
 [Mad Diamond](https://open.kattis.com/problems/maddiamond)
