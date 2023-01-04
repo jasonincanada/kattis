@@ -1,7 +1,20 @@
+## 4 January 2023
+
+This batch isn't an official release from the kattis RSS feed.  Brent Yorgey, from the Haskell leaderboard for many challenges, listed the following problems on his blog entry about [generalizing binary search](https://byorgey.wordpress.com/2023/01/01/competitive-programming-in-haskell-better-binary-search/):
+
+- [Bootstrapping Number](https://open.kattis.com/problems/bootstrappingnumber)
+- [Big Boxes](https://open.kattis.com/problems/bigboxes)
+- [Toast](https://open.kattis.com/problems/toast)
+- [Annoyed Coworkers](https://open.kattis.com/problems/annoyedcoworkers)
+- [Wonky Pizza](https://open.kattis.com/problems/wonkypizza)
+- [AI Jeopardy](https://open.kattis.com/problems/aijeopardy)
+
+
 ## 28 November 2022
 
 [Faster Than Light](https://open.kattis.com/problems/fasterthanlight)
 - Similar to [Target Practice](https://open.kattis.com/problems/targetpractice)
+
 
 ## 25 September 2022
 
