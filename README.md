@@ -2,6 +2,10 @@
 
 My solutions in Rust and Haskell for the [Kattis](https://open.kattis.com/problems?order=problem_difficulty) programming challenges
 
+2023 | Diff. | Source | Description / Notes
+--- | --- | --- | ---
+5 Jan | [2.9](https://open.kattis.com/problems/bootstrappingnumber) | [bootstrapping.rs](rust/bootstrapping/src/main.rs) | Find x^x = n with binary search (f64)
+
 2022 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
 6 Nov | [7.2](https://open.kattis.com/problems/pandemicshopping) | [pandemic.rs](rust/pandemicshopping/src/main.rs) | Count valid floor plans with partial specs [+](notes/Pandemic%20Shopping.md)
