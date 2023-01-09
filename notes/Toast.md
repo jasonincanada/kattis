@@ -23,7 +23,7 @@ If the table is small enough, everyone is in reach of everyone else, so we'll he
 
 Start the table so large that nobody can reach anybody else. Reduce the table radius gradually until everybody can suddenly clink with the person next to them. This enables a total of $N$ clinks: I clink to the right, that person clinks to the right, all the way around until the person to my left clinks to me. This is the "first clink". The clink with my counter-clockwise neighbour, and the table radius I would need to first achieve it, is modeled in the following diagram:
 
-![[./images/toast.png]]
+![toast angle formula](./images/toast.png)
 
 As the radius goes to 0 we will obviously end up with everybody clinking together and we get the $N(N-1)/2$ formula at that point. But it gets interesting between the two extremes. From our perspective at the table (say, the right-most seat, as in the diagram), at "first clink" we will be able to reach the 1st person to our right and 1st person to our left. As the table shrinks, we will next find ourselves in reach of the 2nd person to our right and the 2nd person to our left at the same time.  The person at the exact opposite end of the table (if N is even) is still the *most* out of reach, but that person's two neighbours are *slightly* closer to us than the opposite person, but still out of reach. Since we picked an arbitrary person's perspective, this applies equally to every person at the table, which is why we add `+= people` at each step instead of just 1.
 
@@ -41,8 +41,8 @@ In my initial modeling of the problem, I used LibreOffice Calc to render the per
 
 ### Even N
 
-![[./images/toast-clinkage-even.png]]
+![clinkage matrix even](./images/toast-clinkage-even.png)
 
 ### Odd N
 
-![[./images/toast-clinkage-odd.png]]
+![clinkage matrix odd](./images/toast-clinkage-odd.png)
