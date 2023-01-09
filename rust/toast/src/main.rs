@@ -1,10 +1,8 @@
 /*  https://open.kattis.com/problems/toast  */
 
 fn main() {
-    let input  = get_3_numbers_from_stdin();
-    let answer = toast(input[0],
-                       input[1] as f32,
-                       input[2]);
+    let (n, d, t) = get_3_numbers_from_stdin();
+    let answer    = toast(n, d as f32, t);
 
     println!("{} {}", answer.0, answer.1);
 }
@@ -110,14 +108,19 @@ fn get_radius_for(angle: f32) -> Radius {
 
 /* Parsing */
 
-fn get_3_numbers_from_stdin() -> Vec<u32> {
+fn get_3_numbers_from_stdin() -> (u32, u32, u32) {
     use std::io::BufRead;
 
     let line = std::io::stdin().lock().lines().next().unwrap().unwrap();
     let numbers: Vec<u32> = line.split_whitespace()
                                 .map(|num| num.parse().unwrap())
                                 .collect();
-    numbers
+
+    assert!(numbers.len() >= 3);
+
+    (numbers[0],
+     numbers[1],
+     numbers[2])
 }
 
 
