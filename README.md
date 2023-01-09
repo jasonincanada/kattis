@@ -4,6 +4,7 @@ My solutions in Rust and Haskell for the [Kattis](https://open.kattis.com/proble
 
 2023 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+9 Jan | [5.1](https://open.kattis.com/problems/toast) | [toast.rs](rust/toast/src/main.rs) | Size a table so there are *n* clinks during a toast
 5 Jan | [2.9](https://open.kattis.com/problems/bootstrappingnumber) | [bootstrapping.rs](rust/bootstrapping/src/main.rs) | Find x^x = n with binary search (f64)
 
 2022 | Diff. | Source | Description / Notes
