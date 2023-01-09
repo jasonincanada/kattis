@@ -1,4 +1,8 @@
-/*  https://open.kattis.com/problems/toast  */
+/*  https://open.kattis.com/problems/toast
+
+    The generalized binary search function `search` is ported from the Haskell on Brent Yorgey's blog:
+    [1] https://byorgey.wordpress.com/2023/01/01/competitive-programming-in-haskell-better-binary-search/
+*/
 
 fn main() {
     let (n, d, t) = get_3_numbers_from_stdin();
@@ -44,15 +48,28 @@ fn toast(people    : u32,
 
     // find where we have exactly the number of clinks we're looking for. this can
     // fail if the input is malformed but the problem says there's always a radius
-    let index = tiers.iter()
-                     .position(|&(total, _)| total == clinks)
-                     .unwrap();
-    
-    let from = tiers[index+1].1;
-    let to   = tiers[index  ].1;
+    let (from, to) = get_radius_range(&tiers, clinks);
 
     // we were working with an arm length of 1, scale it up to its actual length
     (from * arm_length, to * arm_length)
+}
+
+// binary search on the number of clinks and return that index and the next's radiuses.
+// this forms the range of table radiuses that hear a certain number of clinks
+fn get_radius_range(tiers : &[(Clinks, Radius)],
+                    clinks: u32) -> (Radius, Radius)
+{
+    let predicate = |i: &i32| tiers[*i as usize].0 >= clinks;
+
+    let index_pair = search(binary,
+                            predicate,
+                            -1,
+                            tiers.len() as i32);
+
+    let from = tiers[index_pair.1 as usize+1].1;
+    let to   = tiers[index_pair.1 as usize  ].1;
+
+    (from, to)
 }
 
 fn is_even(people: u32) -> bool {
@@ -103,6 +120,37 @@ impl Iterator for AngleIterator {
 
 fn get_radius_for(angle: f32) -> Radius {
     1.0 / (angle / 2.0).sin()
+}
+
+
+/* Binary Search */
+
+// generic search function ported from Yorgey's blog [1]. notice no constraints on type A!
+// if there are any, they're applied by the particular mid function we choose
+fn search<F,P,A>(mid  : F,
+                 pred : P,
+                 left : A,
+                 right: A) -> (A, A)
+where
+    F: Fn(&A, &A) -> Option<A>,
+    P: Fn(&A)     -> bool
+{
+    match mid(&left, &right) {
+        Some(m) if pred(&m) => search(mid, pred, left, m),
+        Some(m)             => search(mid, pred, m, right),
+        None                => (left, right)
+    }
+}
+
+// custom "mid" function to pass as the first argument to search() when we need a binary search
+fn binary(left : &i32,
+          right: &i32) -> Option<i32>
+{
+    if right - left > 1 {
+        Some((left+right) / 2)
+    } else {
+        None
+    }
 }
 
 
