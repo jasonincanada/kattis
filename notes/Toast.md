@@ -48,3 +48,11 @@ In my initial modeling of the problem, I used LibreOffice Calc to render the per
 ### Odd N
 
 ![clinkage matrix odd](./images/toast-clinkage-odd.png)
+
+### Interactive Graph
+
+To visualize neighbours converging toward and over each other, I used Desmos to plot 4 people at a table up to 2 in radius:
+
+Interactive graph: https://www.desmos.com/calculator/yfdy2vtcfe
+
+There's a slider on the left that starts at 2 and can be adjusted to show the neighbours' spheres of influence approaching and overlapping.
