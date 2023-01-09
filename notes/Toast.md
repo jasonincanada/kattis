@@ -6,12 +6,11 @@ difficulty: 5.1
 
 # Toast
 
-|     |                                   |
-| --- | --------------------------------- |
-| $N$ | Number of people around the table |
-| $D$ | Length of their arms              |
-| $T$ | Total number of clinks            |
-|     |                                   |
+| Input | Description                       |
+| ----- | --------------------------------- |
+| $N$   | Number of people around the table |
+| $D$   | Length of their arms              |
+| $T$   | Total number of clinks            |
 
 - $2 \le N \le 10^4$
 - $100 \le D \le 10^9$
