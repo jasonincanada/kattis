@@ -17,7 +17,7 @@ difficulty: 4.0
 ## Observations
 
 - There will never be more boxes than items ($k \le n$)
-- If $k = n$, every item has its own box and the answer is just $\min w_i$
+- If $k = n$, every item has its own box and the answer is just $\max w_i$
 - If $k = 1$, we have to put all items into one box, so the answer is the sum of all the weights $\sum_i w_i$
 
 At $k = 2$, things start to get interesting. We can start with the first item in the first box and all the other items in the second box. Then start taking one item at a time from the right box (the left-most one, to preserve the overall order) and add it to the left box. Or we could see it as moving the divider between lists of items (this is likely closer to how it will be modeled in code, with references to items instead of moving ownership of items between containers). Since all the weights are positive, the overall weight of the left box is going to keep increasing as we add items to it, and the right box weight will keep decreasing as we take items from it. At some point (maybe right away before we even start moving items) the weight of the left box will exceed the right box.
