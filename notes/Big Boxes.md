@@ -16,7 +16,7 @@ difficulty: 4.0
 
 ## Observations
 
-- There will never be more boxes than items ($k \le n$)
+- There will never be more boxes than items, $k \le n$
 - If $k = n$, every item has its own box and the answer is just $\max w_i$
 - If $k = 1$, we have to put all items into one box, so the answer is the sum of all the weights $\sum_i w_i$
 
@@ -26,7 +26,7 @@ This should remind us of the `search` function we've been looking at from [Brent
 
 ---
 
-I considered starting with everything in its own box ($k = n$) and taking a box away one at a time until we get to the original $k$ from the input:
+I considered starting with everything in its own box, $k = n$, and taking a box away one at a time until we get to the original $k$ from the input:
 
 - If $k = n - 1$, one of the boxes will have two items in it.
 	- At first I thought the doubled-up box will always contain the max weight and the other weight will be the smaller of its two neighbours
