@@ -6,7 +6,7 @@ difficulty: 4.8
 
 # Target Practice
 
-This challenge involves some geometric deductive reasoning, using points, lines and a triangle. The solution below runs in 0.01s in Rust, which is fast enough to join a 4-way tie for 1st place with the C++ solutions
+This challenge involves some geometric deductive reasoning, using points, lines and a triangle. The solution below runs in 0.01s in Rust, which is fast enough to join a 4-way tie for 1st place with the C++ solutions.
 
 ## Visualization
 
@@ -14,7 +14,7 @@ To get a visual sense of what's going on, let's render **Sample Input 2** using 
 
 ![sample 2](./images/target-practice/targetpractice-sample-2.png)
 
-This test case is a successful one because with at most two lines drawn (red and blue) we have crossed through all the points in the data set
+This test case is a successful one because with at most two lines drawn (red and blue) we have crossed through all the points in the data set.
 
 Compare this to **Sample Input 1**, where we would need at least three lines to cross all points:
 
@@ -25,7 +25,7 @@ Try drawing one line through the remaining blue points!
 
 ## Algorithm
 
-**Summary**: Iterate over points until we have a triangle. Pick a fourth point, $R$. In the success case this point must be collinear with one of the sides $MN$ of the triangle. Then every other point must be collinear with side $MN$ or the line from a new point $B$ (which is not collinear with $MN$) to vertex $O$ of the triangle, the one not belonging to side $MN$. If so, it's a success case, otherwise a failure
+**Summary**: Iterate over points until we have a triangle. Pick a fourth point, $R$. In the success case this point must be collinear with one of the sides $MN$ of the triangle. Then every other point must be collinear with side $MN$ or the line from a new point $B$ (which is not collinear with $MN$) to vertex $O$ of the triangle, the one not belonging to side $MN$. If so, it's a success case, otherwise a failure.
 
 
 ### Notes
@@ -99,7 +99,7 @@ Here's pseudocode for the above algorithm:
 form triangle T
 
 loop
-  R <- next point
+    R <- next point
 until R is collinear with side MN of triangle T
 
 if R
@@ -121,34 +121,34 @@ This is a [mermaid flowchart](https://mermaid-js.github.io/mermaid/#/flowchart) 
 
 ```mermaid
 flowchart TB
-    
+
     subgraph Step 1/2 - Find Triangle and Point
         F{Find<br/>triangle} -->|No triangle| S1[Success]
         F                    -->|Triangle MNO| B
     end
 
-	B{Find collinear<br/>point} -->|No point| 2B
-	B                           -->|Point R| R
+    B{Find collinear<br/>point} -->|No point| 2B
+    B                           -->|Point R| R
     
     subgraph Step 2b - No Collinear Point
         2B{All points collinear<br/>to the same vertex} -->|Yes| S2[Success]
     end
 
     2B -->|No| FL[Failure]
-    
+
     subgraph Step 3 - Find Non-collinear Point
         R{Next point not<br/>collinear to MN}    -->|Point B| B2
         R                                        -->|No point| S3[Success]
         B2{All points collinear<br/>to MN or OB} -->|Yes| S4[Success]
     end
-    
+
     B2 -->|No| FL
-    
-    
+
+
     %% Styling
     classDef successCase fill:#CFC;
     class S1,S2,S3,S4 successCase;
-    
+
     classDef failureCase fill:#FAA;
     class FL failureCase;
     
@@ -161,11 +161,11 @@ The initial attempt at this algorithm was not correct, I found a successful test
 
 ![test-fail](./images/target-practice/targetpractice-test-fail.png)
 
-The points are given to the code starting with the bottom left, then bottom right. So the bottom two are picked as $a$ and $b$ by the code to form the triangle $abc$ with the top left point (triangle $MNO$ in the above image). The second step in the algorithm looks for a point collinear to a side of the triangle, but it doesn't find one and therefore concludes the points cannot be covered with two lines, though clearly they can, shown by the red and blue lines in the example above
+The points are given to the code starting with the bottom left, then bottom right. So the bottom two are picked as $a$ and $b$ by the code to form the triangle $abc$ with the top left point (triangle $MNO$ in the above image). The second step in the algorithm looks for a point collinear to a side of the triangle, but it doesn't find one and therefore concludes the points cannot be covered with two lines, though clearly they can, shown by the red and blue lines in the example above.
 
 ### Fix
 
-The fix for this was straightforward. If there are no points collinear to MNO, it can still be a successful test case as long as all the remaining points form a line and the line includes one of the vertices of the triangle. The runtime is still 0.01s so we are still tied for first. I will reach out to the kattis team in case they want to add my new test case and re-run the submissions
+The fix for this was straightforward. If there are no points collinear to MNO, it can still be a successful test case as long as all the remaining points form a line and the line includes one of the vertices of the triangle. The runtime is still 0.01s so we are still tied for first. I will reach out to the kattis team in case they want to add my new test case and re-run the submissions.
 
 #### Sample Input 3
 
