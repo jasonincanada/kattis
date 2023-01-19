@@ -46,7 +46,7 @@ if amount == 0 {
 }
 ```
 
-I've moved some important logic into a separate function `candidate_indexes(coin, amount)` that returns an iterator, so in the calling code it looks like just another `for` loop. This is the step that decides which sub-problems to look at to determine the optimal value (in this case, the lowest number) to use for whatever table cell we're currently computing.
+I've moved some important logic into a separate function `candidate_indexes(coin, amount)` that returns an iterator, so in the calling code it looks like just another `for` loop. This is the step that decides which sub-problems to look at to determine the optimal value (in this case, the lowest number) to use for whatever table cell we're currently computing. Separating into a function like this also emphasizes that deciding which sub-problems to visit is dependent purely on the `coin` denomination and the `amount` we're considering, no other variables.
 
 ```rust
 fn candidate_indexes(coin  : i32,
