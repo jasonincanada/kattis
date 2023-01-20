@@ -50,12 +50,12 @@ I've moved some important logic into a separate function `candidate_indexes(coin
 
 ```rust
 fn candidate_indexes(coin  : i32,
-                     amount: usize) -> impl Iterator<Item=(usize,usize)>
+                     amount: i32) -> impl Iterator<Item=(usize,i32)>
 {
-    let max_coins = amount / coin as usize;
+    let max_coins = amount / coin;
 
     (0..=max_coins)
-        .map(move |k| (amount - k * coin as usize, k))
+        .map(move |k| ((amount - k*coin) as usize, k))
 }
 ```
 

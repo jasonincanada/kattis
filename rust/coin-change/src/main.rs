@@ -63,7 +63,7 @@ impl Solution {
 
                     // the general step, where the bulk of the computation takes place.
                     // consider taking more and more of this coin denomination
-                    for (a, k) in candidate_indexes(coin, amount as usize) {
+                    for (a, k) in candidate_indexes(coin, amount) {
                         let coin_count = table[c-1][a] + Count(k as i32);
                         candidates.push(coin_count);
                     }
@@ -84,12 +84,12 @@ impl Solution {
 }
 
 fn candidate_indexes(coin  : i32,
-                     amount: usize) -> impl Iterator<Item=(usize,usize)>
+                     amount: i32) -> impl Iterator<Item=(usize,i32)>
 {
-    let max_coins = amount / coin as usize;
+    let max_coins = amount / coin;
 
     (0..=max_coins)
-        .map(move |k| (amount - k*coin as usize, k))
+        .map(move |k| ((amount - k*coin) as usize, k))
 }
 
 use Counting::*;
