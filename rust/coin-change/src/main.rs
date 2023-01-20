@@ -77,7 +77,7 @@ impl Solution {
         }
 
         match table[coin_count-1][amount as usize] {
-            Count(count) => count as i32,
+            Count(count) => count,
             Infinity     => -1
         }
     }
