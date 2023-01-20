@@ -6,7 +6,7 @@ difficulty: Medium
 
 # Coin Change
 
-This is the classic challenge to make an exact amount of change using the fewest number of coins, when you're given the different coin values ahead of time.  Now that I'm getting into non-trivial dynamic programming problems, it's becoming a challenge to write clear code that expresses its intent.  So the motivation with this project is to see if Rust's syntax and idioms can make dynamic programming a bit easier to read and write.
+This is the classic challenge to make an exact amount of change using the fewest number of coins, when you're given the different coin values ahead of time.  Now that I'm getting into non-trivial dynamic programming problems, it's becoming a challenge to write clear code that expresses its intent.  So my motivation for this challenge is to see if Rust's syntax and idioms can make dynamic programming a bit easier to read and write.
 
 ## `enumerate()` all the things
 
@@ -46,7 +46,7 @@ if amount == 0 {
 }
 ```
 
-I've moved some important logic into a separate function `candidate_indexes(coin, amount)` that returns an iterator, so in the calling code it looks like just another `for` loop. This is the step that decides which sub-problems to look at to determine the optimal value (in this case, the lowest number) to use for whatever table cell we're currently computing. Separating into a function like this also emphasizes that deciding which sub-problems to visit is dependent purely on the `coin` denomination and the `amount` we're considering, no other variables.
+I've moved some important logic into a separate function `candidate_indexes(coin, amount)` that returns an iterator, so in the calling code it can be used in a `for` loop. This is the step that decides which other table cells to look at when computing the current table cell. Separating into a function like this also emphasizes that deciding which sub-problems to visit is dependent purely on the `coin` denomination and the `amount` we're considering.
 
 ```rust
 fn candidate_indexes(coin  : i32,
