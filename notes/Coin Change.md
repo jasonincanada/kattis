@@ -59,6 +59,8 @@ fn candidate_indexes(coin  : i32,
 }
 ```
 
+The `move` keyword in the call to `map` moves ownership of the `coin` and `amount` variables into the closure. The function owned them up to that point, but it's about to go out of scope, so `move` passes them to the closure.
+
 This all comes together in the innermost code:
 
 ```rust
