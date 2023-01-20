@@ -97,8 +97,8 @@ fn coin_change(coins : Vec<i32>,
 {
     for (c, coin) in coins.into_iter().enumerate() {
     for (a, amount) in (0..=amount).enumerate() {
-        for (a, k) in candidate_indexes(coin, amount as usize) {
-            let coin_count = table[c-1][a] + Count(k as i32);
+        for (a, k) in candidate_indexes(coin, amount) {
+            let coin_count = table[c-1][a] + Count(k);
             candidates.push(coin_count);
         }
         table[c][a] = optimal(candidates);
