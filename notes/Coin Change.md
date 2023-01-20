@@ -55,7 +55,7 @@ fn candidate_indexes(coin  : i32,
     let max_coins = amount / coin as usize;
 
     (0..=max_coins)
-        .map(move |k| (k, amount - k * coin as usize))
+        .map(move |k| (amount - k * coin as usize, k))
 }
 ```
 
@@ -64,7 +64,7 @@ This all comes together in the innermost code:
 ```rust
 // the general step, where the bulk of the computation takes place.
 // consider taking more and more of this coin denomination
-for (k, a) in candidate_indexes(coin, amount as usize) {
+for (a, k) in candidate_indexes(coin, amount as usize) {
     let coin_count = table[c-1][a] + Count(k as i32);
     candidates.push(coin_count);
 }
@@ -97,7 +97,7 @@ fn coin_change(coins : Vec<i32>,
 {
     for (c, coin) in coins.into_iter().enumerate() {
     for (a, amount) in (0..=amount).enumerate() {
-        for (k, a) in candidate_indexes(coin, amount as usize) {
+        for (a, k) in candidate_indexes(coin, amount as usize) {
             let coin_count = table[c-1][a] + Count(k as i32);
             candidates.push(coin_count);
         }
