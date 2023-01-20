@@ -10,7 +10,7 @@ enum Counting {
     Infinity
 }
 
-// override the + operator for the Counting enum to account for the Infinity variant
+// implement the + operator for the Counting enum and account for the Infinity variant
 impl std::ops::Add for Counting {
     type Output = Self;
 
@@ -29,7 +29,7 @@ impl Solution {
                        amount: i32) -> i32
     {
         let coin_count = coins.len();
-        let mut table: Vec<Vec<Counting>> = vec![ vec![Infinity; amount as usize +1]; coins.len()];
+        let mut table: Vec<Vec<Counting>> = vec![ vec![Infinity; amount as usize +1]; coins.len() ];
 
         for (c, coin) in coins.into_iter().enumerate() {
 
