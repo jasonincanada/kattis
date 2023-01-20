@@ -4,6 +4,7 @@ My solutions in Rust and Haskell for the [Kattis](https://open.kattis.com/proble
 
 2023 | Diff. | Source | Description / Notes
 --- | --- | --- | ---
+20 Jan | [Med](https://leetcode.com/problems/house-robber/) | [house-robber.rs](rust/house-robber/src/main.rs) | Compute max loot from robbing non-adjacent houses
 19 Jan | [Med](https://leetcode.com/problems/coin-change/) | [coin-change.rs](rust/coin-change/src/main.rs) | Make change with minimum number of coins [+](notes/Coin%20Change.md)
 9 Jan | [5.1](https://open.kattis.com/problems/toast) | [toast.rs](rust/toast/src/main.rs) | Size a table so there are *n* clinks during a toast [+](notes/Toast.md)
 5 Jan | [2.9](https://open.kattis.com/problems/bootstrappingnumber) | [bootstrapping.rs](rust/bootstrapping/src/main.rs) | Find $x^x = n$ with binary search (f64)
