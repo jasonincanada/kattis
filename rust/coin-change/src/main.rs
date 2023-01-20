@@ -64,7 +64,7 @@ impl Solution {
                     // the general step, where the bulk of the computation takes place.
                     // consider taking more and more of this coin denomination
                     for (a, k) in candidate_indexes(coin, amount) {
-                        let coin_count = table[c-1][a] + Count(k as i32);
+                        let coin_count = table[c-1][a] + Count(k);
                         candidates.push(coin_count);
                     }
 
