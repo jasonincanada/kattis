@@ -1,3 +1,10 @@
+## 31 May 2023
+
+- [Hand of the Free Marked](https://open.kattis.com/problems/marked)
+- [Spider Walk](https://open.kattis.com/problems/spiderwalk)
+- [ChatNOI](https://open.kattis.com/problems/chatnoi)
+
+
 ## 4 January 2023
 
 This batch isn't an official release from the kattis RSS feed.  Brent Yorgey, from the Haskell leaderboard for many challenges, listed the following problems on his blog entry about [generalizing binary search](https://byorgey.wordpress.com/2023/01/01/competitive-programming-in-haskell-better-binary-search/):
