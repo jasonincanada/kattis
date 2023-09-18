@@ -1,3 +1,14 @@
+## 18 September 2023
+
+- [Flæðasmíði](https://open.kattis.com/problems/flaedasmidi)
+- [Atlögur](https://open.kattis.com/problems/atlogur)
+
+
+## 18 July 2023
+
+- [Padel Prize Pursuit](https://open.kattis.com/problems/padelprize)
+
+
 ## 31 May 2023
 
 - [Hand of the Free Marked](https://open.kattis.com/problems/marked)
