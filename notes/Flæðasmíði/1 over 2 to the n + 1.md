@@ -106,4 +106,4 @@ stateDiagram-v2
 
 ## Observations
 
-- Two subgraphs, one a 2-ary tree rooted at 1 containing $2^n$ leaves, the other a cyclic graph with 1 leaf (customer) that gathers and carries back to 1 all the excess supply
+- Two subgraphs, one a 2-ary tree rooted at 11 containing $2^n$ leaves, the other a cyclic graph with 1 leaf (customer) that gathers and carries back to 1 all the excess supply

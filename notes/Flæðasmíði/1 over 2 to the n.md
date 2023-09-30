@@ -53,16 +53,7 @@ stateDiagram-v2
 	14 --> 6: 1/8
 	14 --> 7
 	15 --> 8
-	15 --> 9
-	2
-	3
-	4
-	5
-	6
-	7
-	8 
-	9
-	
+	15 --> 9	
 
 	classDef source fill:#C44
 	classDef sink fill:#3CD
