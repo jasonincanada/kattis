@@ -1,3 +1,8 @@
+## 7 October 2023
+
+- [Intertwined](https://open.kattis.com/problems/intertwined)
+
+
 ## 18 September 2023
 
 - [Flæðasmíði](https://open.kattis.com/problems/flaedasmidi)
